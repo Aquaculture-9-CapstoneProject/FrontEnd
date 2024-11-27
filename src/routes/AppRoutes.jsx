@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "../components/auth/login/Login";
-import LandingPage from "../pages/users/LandingPage";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "../pages/admin/Dashboard";
 import Error from "../components/common/Error";
 import Register from "../components/auth/register/Register";
+import LandingPage from "../components/landingPage/LandingPage";
 
 export default function AppRoutes() {
   const userRole = "user"; // Role statis: bisa diganti dengan "admin" atau "user"
@@ -30,9 +30,6 @@ export default function AppRoutes() {
           }
         />
       )}
-
-      {/* Halaman default jika tidak ada rute yang cocok */}
-      <Route path="*" element={<LandingPage />} />
     </Routes>
   );
 }
