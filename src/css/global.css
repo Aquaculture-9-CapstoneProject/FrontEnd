@@ -7,3 +7,19 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.input-style {
+  @apply w-full border rounded-md p-2;
+}
+
+.input-error {
+  @apply border-error-3;
+}
+
+.button-style {
+  @apply btn bg-primary-5 w-full font-bold text-base text-neutral-5 mt-6;
+}
+
+.forgot-password {
+  @apply text-[10px] text-neutral-1 hover:text-primary-1 cursor-pointer ml-auto;
+}
