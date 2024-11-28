@@ -1,25 +1,15 @@
 import { useForm } from "react-hook-form";
-import useAuthStore from "../../../store/useAuthStore";
-import { useNavigate } from "react-router-dom";
+import useLogin from "../../../hooks/useLogin";
 
 export default function LoginForm() {
-  const { email, setEmail, password, setPassword } = useAuthStore();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
-  const onSubmit = (data) => {
-    setEmail(data.email);
-    setPassword(data.password);
-    console.log("Form submitted:", data);
-  };
-
-  const handleForgotPassword = () => {
-    console.log("pergi ke lupa password");
-  };
+  const { isError, loading, onSubmit, handleForgotPassword, navigate } =
+    useLogin();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -32,7 +22,6 @@ export default function LoginForm() {
           id="email"
           type="email"
           placeholder="example@gmail.com"
-          defaultValue={email}
           {...register("email", {
             required: "Email wajib diisi.",
             pattern: {
@@ -58,7 +47,6 @@ export default function LoginForm() {
           id="password"
           type="password"
           placeholder="Minimal 6 karakter"
-          defaultValue={password}
           {...register("password", {
             required: "Password wajib diisi.",
             minLength: {
@@ -77,15 +65,20 @@ export default function LoginForm() {
 
       {/* Lupa Password */}
       <div className="flex justify-between items-center">
-        <p className="forgot-password" onClick={handleForgotPassword}>
+        {isError && <p className="text-error-4 text-[10px] mt-1">{isError}</p>}
+        <p className="forgot-password ml-auto" onClick={handleForgotPassword}>
           Lupa password?
         </p>
       </div>
 
       <div className="form-control mt-10">
         {/* Submit Button */}
-        <button type="submit" className="button-style">
-          Masuk
+        <button type="submit" className="button-style" disabled={loading}>
+          {loading ? (
+            <span className="loading loading-spinner loading-md"></span>
+          ) : (
+            "Masuk"
+          )}
         </button>
         {/* Registrasi */}
         <p className="text-base text-center mt-6">
