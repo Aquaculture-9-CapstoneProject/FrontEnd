@@ -1,35 +1,16 @@
 import { useForm } from "react-hook-form";
-import useAuthStore from "../../../store/useAuthStore";
-import { useNavigate } from "react-router-dom";
+import useRegister from "../../../hooks/useRegister";
 
 export default function RegisterForm() {
-  const {
-    setEmail,
-    setPassword,
-    setFullName,
-    setPhoneNumber,
-    setAddress,
-    setConfirmPassword,
-  } = useAuthStore();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-
-  const onSubmit = (data) => {
-    setFullName(data.fullName);
-    setEmail(data.email);
-    setPhoneNumber(data.phoneNumber);
-    setAddress(data.address);
-    setPassword(data.password);
-    setConfirmPassword(data.confirmPassword);
-    console.log("Form submitted:", data);
-  };
+  const { onSubmit, serverError, isLoading, navigate } = useRegister();
 
   const passwordValue = watch("password", "");
-  const navigate = useNavigate();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -176,12 +157,23 @@ export default function RegisterForm() {
         )}
       </div>
 
+      {/* Server Error Message */}
+      {serverError && (
+        <div className="text-error-4 text-[12px] mt-2">{serverError}</div>
+      )}
+
+      {/* Submit Button with Spinner */}
       <div className="form-control mt-10">
         <button
           type="submit"
           className="btn bg-primary-5 w-full font-bold text-base text-neutral-5 mt-6"
+          disabled={isLoading}
         >
-          Daftar
+          {isLoading ? (
+            <span className="loading loading-spinner loading-md"></span>
+          ) : (
+            "Daftar"
+          )}
         </button>
       </div>
 
