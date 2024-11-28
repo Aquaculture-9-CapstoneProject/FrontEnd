@@ -2,7 +2,7 @@ import React from "react";
 
 const HeroSection = () => {
   return (
-    <div className="hero bg-base-100 mt-8 py-8 px-28 max-w-[1440px] mx-auto flex items-center">
+    <div className="hero bg-neutral-5 mt-8 py-8 px-28 max-w-[1440px] mx-auto flex items-center">
       {/* Left Content */}
       <div className="w-1/2">
         <h1 className="text-4xl font-semibold text-neutral-1 leading-snug">

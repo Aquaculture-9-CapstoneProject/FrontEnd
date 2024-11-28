@@ -1,11 +1,14 @@
 import React from "react";
+import Logo from "../common/Logo";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 px-28 py-4 max-w-[1440px] mx-auto">
+    <div className="navbar bg-neutral-5 px-28 py-4 max-w-[1440px] mx-auto">
       {/* Navbar Start */}
       <div className="navbar-start">
-          <img src="logo2.svg" alt="Blue Bay Logo" className="h-12" />
+        <div>
+          <Logo />
+        </div>
       </div>
 
       {/* Navbar Center */}
