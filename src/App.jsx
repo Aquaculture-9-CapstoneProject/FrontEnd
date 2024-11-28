@@ -1,9 +1,10 @@
-function App() {
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+
+export default function App() {
   return (
-    <>
-      <p className="text-red-800">hello world</p>
-    </>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <AppRoutes />
+    </Router>
   );
 }
-
-export default App;
