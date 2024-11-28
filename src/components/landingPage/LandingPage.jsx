@@ -1,7 +1,14 @@
+import React from "react";
+import Navbar from "./Navbar";
+import HeroSection from "./HeroSection";
+import AboutSection from "./AboutSection";
+
 export default function LandingPage() {
   return (
     <>
-      <h1>ini landing page</h1>
+      <Navbar />
+      <HeroSection />
+      <AboutSection />
     </>
   );
-}
+};
