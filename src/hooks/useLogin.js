@@ -22,6 +22,10 @@ export default function useLogin() {
         role: decodedToken.role,
         token: response.Token,
         email: response.Email,
+        name: response.Nama,
+        address: response.Alamat,
+        phone: response.Notelpon,
+        message: response.Message,
       });
 
       if (decodedToken.role === "admin") {
