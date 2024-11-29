@@ -5,6 +5,7 @@ import AboutSection from "./AboutSection";
 import BenefitSection from "./BenefitSection";
 import HowItWorksSection from "./HowItWorksSection";
 import KeyFeatureSection from "./KeyFeatureSection";
+import Footer from "./Footer";
 
 export default function LandingPage() {
   return (
@@ -15,6 +16,7 @@ export default function LandingPage() {
       <BenefitSection />
       <HowItWorksSection />
       <KeyFeatureSection />
+      <Footer />
     </>
   );
 };
