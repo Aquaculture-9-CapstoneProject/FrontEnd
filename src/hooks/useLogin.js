@@ -15,17 +15,17 @@ export default function useLogin() {
       setLoading(true);
       const response = await loginServices(data.email, data.password);
 
-      const decodedToken = jwtDecode(response.Token);
+      const decodedToken = jwtDecode(response.token);
 
       setUser({
         userID: decodedToken.userID,
         role: decodedToken.role,
-        token: response.Token,
-        email: response.Email,
-        name: response.Nama,
-        address: response.Alamat,
-        phone: response.Notelpon,
-        message: response.Message,
+        token: response.token,
+        email: response.user.email,
+        name: response.user.nama,
+        address: response.user.alamat,
+        phone: response.user.noTelpon,
+        message: response.message,
       });
 
       if (decodedToken.role === "admin") {
