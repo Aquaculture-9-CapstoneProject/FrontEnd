@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+import ProductCard from "../../common/ProductCard";
 
 export default function CheapersProduct() {
   const products = [
