@@ -1,4 +1,6 @@
 import { useState } from "react";
+import useUserStore from "../../store/useUsersStore";
+import { useNavigate } from "react-router-dom";
 
 const MenuItem = ({ icon, label, onClick, isActive, isLogout }) => (
   <li
@@ -26,6 +28,13 @@ const MenuItem = ({ icon, label, onClick, isActive, isLogout }) => (
 
 export default function Sidebar({ children }) {
   const [activeMenuItem, setActiveMenuItem] = useState(null);
+  const { clearUser } = useUserStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearUser();
+    navigate("/");
+  };
 
   const handleMenuClick = (index) => {
     setActiveMenuItem(index);
@@ -121,9 +130,7 @@ export default function Sidebar({ children }) {
               label="Logout"
               isActive={false}
               isLogout={true}
-              onClick={() => {
-                console.log("Logout clicked");
-              }}
+              onClick={handleLogout}
             />
           </div>
         </ul>
