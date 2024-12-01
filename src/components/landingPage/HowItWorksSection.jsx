@@ -24,7 +24,7 @@ const HowItWorksSection = () => {
         {/* Right Section */}
         <div className="relative">
           {/* Vertical Line */}
-          <div className="absolute left-5 top-5 h-[calc(100%-4rem)] w-[3px] bg-neutral-4">
+          <div className="absolute left-6 top-5 h-[calc(100%-4rem)] w-[3px] bg-neutral-4">
             <div className="absolute top-0 h-[calc(3rem+80px)] bg-primary-5 w-[3px]"></div>
           </div>
 
