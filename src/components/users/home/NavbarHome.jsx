@@ -21,7 +21,7 @@ export default function NavbarHome() {
         <input
           type="text"
           placeholder="Cari di BluyBay"
-          className="p-3 py-3 rounded-lg border-2 border-neutral-4 border-solid w-full h-[52px] focus:outline-none"
+          className="p-3 py-3 rounded-lg border-2 border-neutral-4 border-solid w-full h-12 focus:outline-none"
         />
 
         <button className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-neutral-600">
@@ -41,15 +41,26 @@ export default function NavbarHome() {
       </div>
 
       <div className="md:flex items-center gap-5 hidden">
-        {/* ChatBot Button */}
-        <button className="btn border-neutral-4 bg-neutral-5 hidden lg:block">
-          ChatBot
-        </button>
+        {/* Cart Button */}
+        <div className="btn">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.3291 21C8.04577 21 7.00744 22.05 7.00744 23.3334C7.00744 24.6167 8.04577 25.6667 9.3291 25.6667C10.6124 25.6667 11.6624 24.6167 11.6624 23.3334C11.6624 22.05 10.6124 21 9.3291 21ZM2.3291 3.50004C2.3291 4.14171 2.8541 4.66671 3.49577 4.66671H4.66244L8.86244 13.5217L7.28744 16.3684C6.43577 17.9317 7.55577 19.8334 9.3291 19.8334H22.1624C22.8041 19.8334 23.3291 19.3084 23.3291 18.6667C23.3291 18.025 22.8041 17.5 22.1624 17.5H9.3291L10.6124 15.1667H19.3041C20.1791 15.1667 20.9491 14.6884 21.3458 13.965L25.5224 6.39337C25.9541 5.62337 25.3941 4.66671 24.5074 4.66671H7.24077L6.4591 2.99837C6.27244 2.59004 5.85244 2.33337 5.4091 2.33337H3.49577C2.8541 2.33337 2.3291 2.85837 2.3291 3.50004ZM20.9958 21C19.7124 21 18.6741 22.05 18.6741 23.3334C18.6741 24.6167 19.7124 25.6667 20.9958 25.6667C22.2791 25.6667 23.3291 24.6167 23.3291 23.3334C23.3291 22.05 22.2791 21 20.9958 21Z"
+              fill="#262626"
+            />
+          </svg>
+        </div>
 
         {/* Profile Dropdown */}
         <div className="dropdown dropdown-end">
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-            <div className="w-16 rounded-full">
+            <div className="w-10 rounded-full">
               <img
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                 alt="Profile"
