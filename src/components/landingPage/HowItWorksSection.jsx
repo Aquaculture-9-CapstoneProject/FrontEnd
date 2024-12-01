@@ -31,7 +31,7 @@ const HowItWorksSection = () => {
           <div className="grid gap-6 relative">
             {/* Step 1 */}
             <div className="flex items-start gap-8 relative">
-              <div className="bg-primary-5 text-neutral-5 w-12 h-12 flex items-center justify-center rounded-full font-semibold text-xl relative z-10">
+              <div className="aspect-square bg-primary-5 text-neutral-5 w-12 h-12 flex items-center justify-center rounded-full font-semibold text-xl relative z-10">
                 1
               </div>
               <div>
@@ -44,7 +44,7 @@ const HowItWorksSection = () => {
 
             {/* Step 2 */}
             <div className="flex items-start gap-8 relative">
-              <div className="bg-neutral-4 text-neutral-1 w-12 h-12 flex items-center justify-center rounded-full font-semibold text-xl relative z-10">
+              <div className="aspect-square bg-neutral-4 text-neutral-1 w-12 h-12 flex items-center justify-center rounded-full font-semibold text-xl relative z-10">
                 2
               </div>
               <div>
@@ -57,7 +57,7 @@ const HowItWorksSection = () => {
 
             {/* Step 3 */}
             <div className="flex items-start gap-8 relative">
-              <div className="bg-neutral-4 text-neutral-1 w-12 h-12 flex items-center justify-center rounded-full font-semibold text-xl relative z-10">
+              <div className="aspect-square bg-neutral-4 text-neutral-1 w-12 h-12 flex items-center justify-center rounded-full font-semibold text-xl relative z-10">
                 3
               </div>
               <div>
@@ -70,7 +70,7 @@ const HowItWorksSection = () => {
 
             {/* Step 4 */}
             <div className="flex items-start gap-8 relative">
-              <div className="bg-neutral-4 text-neutral-1 w-12 h-12 flex items-center justify-center rounded-full font-semibold text-xl relative z-10">
+              <div className="aspect-square bg-neutral-4 text-neutral-1 w-12 h-12 flex items-center justify-center rounded-full font-semibold text-xl relative z-10">
                 4
               </div>
               <div>
