@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../common/Logo";
 
 const Navbar = () => {
   return (
@@ -7,7 +6,11 @@ const Navbar = () => {
       {/* Navbar Start */}
       <div className="navbar-start">
         <div>
-          <Logo />
+        <img
+          src="logo.svg"
+          alt="Logo BlueBay"
+          className="w-[96px] h-[48px]"
+        />
         </div>
       </div>
 
