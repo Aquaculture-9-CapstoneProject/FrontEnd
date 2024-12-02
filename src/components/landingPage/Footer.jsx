@@ -1,13 +1,10 @@
-import React from "react";
-import Logo from "../common/Logo";
-
 const Footer = () => {
   return (
     <footer className="bg-primary-1 text-neutral-5 py-20 px-28">
       <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-top gap-[131.33px]">
         {/* Logo and Description */}
         <div className="mb-8 md:mb-0 flex-1">
-          <Logo />
+          <img src="./logo.svg" alt="logo" />
           <p className="text-normal text-xs leading-5">
             BlueBay menyediakan ikan dan produk laut segar yang bergizi,
             diproduksi dengan metode budidaya ramah lingkungan.
@@ -18,18 +15,10 @@ const Footer = () => {
         <div className="mb-8 md:mb-0 flex-1">
           <h3 className="font-semibold text-sm mb-3">Navigasi</h3>
           <ul className="space-y-3 text-xs text-normal">
-            <li>
-                Beranda
-            </li>
-            <li>
-                Keunggulan
-            </li>
-            <li>
-                Artikel
-            </li>
-            <li>
-                Testimoni
-            </li>
+            <li>Beranda</li>
+            <li>Keunggulan</li>
+            <li>Artikel</li>
+            <li>Testimoni</li>
           </ul>
         </div>
 
@@ -64,3 +53,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
