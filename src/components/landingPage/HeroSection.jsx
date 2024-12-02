@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="hero bg-neutral-5 pt-16 md:pt-36 px-6 md:px-28 max-w-[1440px] mx-auto flex flex-wrap items-center">
       {/* Left Content */}
@@ -12,7 +20,10 @@ const HeroSection = () => {
           Temukan hasil akuakultur segar langsung dari pembudidaya terpercaya.
           Pesan dengan mudah, cepat, dan aman melalui platform kami.
         </p>
-        <button className="btn bg-primary-4 mt-8 md:mt-16 text-neutral-5 border-none w-[140px] md:w-[184px] h-[40px] md:h-[48px]">
+        <button
+          onClick={handleButtonClick}
+          className="btn bg-primary-4 mt-8 md:mt-16 text-neutral-5 border-none w-[140px] md:w-[184px] h-[40px] md:h-[48px]"
+        >
           Belanja Sekarang
         </button>
       </div>
