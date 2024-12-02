@@ -55,7 +55,7 @@ export default function AppRoutes() {
               <Navigate to="/error" replace /> // Admin tidak bisa akses /home
             )
           ) : (
-            <Navigate to="/login" replace /> // Jika belum login, arahkan ke /login
+            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
           )
         }
       />
@@ -73,7 +73,7 @@ export default function AppRoutes() {
               <Navigate to="/error" replace /> // User tidak bisa akses /dashboard
             )
           ) : (
-            <Navigate to="/login" replace /> // Jika belum login, arahkan ke /login
+            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
           )
         }
       />

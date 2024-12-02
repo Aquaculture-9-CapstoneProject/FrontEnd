@@ -15,7 +15,7 @@ export default function RegisterForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       {/* Full Name */}
-      <div className="form-control mt-10">
+      <div className="form-control mt-4">
         <label htmlFor="fullName" className="label">
           <span className="label-text font-medium">Nama Lengkap</span>
         </label>
@@ -34,58 +34,60 @@ export default function RegisterForm() {
       </div>
 
       {/* Phone Number and Address */}
-      <div className="form-control flex lg:flex-row gap-3">
-        <div className="w-full lg:w-1/2">
-          <label htmlFor="address" className="label">
-            <span className="label-text font-medium">Alamat</span>
-          </label>
-          <input
-            id="address"
-            type="text"
-            placeholder="Alamat Lengkap"
-            {...register("address", {
-              required: "Alamat wajib diisi.",
-              minLength: {
-                value: 5,
-                message: "Alamat harus lebih dari 5 karakter.",
-              },
-            })}
-            className={`input-style ${errors.address ? "input-error" : "border-secondary-5"}`}
-          />
-          {errors.address && (
-            <p className="text-error-4 text-[10px] mt-1">
-              {errors.address.message}
-            </p>
-          )}
-        </div>
+      <div className="form-control mt-4">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <div className="w-full lg:w-1/2">
+            <label htmlFor="address" className="label">
+              <span className="label-text font-medium">Alamat</span>
+            </label>
+            <input
+              id="address"
+              type="text"
+              placeholder="Alamat Lengkap"
+              {...register("address", {
+                required: "Alamat wajib diisi.",
+                minLength: {
+                  value: 5,
+                  message: "Alamat harus lebih dari 5 karakter.",
+                },
+              })}
+              className={`input-style ${errors.address ? "input-error" : "border-secondary-5"}`}
+            />
+            {errors.address && (
+              <p className="text-error-4 text-[10px] mt-1">
+                {errors.address.message}
+              </p>
+            )}
+          </div>
 
-        <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
-          <label htmlFor="phoneNumber" className="label">
-            <span className="label-text font-medium">Nomor Telepon</span>
-          </label>
-          <input
-            id="phoneNumber"
-            type="text"
-            placeholder="Nomor Telepon"
-            {...register("phoneNumber", {
-              required: "Nomor telepon wajib diisi.",
-              pattern: {
-                value: /^[0-9]{10,15}$/,
-                message: "Nomor telepon tidak valid.",
-              },
-            })}
-            className={`input-style ${errors.phoneNumber ? "input-error" : "border-secondary-5"}`}
-          />
-          {errors.phoneNumber && (
-            <p className="text-error-4 text-[10px] mt-1">
-              {errors.phoneNumber.message}
-            </p>
-          )}
+          <div className="w-full lg:w-1/2">
+            <label htmlFor="phoneNumber" className="label">
+              <span className="label-text font-medium">Nomor Telepon</span>
+            </label>
+            <input
+              id="phoneNumber"
+              type="text"
+              placeholder="Nomor Telepon"
+              {...register("phoneNumber", {
+                required: "Nomor telepon wajib diisi.",
+                pattern: {
+                  value: /^[0-9]{10,15}$/,
+                  message: "Nomor telepon tidak valid.",
+                },
+              })}
+              className={`input-style ${errors.phoneNumber ? "input-error" : "border-secondary-5"}`}
+            />
+            {errors.phoneNumber && (
+              <p className="text-error-4 text-[10px] mt-1">
+                {errors.phoneNumber.message}
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Email */}
-      <div className="form-control mt-10">
+      <div className="form-control mt-4">
         <label htmlFor="email" className="label">
           <span className="label-text font-medium">Email</span>
         </label>
