@@ -76,20 +76,20 @@ export default function ProductDescription() {
           <div className="flex-col flex gap-3">
             <p className="text-base text-neutral-2 font-semibold">Kuantitas</p>
             <div className="flex items-center gap-8">
-              <div className="border-2 border-primary-5 rounded-full flex py-2 px-5">
-                <button
+              <div className="border-[1px] border-primary-5 rounded-full flex py-2 px-5">
+                <img
+                  src="./user/detail/minus.svg"
+                  alt="minus"
                   onClick={handleDecrement}
-                  className="flex border-neutral-4"
-                >
-                  -
-                </button>
-                <p className="text-xl mx-6 select-none">{quantity}</p>
-                <button
+                />
+                <p className="text-xl w-14 text-center select-none">
+                  {quantity}
+                </p>
+                <img
+                  src="./user/detail/plus.svg"
+                  alt="minus"
                   onClick={handleIncrement}
-                  className="flex border-neutral-4"
-                >
-                  +
-                </button>
+                />
               </div>
               <p className="text-base">
                 Stok:{" "}

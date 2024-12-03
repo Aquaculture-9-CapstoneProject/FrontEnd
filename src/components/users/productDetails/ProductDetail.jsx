@@ -4,7 +4,7 @@ import Breadcrumb from "./Breadcrumb";
 import ProductDescription from "./ProductDescription";
 import ProductImage from "./ProductImage";
 import ProductRating from "./ProductRating";
-import ProductRecomendation from "./ProductRecomendation";
+import ProductRecomendation from "../../common/ProductRecomendation";
 
 export default function ProductDetail() {
   const breadcrumbItems = ["Beranda", "Produk", "Ikan", "Ikan Salmon"];
@@ -21,7 +21,7 @@ export default function ProductDetail() {
         <ProductDescription />
         <ProductRating />
       </div>
-      <ProductRecomendation />
+      <ProductRecomendation title="Rekomendasi Produk" />
     </>
   );
 }

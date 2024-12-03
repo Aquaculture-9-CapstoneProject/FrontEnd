@@ -10,10 +10,6 @@ export default function Navbar() {
     navigate("/");
   };
 
-  const goToHome = () => {
-    navigate("/home");
-  };
-
   return (
     <div className="navbar flex justify-between items-center bg-neutral-5 border-b-neutral-4 border-[1px] px-8 py-4">
       {/* Logo Section */}
@@ -22,7 +18,7 @@ export default function Navbar() {
           className="w-24 cursor-pointer"
           src="./logo.svg"
           alt="Logo"
-          onClick={goToHome}
+          onClick={() => navigate("/home")}
         />
       </div>
       <div className="relative w-full lg:w-[52%]">
@@ -50,7 +46,10 @@ export default function Navbar() {
       </div>
       <div className="md:flex items-center gap-5 hidden">
         {/* Cart Button */}
-        <div className="btn">
+        <div
+          className="hover:bg-neutral-4 px-4 py-2 rounded-lg cursor-pointer"
+          onClick={() => navigate("/cart")}
+        >
           <svg
             width="28"
             height="28"
