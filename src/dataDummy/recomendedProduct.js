@@ -1,0 +1,38 @@
+export const recommendedProducts = [
+  {
+    id: 8,
+    name: "Cupang Fancy",
+    price: 50000,
+    image: "/user/search/ikan-hias.png",
+    category: "ikan hias",
+    rating: 4.9,
+    quantity: 1,
+  },
+  {
+    id: 9,
+    name: "Koi Showa",
+    price: 150000,
+    image: "/user/search/ikan-hias.png",
+    category: "ikan hias",
+    rating: 4.8,
+    quantity: 1,
+  },
+  {
+    id: 4,
+    name: "Udang Windu",
+    price: 70000,
+    image: "/user/search/ikan.png",
+    category: "udang",
+    rating: 4.8,
+    quantity: 1,
+  },
+  {
+    id: 5,
+    name: "Udang Galah",
+    price: 80000,
+    image: "/user/search/ikan.png",
+    category: "udang",
+    rating: 4.7,
+    quantity: 1,
+  },
+];

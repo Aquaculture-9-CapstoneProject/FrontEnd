@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import { products } from "../dataDummy/product";
+import { recommendedProducts } from "../dataDummy/recomendedProduct";
 
 const useCartStore = create((set) => ({
-  products: products,
+  products: recommendedProducts,
   setQuantity: (id, quantity) => {
     set((state) => ({
       products: state.products.map((product) =>

@@ -27,8 +27,15 @@ export default function Navbar() {
           type="text"
           placeholder="Cari di BluyBay"
           className="p-3 py-3 rounded-lg border-2 border-neutral-4 border-solid w-full h-12 focus:outline-none"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              const query = e.target.value.trim();
+              if (query) {
+                navigate(`/search?query=${encodeURIComponent(query)}`);
+              }
+            }
+          }}
         />
-
         <button className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-neutral-600">
           <svg
             width="25"
