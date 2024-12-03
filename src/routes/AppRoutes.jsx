@@ -7,16 +7,17 @@ import Register from "../components/auth/register/Register";
 import LandingPage from "../components/landingPage/LandingPage";
 import HomePage from "../pages/users/HomePage";
 import useUserStore from "../store/useUsersStore";
+import ProductDetail from "../components/users/productDetails/ProductDetail";
 
 export default function AppRoutes() {
   const { user } = useUserStore();
 
   return (
     <Routes>
-      {/* Rute untuk halaman umum (Landing Page) */}
+      {/* Rute untuk halaman umum */}
       <Route path="/" element={<LandingPage />} />
 
-      {/* Rute untuk login dan registrasi hanya jika user belum login */}
+      {/* Rute untuk login dan registrasi */}
       <Route
         path="/login"
         element={
@@ -44,44 +45,39 @@ export default function AppRoutes() {
         }
       />
 
-      {/* Rute untuk halaman Home (hanya untuk role "user") */}
+      {/* Rute untuk Home (user) */}
       <Route
         path="/home"
         element={
-          user ? ( // Jika sudah login
-            user.role === "user" ? (
-              <HomePage />
-            ) : (
-              <Navigate to="/error" replace /> // Admin tidak bisa akses /home
-            )
-          ) : (
-            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
-          )
+          <ProtectedRoute allowedRole="user">
+            <HomePage />
+          </ProtectedRoute>
         }
       />
 
-      {/* Rute untuk halaman Dashboard (hanya untuk role "admin") */}
+      <Route
+        path="/detail/"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <ProductDetail />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Rute untuk Dashboard (admin) */}
       <Route
         path="/dashboard"
         element={
-          user ? ( // Jika sudah login
-            user.role === "admin" ? (
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            ) : (
-              <Navigate to="/error" replace /> // User tidak bisa akses /dashboard
-            )
-          ) : (
-            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
-          )
+          <ProtectedRoute allowedRole="admin">
+            <Dashboard />
+          </ProtectedRoute>
         }
       />
 
       {/* Rute untuk halaman Error */}
       <Route path="/error" element={<Error />} />
 
-      {/* Rute yang tidak ditemukan */}
+      {/* Rute tidak ditemukan */}
       <Route path="*" element={<Error />} />
     </Routes>
   );
