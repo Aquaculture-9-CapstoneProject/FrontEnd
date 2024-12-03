@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 export default function ProductCard({ name, price, image, rating, category }) {
+  const navigate = useNavigate();
+
   const handleCardClick = () => {
-    console.log("Card clicked: ", name);
+    navigate("/detail");
   };
 
   const handleBuyClick = () => {
