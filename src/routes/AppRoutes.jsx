@@ -9,6 +9,7 @@ import HomePage from "../pages/users/HomePage";
 import useUserStore from "../store/useUsersStore";
 import ProductDetail from "../components/users/productDetails/ProductDetail";
 import Cart from "../components/users/cart/Cart";
+import Search from "../components/users/search/Search";
 
 export default function AppRoutes() {
   const { user } = useUserStore();
@@ -70,6 +71,15 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute allowedRole="user">
             <Cart />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/search"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Search />
           </ProtectedRoute>
         }
       />
