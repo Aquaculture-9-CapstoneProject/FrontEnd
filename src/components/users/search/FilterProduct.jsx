@@ -13,13 +13,17 @@ export default function FilterProduct() {
 
   return (
     <div className="w-9/12">
-      <h1 className="text-lg ">
-        Menampilkan pencarian untuk{" "}
-        <span className="font-bold">
-          {selectedCategories.length > 0
-            ? selectedCategories.join(", ")
-            : "semua kategori"}
-        </span>
+      <h1 className="text-lg">
+        {selectedCategories.length > 0 ? (
+          <>
+            Menampilkan hasil pencarian untuk{" "}
+            <span className="font-bold">{selectedCategories.join(", ")}</span>
+          </>
+        ) : (
+          <>
+            <span className="font-bold">Semua Produk</span>
+          </>
+        )}{" "}
       </h1>
 
       {filteredProducts.length > 0 ? (
