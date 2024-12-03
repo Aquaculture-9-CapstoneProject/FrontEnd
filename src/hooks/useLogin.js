@@ -17,16 +17,21 @@ export default function useLogin() {
 
       const decodedToken = jwtDecode(response.token);
 
-      setUser({
+      const userData = {
         userID: decodedToken.userID,
         role: decodedToken.role,
         token: response.token,
-        email: response.user.email,
-        name: response.user.nama,
-        address: response.user.alamat,
-        phone: response.user.noTelpon,
         message: response.message,
-      });
+      };
+
+      if (response.user) {
+        userData.email = response.user.email;
+        userData.name = response.user.nama;
+        userData.address = response.user.alamat;
+        userData.phone = response.user.noTelpon;
+      }
+
+      setUser(userData);
 
       if (decodedToken.role === "admin") {
         navigate("/dashboard");
