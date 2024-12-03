@@ -6,6 +6,7 @@ import Error from "../components/common/Error";
 import Register from "../components/auth/register/Register";
 import LandingPage from "../components/landingPage/LandingPage";
 import HomePage from "../pages/users/HomePage";
+import Article from "../components/users/article/Article";
 import useUserStore from "../store/useUsersStore";
 
 export default function AppRoutes() {
@@ -59,6 +60,24 @@ export default function AppRoutes() {
           )
         }
       />
+
+      <Route path="/article" element={<Article />} />
+
+      {/* Rute untuk halaman Article (hanya untuk role "user") */}
+      {/* <Route
+        path="/article"
+        element={
+          user ? ( // Jika sudah login
+            user.role === "user" ? (
+              <HomePage />
+            ) : (
+              <Navigate to="/error" replace /> // Admin tidak bisa akses /home
+            )
+          ) : (
+            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
+          )
+        }
+      /> */}
 
       {/* Rute untuk halaman Dashboard (hanya untuk role "admin") */}
       <Route
