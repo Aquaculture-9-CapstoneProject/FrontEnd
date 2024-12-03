@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function PosterCard() {
+  const navigate = useNavigate();
   const cards = [
     {
       bgColor: "#D1ECFA",
@@ -38,6 +41,7 @@ export default function PosterCard() {
               <button
                 type="button"
                 className="btn bg-primary-4 text-neutral-5 text-xs mt-4 sm:mt-8"
+                onClick={() => navigate("/search")}
               >
                 Beli Sekarang
               </button>
