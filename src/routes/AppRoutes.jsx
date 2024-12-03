@@ -8,6 +8,7 @@ import LandingPage from "../components/landingPage/LandingPage";
 import HomePage from "../pages/users/HomePage";
 import useUserStore from "../store/useUsersStore";
 import ProductDetail from "../components/users/productDetails/ProductDetail";
+import Cart from "../components/users/cart/Cart";
 
 export default function AppRoutes() {
   const { user } = useUserStore();
@@ -56,10 +57,19 @@ export default function AppRoutes() {
       />
 
       <Route
-        path="/detail/"
+        path="/detail"
         element={
           <ProtectedRoute allowedRole="user">
             <ProductDetail />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/cart"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Cart />
           </ProtectedRoute>
         }
       />
