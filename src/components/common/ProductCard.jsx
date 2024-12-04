@@ -8,7 +8,7 @@ export default function ProductCard({ name, price, image, rating, category }) {
   };
 
   const handleBuyClick = () => {
-    console.log("Buy button clicked: ", name);
+    navigate("/checkout");
   };
 
   return (
