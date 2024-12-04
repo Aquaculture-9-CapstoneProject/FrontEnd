@@ -8,6 +8,7 @@ import LandingPage from "../components/landingPage/LandingPage";
 import HomePage from "../pages/users/HomePage";
 import Article from "../components/users/article/Article";
 import AllArticles from "../components/users/article/AllArticles";
+import FilteredArticles from "../components/users/article/FilteredArticles";
 import useUserStore from "../store/useUsersStore";
 
 export default function AppRoutes() {
@@ -63,7 +64,8 @@ export default function AppRoutes() {
       />
 
       <Route path="/article" element={<Article />} />
-      <Route path="/all-articles" element={<AllArticles />} />
+      <Route path="/article/latest" element={<AllArticles />} />
+      <Route path="/article/:topic" element={<FilteredArticles />} />
 
       {/* Rute untuk halaman Article (hanya untuk role "user") */}
       {/* <Route
