@@ -1,4 +1,5 @@
 import React from "react";
+import ArticleCard from "./ArticleCard";
 
 const LatestArticles = () => {
   const latestArticles = [
@@ -51,7 +52,7 @@ const LatestArticles = () => {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold text-neutral-1">Artikel Terbaru</h2>
-        <a href="#" className="flex items-center gap-2 text-base font-semibold text-primary-5 hover:underline">
+        <div className="flex items-center gap-2 text-base font-semibold text-primary-5 hover:underline">
           Lihat Semua
           <svg
             width="8"
@@ -65,36 +66,19 @@ const LatestArticles = () => {
               fill="#0D5B82"
             />
           </svg>
-        </a>
+        </div>
       </div>
 
       {/* Grid Articles */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {latestArticles.map((article) => (
-          <div key={article.id}>
-            <img
-              src={article.image}
-              alt={article.title}
-              className="w-full h-[200px] sm:h-48 object-cover rounded-md"
-            />
-            <h3 className="mt-4 text-base font-semibold text-neutral-1">{article.title}</h3>
-            <div className="flex items-center text-xs text-neutral-2 mt-2">
-              <svg
-                width="12"
-                height="12"
-                fill="none"
-                className="mr-1"
-              >
-                <path
-                  d="M10 1.5H9.5V1C9.5 0.725 9.275 0.5 9 0.5C8.725 0.5 8.5 0.725 8.5 1V1.5H3.5V1C3.5 0.725 3.275 0.5 3 0.5C2.725 0.5 2.5 0.725 2.5 1V1.5H2C1.45 1.5 1 1.95 1 2.5V10.5C1 11.05 1.45 11.5 2 11.5H10C10.55 11.5 11 11.05 11 10.5V2.5C11 1.95 10.55 1.5 10 1.5ZM9.5 10.5H2.5C2.225 10.5 2 10.275 2 10V4H10V10C10 10.275 9.775 10.5 9.5 10.5Z"
-                  fill="#525252"
-                />
-              </svg>
-              {article.date}
-              <span className="mx-2">•</span>
-              <span>{article.badgeText}</span>
-            </div>
-          </div>
+          <ArticleCard
+            key={article.id}
+            image={article.image}
+            title={article.title}
+            date={article.date}
+            badgeText={article.badgeText}
+          />
         ))}
       </div>
     </section>

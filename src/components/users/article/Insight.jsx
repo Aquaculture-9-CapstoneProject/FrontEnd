@@ -1,5 +1,5 @@
 import React from "react";
-import ArticleCard from "./ArticleCard";
+import ArticleThumbnail from "./ArticleThumbnail";
 
 const Insight = () => {
   return (
@@ -8,20 +8,17 @@ const Insight = () => {
         Wawasan Terkait Produk BlueBay
       </h2>
       <div className="grid grid-cols-8 gap-6">
-        {/* Card Besar */}
         <div className="col-span-8 lg:col-span-5">
-          <ArticleCard
+          <ArticleThumbnail
             image="user/home/bg-article.png"
             title="Sajian Udang Asam Manis Untuk Keluarga"
             badgeText="Resep dan Kuliner"
             cardSize="large"
           />
         </div>
-
-        {/* Card Kecil */}
         <div className="col-span-8 lg:col-span-3 flex flex-col gap-5">
           {[...Array(2)].map((_, index) => (
-            <ArticleCard
+            <ArticleThumbnail
               key={index}
               image="user/home/bg-article.png"
               title="Sajian Udang Asam Manis Untuk Keluarga"

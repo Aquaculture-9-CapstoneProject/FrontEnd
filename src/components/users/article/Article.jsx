@@ -6,12 +6,15 @@ import TopicSection from "./TopicSection";
 
 export default function Article() {
   return (
-    <div className="max-w-[1440px] mx-auto px-4 md:px-8">
+    <div>
       <NavbarHome />
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 bg-neutral-5">
       <Top3 />
       <TopicSection />
       <Insight />
       <LatestArticles />
+      </div>
     </div>
+    
   );
 }

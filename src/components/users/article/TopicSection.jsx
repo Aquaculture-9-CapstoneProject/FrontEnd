@@ -28,7 +28,7 @@ const TopicSection = () => {
     {topics.map((topic) => (
       <button
         key={topic.id}
-        className="btn btn-outline btn-primary bg-neutral-5 flex items-center gap-3 w-full h-[72px] rounded-lg border-neutral-3"
+        className="btn bg-neutral-5 flex items-center gap-3 w-full h-[72px] rounded-lg border-neutral-3"
       >
         {/* Icon */}
         <img

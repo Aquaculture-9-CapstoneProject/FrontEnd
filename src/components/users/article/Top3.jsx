@@ -1,5 +1,5 @@
 import React from "react";
-import ArticleCard from "./ArticleCard";
+import ArticleThumbnail from "./ArticleThumbnail";
 
 const Top3 = () => {
   // Data dummy
@@ -33,7 +33,7 @@ const Top3 = () => {
       <h2 className="text-2xl font-semibold text-neutral-1 mb-5">
         Berita dan Artikel
       </h2>
-      <ArticleCard
+      <ArticleThumbnail
             image="user/home/bg-article.png"
             title="Sajian Udang Asam Manis Untuk Keluarga"
             badgeText="Resep dan Kuliner"
@@ -48,7 +48,7 @@ const Top3 = () => {
       </h3>
       <div className="space-y-4">
         {topArticles.map((article) => (
-          <div key={article.id} className="flex items-start gap-4">
+          <div key={article.id} className="flex items-start gap-4 cursor-pointer transform transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95">
             {/* Gambar Artikel */}
             <img
               className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg"
