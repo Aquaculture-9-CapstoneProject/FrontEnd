@@ -1,15 +1,22 @@
+import { useProductStore } from "../../../store/useProductStore";
+import { useNavigate } from "react-router-dom";
+
 export default function Category() {
+  const { setSelectedCategories } = useProductStore();
+  const navigate = useNavigate();
+
   const categories = [
-    { imgSrc: "./user/home/ikan.png", label: "Ikan" },
-    { imgSrc: "./user/home/udang.png", label: "Udang" },
-    { imgSrc: "./user/home/kerang.png", label: "Kerang" },
-    { imgSrc: "./user/home/ikan-hias.png", label: "Ikan Hias" },
-    { imgSrc: "./user/home/produk-olahan.png", label: "Produk Olahan" },
-    { imgSrc: "./user/home/benih.png", label: "Benih" },
+    { imgSrc: "./user/home/ikan.png", label: "ikan" },
+    { imgSrc: "./user/home/udang.png", label: "udang" },
+    { imgSrc: "./user/home/kerang.png", label: "kerang" },
+    { imgSrc: "./user/home/ikan-hias.png", label: "ikan hias" },
+    { imgSrc: "./user/home/produk-olahan.png", label: "produk olahan" },
+    { imgSrc: "./user/home/benih.png", label: "benih" },
   ];
 
   const handleClick = (label) => {
-    alert(`Kategori ${label} telah dipilih!`);
+    setSelectedCategories([label]);
+    navigate("/search");
   };
 
   return (

@@ -11,16 +11,19 @@ import AllArticles from "../components/users/article/AllArticles";
 import FilteredArticles from "../components/users/article/FilteredArticles";
 import ArticleContent from "../components/users/article/ArticleContent";
 import useUserStore from "../store/useUsersStore";
+import ProductDetail from "../components/users/productDetails/ProductDetail";
+import Cart from "../components/users/cart/Cart";
+import Search from "../components/users/search/Search";
 
 export default function AppRoutes() {
   const { user } = useUserStore();
 
   return (
     <Routes>
-      {/* Rute untuk halaman umum (Landing Page) */}
+      {/* Rute untuk halaman umum */}
       <Route path="/" element={<LandingPage />} />
 
-      {/* Rute untuk login dan registrasi hanya jika user belum login */}
+      {/* Rute untuk login dan registrasi */}
       <Route
         path="/login"
         element={
@@ -48,108 +51,57 @@ export default function AppRoutes() {
         }
       />
 
-      {/* Rute untuk halaman Home (hanya untuk role "user") */}
+      {/* Rute untuk Home (user) */}
       <Route
         path="/home"
         element={
-          user ? ( // Jika sudah login
-            user.role === "user" ? (
-              <HomePage />
-            ) : (
-              <Navigate to="/error" replace /> // Admin tidak bisa akses /home
-            )
-          ) : (
-            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
-          )
+          <ProtectedRoute allowedRole="user">
+            <HomePage />
+          </ProtectedRoute>
         }
       />
 
-      {/* Rute untuk halaman Article (hanya untuk role "user") */}
       <Route
-        path="/article"
+        path="/detail"
         element={
-          user ? ( // Jika sudah login
-            user.role === "user" ? (
-              <Article />
-            ) : (
-              <Navigate to="/error" replace /> // Admin tidak bisa akses /article
-            )
-          ) : (
-            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
-          )
+          <ProtectedRoute allowedRole="user">
+            <ProductDetail />
+          </ProtectedRoute>
         }
       />
-
-      {/* Rute untuk halaman Article Terbaru (hanya untuk role "user") */}
+          
       <Route
-        path="/article/latest"
+        path="/cart"
         element={
-          user ? ( // Jika sudah login
-            user.role === "user" ? (
-              <AllArticles />
-            ) : (
-              <Navigate to="/error" replace /> // Admin tidak bisa akses /article/latest
-            )
-          ) : (
-            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
-          )
+          <ProtectedRoute allowedRole="user">
+            <Cart />
+          </ProtectedRoute>
         }
       />
 
-      {/* Rute untuk halaman Article Berdasarkan Topik (hanya untuk role "user") */}
       <Route
-        path="/article/:topic"
+        path="/search"
         element={
-          user ? ( // Jika sudah login
-            user.role === "user" ? (
-              <FilteredArticles />
-            ) : (
-              <Navigate to="/error" replace /> // Admin tidak bisa akses /article/:topic
-            )
-          ) : (
-            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
-          )
+          <ProtectedRoute allowedRole="user">
+            <Search />
+          </ProtectedRoute>
         }
       />
 
-      {/* Rute untuk halaman Article Content (hanya untuk role "user") */}
-      <Route
-        path="/article/content"
-        element={
-          user ? ( // Jika sudah login
-            user.role === "user" ? (
-              <ArticleContent />
-            ) : (
-              <Navigate to="/error" replace /> // Admin tidak bisa akses /article/content
-            )
-          ) : (
-            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
-          )
-        }
-      />
-
-      {/* Rute untuk halaman Dashboard (hanya untuk role "admin") */}
+      {/* Rute untuk Dashboard (admin) */}
       <Route
         path="/dashboard"
         element={
-          user ? ( // Jika sudah login
-            user.role === "admin" ? (
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            ) : (
-              <Navigate to="/error" replace /> // User tidak bisa akses /dashboard
-            )
-          ) : (
-            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
-          )
+          <ProtectedRoute allowedRole="admin">
+            <Dashboard />
+          </ProtectedRoute>
         }
       />
 
       {/* Rute untuk halaman Error */}
       <Route path="/error" element={<Error />} />
 
-      {/* Rute yang tidak ditemukan */}
+      {/* Rute tidak ditemukan */}
       <Route path="*" element={<Error />} />
     </Routes>
   );
