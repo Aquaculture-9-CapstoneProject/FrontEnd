@@ -1,8 +1,12 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ArticleCard = ({ image, title, date, badgeText }) => {
+  const navigate = useNavigate();
   return (
-    <div>
+    <div
+      className="cursor-pointer"
+      onClick={() => navigate("/article-content")}
+    >
       <img
         src={image}
         alt={title}
