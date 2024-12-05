@@ -69,7 +69,7 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
-          
+
       <Route
         path="/cart"
         element={
@@ -84,6 +84,39 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute allowedRole="user">
             <Search />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/article"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Article />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/article-latest"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <AllArticles />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/article-topic"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <FilteredArticles />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/article/content"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <ArticleContent />
           </ProtectedRoute>
         }
       />

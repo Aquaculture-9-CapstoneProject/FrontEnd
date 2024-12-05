@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import NavbarHome from "../home/NavbarHome";
+import { useState } from "react";
+// import { useParams } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
+import Navbar from "../../common/Navbar";
 
 export default function FilteredArticles() {
-  const { topic } = useParams(); // Ambil topik dari parameter URL
+  // const { topic } = useParams(); // Ambil topik dari parameter URL
+  const topic = "kesehatan";
 
   // Data artikel berdasarkan topik
   const articlesData = {
@@ -108,7 +109,7 @@ export default function FilteredArticles() {
 
   return (
     <div>
-      <NavbarHome />
+      <Navbar />
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 bg-neutral-5">
         <section className="py-10 px-4 md:px-8 min-h-screen flex flex-col justify-between">
           {/* Header */}

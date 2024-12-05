@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import NavbarHome from "../home/NavbarHome";
+import { useState } from "react";
 import ArticleCard from "./ArticleCard";
+import Navbar from "../../common/Navbar";
 
 export default function Article() {
-   const articles = [
+  const articles = [
     {
       id: 1,
       image: "user/home/bg-article.png",
@@ -89,7 +89,7 @@ export default function Article() {
       badgeText: "Panduan dan Tips",
     },
   ];
-    
+
   const articlesPerPage = 9; // Jumlah artikel per halaman
   const [currentPage, setCurrentPage] = useState(1); // State untuk halaman aktif
 
@@ -113,7 +113,7 @@ export default function Article() {
 
   return (
     <div>
-      <NavbarHome />
+      <Navbar />
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 bg-neutral-5">
         <section className="py-10 px-4 md:px-8 min-h-screen flex flex-col justify-between">
           {/* Header */}
@@ -195,3 +195,4 @@ export default function Article() {
     </div>
   );
 }
+
