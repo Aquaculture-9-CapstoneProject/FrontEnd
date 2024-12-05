@@ -6,8 +6,15 @@ import Error from "../components/common/Error";
 import Register from "../components/auth/register/Register";
 import LandingPage from "../components/landingPage/LandingPage";
 import HomePage from "../pages/users/HomePage";
+import Article from "../components/users/article/Article";
+import AllArticles from "../components/users/article/AllArticles";
+import FilteredArticles from "../components/users/article/FilteredArticles";
+import ArticleContent from "../components/users/article/ArticleContent";
 import useUserStore from "../store/useUsersStore";
 import ProductDetail from "../components/users/productDetails/ProductDetail";
+import Cart from "../components/users/cart/Cart";
+import Search from "../components/users/search/Search";
+import Checkout from "../components/users/checkout/Checkout";
 
 export default function AppRoutes() {
   const { user } = useUserStore();
@@ -56,10 +63,37 @@ export default function AppRoutes() {
       />
 
       <Route
-        path="/detail/"
+        path="/detail"
         element={
           <ProtectedRoute allowedRole="user">
             <ProductDetail />
+          </ProtectedRoute>
+        }
+      />
+          
+      <Route
+        path="/cart"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Cart />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/search"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Search />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/checkout"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Checkout />
           </ProtectedRoute>
         }
       />

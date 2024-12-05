@@ -10,10 +10,6 @@ export default function Navbar() {
     navigate("/");
   };
 
-  const goToHome = () => {
-    navigate("/home");
-  };
-
   return (
     <div className="navbar flex justify-between items-center bg-neutral-5 border-b-neutral-4 border-[1px] px-8 py-4">
       {/* Logo Section */}
@@ -22,7 +18,7 @@ export default function Navbar() {
           className="w-24 cursor-pointer"
           src="./logo.svg"
           alt="Logo"
-          onClick={goToHome}
+          onClick={() => navigate("/home")}
         />
       </div>
       <div className="relative w-full lg:w-[52%]">
@@ -31,8 +27,15 @@ export default function Navbar() {
           type="text"
           placeholder="Cari di BluyBay"
           className="p-3 py-3 rounded-lg border-2 border-neutral-4 border-solid w-full h-12 focus:outline-none"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              const query = e.target.value.trim();
+              if (query) {
+                navigate(`/search?query=${encodeURIComponent(query)}`);
+              }
+            }
+          }}
         />
-
         <button className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-neutral-600">
           <svg
             width="25"
@@ -50,7 +53,10 @@ export default function Navbar() {
       </div>
       <div className="md:flex items-center gap-5 hidden">
         {/* Cart Button */}
-        <div className="btn">
+        <div
+          className="hover:bg-neutral-4 px-4 py-2 rounded-lg cursor-pointer"
+          onClick={() => navigate("/cart")}
+        >
           <svg
             width="28"
             height="28"
