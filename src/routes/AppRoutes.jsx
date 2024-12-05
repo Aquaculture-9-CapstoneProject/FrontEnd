@@ -81,6 +81,15 @@ export default function AppRoutes() {
       />
 
       <Route
+        path="/checkout"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Checkout />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
         path="/search"
         element={
           <ProtectedRoute allowedRole="user">

@@ -31,7 +31,7 @@ export default function Checkout() {
         </div>
       </div>
 
-      <div className="px-16">
+      <div className="px-16 mb-10">
         <h1 className="font-semibold text-[28px] mb-5">Pembelian</h1>
         <div className="grid grid-cols-10 gap-6">
           <div className="col-span-6 flex flex-col gap-5">
