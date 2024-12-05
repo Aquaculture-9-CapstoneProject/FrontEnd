@@ -1,7 +1,9 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 
 const LatestArticles = () => {
+  const navigate = useNavigate();
+
   const latestArticles = [
     {
       id: 1,
@@ -51,8 +53,13 @@ const LatestArticles = () => {
     <section className="py-10 px-4 md:px-8">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold text-neutral-1">Artikel Terbaru</h2>
-        <div className="flex items-center gap-2 text-base font-semibold text-primary-5 hover:underline">
+        <h2 className="text-2xl font-semibold text-neutral-1">
+          Artikel Terbaru
+        </h2>
+        <div
+          className="flex items-center gap-2 text-base cursor-pointer font-semibold text-primary-5 hover:underline"
+          onClick={() => navigate("/article-latest")}
+        >
           Lihat Semua
           <svg
             width="8"

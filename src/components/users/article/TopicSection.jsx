@@ -1,13 +1,27 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const TopicSection = () => {
   const navigate = useNavigate();
 
   const topics = [
-    { id: 1, label: "Panduan dan Tips", icon: "user/article/icon1.svg", route: "panduan-dan-tips" },
-    { id: 2, label: "Resep dan Kuliner", icon: "user/article/icon2.svg", route: "resep-dan-kuliner" },
-    { id: 3, label: "Kesehatan", icon: "user/article/icon3.svg", route: "kesehatan" },
+    {
+      id: 1,
+      label: "Panduan dan Tips",
+      icon: "user/article/icon1.svg",
+      route: "panduan-dan-tips",
+    },
+    {
+      id: 2,
+      label: "Resep dan Kuliner",
+      icon: "user/article/icon2.svg",
+      route: "resep-dan-kuliner",
+    },
+    {
+      id: 3,
+      label: "Kesehatan",
+      icon: "user/article/icon3.svg",
+      route: "kesehatan",
+    },
   ];
 
   return (
@@ -20,7 +34,8 @@ const TopicSection = () => {
           <button
             key={topic.id}
             className="btn bg-neutral-5 flex items-center gap-3 w-full h-[72px] rounded-lg border-neutral-3"
-            onClick={() => navigate(`/article/${topic.route}`)} // Navigasi ke rute dinamis
+            // onClick={() => navigate(`/article/${topic.route}`)} // Navigasi ke rute dinamis
+            onClick={() => navigate(`/article-topic`)} // Navigasi ke rute statis
           >
             <img
               src={topic.icon}
