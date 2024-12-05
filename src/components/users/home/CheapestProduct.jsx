@@ -1,64 +1,12 @@
 import ProductCard from "../../common/ProductCard";
+import useCheapestProducts from "../../../hooks/useCheapersProduct";
 
-export default function CheapersProduct() {
-  const products = [
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-  ];
+export default function CheapestProduct() {
+  const { products, error } = useCheapestProducts();
+
+  if (error) {
+    console.log(error);
+  }
 
   return (
     <div className="px-4 sm:px-8 mt-4 sm:mt-6">
@@ -78,11 +26,11 @@ export default function CheapersProduct() {
           {products.map((product, index) => (
             <ProductCard
               key={index}
-              name={product.name}
-              price={product.price}
-              image={product.image}
-              rating={product.rating}
-              category={product.category}
+              name={product.Nama}
+              price={`Rp${product.Harga.toLocaleString()}`}
+              image={product.Gambar}
+              rating={product.Rating}
+              category={product.Jenis || "Tidak Ada Kategori"}
             />
           ))}
         </div>
