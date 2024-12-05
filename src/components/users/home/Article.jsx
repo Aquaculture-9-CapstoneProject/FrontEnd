@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 
 export default function Article() {
+  const navigate = useNavigate();
   const articles = [
     {
       title: "Sajian Udang Asam Manis Untuk Keluarga",
@@ -54,7 +56,10 @@ export default function Article() {
       <h1 className="font-semibold text-neutral-1 text-[28px]">
         Artikel dan Berita
       </h1>
-      <div className="relative z-10 flex gap-6 sm:px-8 py-6 overflow-x-auto scrollbar-thin scrollbar-thumb-primary-4 scrollbar-track-neutral-200 whitespace-nowrap">
+      <div
+        className="relative z-10 flex gap-6 sm:px-8 py-6 overflow-x-auto scrollbar-thin scrollbar-thumb-primary-4 scrollbar-track-neutral-200 whitespace-nowrap"
+        onClick={() => navigate("/article")}
+      >
         {articles.map((article, idx) => (
           <ArticleCard
             key={idx}

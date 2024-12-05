@@ -113,7 +113,7 @@ export default function AppRoutes() {
         }
       />
       <Route
-        path="/article/content"
+        path="/article-content"
         element={
           <ProtectedRoute allowedRole="user">
             <ArticleContent />

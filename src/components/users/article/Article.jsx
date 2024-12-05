@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "../../common/Navbar";
 import Insight from "./Insight";
 import LatestArticles from "./LatestArticles";
@@ -5,6 +6,10 @@ import Top3 from "./Top3";
 import TopicSection from "./TopicSection";
 
 export default function Article() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -17,4 +22,3 @@ export default function Article() {
     </div>
   );
 }
-

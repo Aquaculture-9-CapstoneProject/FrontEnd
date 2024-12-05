@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import Navbar from "../../common/Navbar";
 
 export default function FilteredArticles() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // const { topic } = useParams(); // Ambil topik dari parameter URL
   const topic = "kesehatan";
-
   // Data artikel berdasarkan topik
   const articlesData = {
     "panduan-dan-tips": [

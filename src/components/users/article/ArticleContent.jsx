@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import Navbar from "../../common/Navbar";
 
 export default function ArticleContent() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Data dummy artikel (nanti bisa diganti dengan data dari backend)
   const articleData = {
     title: "Sajian Udang Asam Manis Untuk Keluarga",

@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
 import Navbar from "../../common/Navbar";
 
 export default function Article() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const articles = [
     {
       id: 1,
@@ -104,11 +107,13 @@ export default function Article() {
   // Fungsi untuk navigasi ke halaman sebelumnya
   const handlePrevious = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
+    window.scrollTo(0, 0);
   };
 
   // Fungsi untuk navigasi ke halaman berikutnya
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -165,7 +170,10 @@ export default function Article() {
                           ? "border-neutral-5 bg-secondary-5 text-neutral-5"
                           : "border-neutral-5 bg-neutral-4 text-neutral-1 hover:text-neutral-5 hover:bg-secondary-5"
                       }`}
-                      onClick={() => setCurrentPage(index + 1)}
+                      onClick={() => {
+                        setCurrentPage(index + 1);
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       {index + 1}
                     </button>
@@ -195,4 +203,3 @@ export default function Article() {
     </div>
   );
 }
-
