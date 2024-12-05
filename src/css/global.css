@@ -23,3 +23,12 @@ body {
 .forgot-password {
   @apply text-[10px] text-neutral-1 hover:text-primary-1 cursor-pointer ml-auto;
 }
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

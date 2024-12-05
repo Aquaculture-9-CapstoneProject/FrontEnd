@@ -74,7 +74,7 @@ export default function CheapersProduct() {
         ></div>
 
         {/* Product List */}
-        <div className="relative z-10 flex gap-6 px-4 sm:px-8 py-6 overflow-x-auto scrollbar-thin scrollbar-thumb-primary-4 scrollbar-track-neutral-200">
+        <div className="relative z-10 flex gap-6 px-4 sm:px-8 py-6 overflow-x-auto no-scrollbar">
           {products.map((product, index) => (
             <ProductCard
               key={index}

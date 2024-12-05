@@ -57,7 +57,7 @@ export default function Article() {
         Artikel dan Berita
       </h1>
       <div
-        className="relative z-10 flex gap-6 sm:px-8 py-6 overflow-x-auto scrollbar-thin scrollbar-thumb-primary-4 scrollbar-track-neutral-200 whitespace-nowrap"
+        className="relative z-10 flex gap-6 sm:px-8 py-6 overflow-x-auto scrollbar-thin scrollbar-thumb-primary-4 scrollbar-track-neutral-200 whitespace-nowrap no-scrollbar"
         onClick={() => navigate("/article")}
       >
         {articles.map((article, idx) => (
