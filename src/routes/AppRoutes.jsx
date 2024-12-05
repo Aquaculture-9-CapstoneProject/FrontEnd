@@ -64,13 +64,8 @@ export default function AppRoutes() {
         }
       />
 
-      <Route path="/article" element={<Article />} />
-      <Route path="/article/latest" element={<AllArticles />} />
-      <Route path="/article/:topic" element={<FilteredArticles />} />
-      <Route path="/article/content" element={<ArticleContent />} />
-
       {/* Rute untuk halaman Article (hanya untuk role "user") */}
-      {/* <Route
+      <Route
         path="/article"
         element={
           user ? ( // Jika sudah login
@@ -83,7 +78,55 @@ export default function AppRoutes() {
             <Navigate to="/" replace /> // Jika belum login, arahkan ke /
           )
         }
-      /> */}
+      />
+
+      {/* Rute untuk halaman Article Terbaru (hanya untuk role "user") */}
+      <Route
+        path="/article/latest"
+        element={
+          user ? ( // Jika sudah login
+            user.role === "user" ? (
+              <AllArticles />
+            ) : (
+              <Navigate to="/error" replace /> // Admin tidak bisa akses /article/latest
+            )
+          ) : (
+            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
+          )
+        }
+      />
+
+      {/* Rute untuk halaman Article Berdasarkan Topik (hanya untuk role "user") */}
+      <Route
+        path="/article/:topic"
+        element={
+          user ? ( // Jika sudah login
+            user.role === "user" ? (
+              <FilteredArticles />
+            ) : (
+              <Navigate to="/error" replace /> // Admin tidak bisa akses /article/:topic
+            )
+          ) : (
+            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
+          )
+        }
+      />
+
+      {/* Rute untuk halaman Article Content (hanya untuk role "user") */}
+      <Route
+        path="/article/content"
+        element={
+          user ? ( // Jika sudah login
+            user.role === "user" ? (
+              <ArticleContent />
+            ) : (
+              <Navigate to="/error" replace /> // Admin tidak bisa akses /article/content
+            )
+          ) : (
+            <Navigate to="/" replace /> // Jika belum login, arahkan ke /
+          )
+        }
+      />
 
       {/* Rute untuk halaman Dashboard (hanya untuk role "admin") */}
       <Route
