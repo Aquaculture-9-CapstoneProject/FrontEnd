@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Instructions() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="p-4 rounded-lg border-[1px] border-neutral-3 mt-5">
@@ -59,6 +62,7 @@ export default function Instructions() {
                border-2 border-transparent hover:border-neutral-1 
                hover:text-neutral-6 active:bg-neutral-6 active:text-neutral-8 
                transition duration-200 font-semibold"
+          onClick={() => navigate("/payment-failed")}
         >
           Batalkan Pesanan
         </button>
@@ -67,6 +71,7 @@ export default function Instructions() {
           className="w-1/2 py-3 px-6 bg-primary-5 text-neutral-5 rounded-md font-semibold
                hover:bg-primary-6 hover:text-neutral-6 
                active:bg-primary-7 active:text-neutral-8 transition duration-200"
+          onClick={() => navigate("/payment-succes")}
         >
           Cek Status Pembayaran
         </button>

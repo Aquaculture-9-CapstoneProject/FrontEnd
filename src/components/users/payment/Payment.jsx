@@ -9,6 +9,10 @@ export default function Payment() {
   const [counter, setCounter] = useState(59);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (counter > 0) {
       const timer = setTimeout(() => setCounter(counter - 1), 1000);
       return () => clearTimeout(timer); // Clear timeout untuk menghindari memory leak
