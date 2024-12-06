@@ -32,7 +32,7 @@ export default function Step({ currentStep }) {
       </div>
 
       {/* Progress Steps */}
-      <div className="flex justify-center w-8/12">
+      <div className="flex justify-center w-8/12 ml-8">
         <ol className="flex items-center justify-center w-full">
           {steps.map((step, index) => (
             <li key={index}>
