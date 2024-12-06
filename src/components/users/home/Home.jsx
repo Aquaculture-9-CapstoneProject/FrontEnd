@@ -1,7 +1,7 @@
 import Navbar from "../../common/Navbar";
 import Article from "./Article";
 import Carousel from "./Carousel";
-import CartButton from "./CartButton";
+import ChatbotButton from "../chatbot/ChatbotButton";
 import Category from "./Category";
 import CheapersProduct from "./CheapestProduct";
 import PopularProduct from "./PopularProduct";
@@ -17,7 +17,7 @@ export default function Home() {
       <CheapersProduct />
       <PopularProduct />
       <Article />
-      <CartButton />
+      <ChatbotButton />
     </>
   );
 }
