@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "../components/auth/login/Login";
 import ProtectedRoute from "./ProtectedRoute";
-import Dashboard from "../pages/admin/Dashboard";
 import Error from "../components/common/Error";
 import Register from "../components/auth/register/Register";
 import LandingPage from "../components/landingPage/LandingPage";
@@ -16,6 +15,11 @@ import Cart from "../components/users/cart/Cart";
 import Search from "../components/users/search/Search";
 import Checkout from "../components/users/checkout/Checkout";
 import Payment from "../components/users/payment/Payment";
+import TransactionPage from "../pages/admin/TransactionPage";
+import DashboardPage from "../pages/admin/DashboardPage";
+import OrderPage from "../pages/admin/OrderPage";
+import ProductPage from "../pages/admin/ProductPage";
+import ArticlePage from "../pages/admin/ArticlePage";
 
 export default function AppRoutes() {
   const { user } = useUserStore();
@@ -146,7 +150,43 @@ export default function AppRoutes() {
         path="/dashboard"
         element={
           <ProtectedRoute allowedRole="admin">
-            <Dashboard />
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/transaksi"
+        element={
+          <ProtectedRoute allowedRole="admin">
+            <TransactionPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/pesanan"
+        element={
+          <ProtectedRoute allowedRole="admin">
+            <OrderPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/produk"
+        element={
+          <ProtectedRoute allowedRole="admin">
+            <ProductPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/artikel"
+        element={
+          <ProtectedRoute allowedRole="admin">
+            <ArticlePage />
           </ProtectedRoute>
         }
       />
