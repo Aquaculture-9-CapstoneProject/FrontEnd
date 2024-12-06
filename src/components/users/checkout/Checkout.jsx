@@ -4,12 +4,9 @@ import AddressSection from "./AddressSection";
 import OrderSummary from "./OrderSummary";
 import PaymentMethod from "./PaymentMethod";
 import ProductList from "./ProductList";
-import Step from "./Step";
-import { useNavigate } from "react-router-dom";
+import Step from "../../common/Step";
 
 export default function Checkout() {
-  const navigate = useNavigate();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -17,19 +14,7 @@ export default function Checkout() {
   return (
     <>
       <Navbar />
-      <div className="px-16 py-6 flex">
-        <div
-          className="flex align-top -mt-8 items-center gap-2 w-[17%] cursor-pointer"
-          onClick={() => navigate(-1)} // Navigate back
-        >
-          <img src="/user/checkout/back.svg" alt="back" />
-          <h1 className="font-semibold">Kembali</h1>
-        </div>
-
-        <div className="flex justify-center w-8/12">
-          <Step />
-        </div>
-      </div>
+      <Step currentStep={1} />
 
       <div className="px-16 mb-10">
         <h1 className="font-semibold text-[28px] mb-5">Pembelian</h1>
