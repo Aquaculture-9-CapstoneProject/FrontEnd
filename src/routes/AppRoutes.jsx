@@ -16,6 +16,8 @@ import Cart from "../components/users/cart/Cart";
 import Search from "../components/users/search/Search";
 import Checkout from "../components/users/checkout/Checkout";
 import Payment from "../components/users/payment/Payment";
+import PaymentSucces from "../components/users/paymentSucces/PaymentSucces";
+import PaymentFailed from "../components/users/paymentFailed/PaymentFailed";
 
 export default function AppRoutes() {
   const { user } = useUserStore();
@@ -137,6 +139,24 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute allowedRole="user">
             <Payment />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/payment-succes"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <PaymentSucces />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/payment-failed"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <PaymentFailed />
           </ProtectedRoute>
         }
       />
