@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function OrderSummary() {
+  const navigate = useNavigate();
+
   const subtotal = 100000;
   const biayaLayanan = 5000;
   const ongkir = 20000;
@@ -37,7 +41,11 @@ export default function OrderSummary() {
           </div>
         </div>
       </div>
-      <button type="button" className="btn bg-primary-5 text-neutral-5">
+      <button
+        type="button"
+        className="btn bg-primary-5 text-neutral-5"
+        onClick={() => navigate("/payment")}
+      >
         Buat Pesanan
       </button>
     </>
