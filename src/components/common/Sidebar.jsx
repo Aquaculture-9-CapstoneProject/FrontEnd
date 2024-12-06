@@ -1,44 +1,35 @@
 import { useState } from "react";
 import useUserStore from "../../store/useUsersStore";
-import { useNavigate } from "react-router-dom";
-
-const MenuItem = ({ icon, label, onClick, isActive, isLogout }) => (
-  <li
-    className={`flex gap-2 rounded-lg ${isActive ? "bg-neutral-4" : ""}`}
-    onClick={onClick}
-  >
-    <div className="h-11 flex items-center">
-      <img
-        src={icon}
-        alt={label}
-        className={`transition-opacity duration-200 ${
-          isActive || isLogout ? "opacity-100" : "opacity-50"
-        }`}
-      />
-      <p
-        className={`text-base font-semibold ${
-          isActive ? "text-neutral-1" : "text-neutral-2"
-        }`}
-      >
-        {label}
-      </p>
-    </div>
-  </li>
-);
+import { useLocation, useNavigate } from "react-router-dom";
+import MenuItem from "./MenuItem";
+import { useEffect } from "react";
 
 export default function Sidebar({ children }) {
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   const { clearUser } = useUserStore();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (location.pathname === "/dashboard") setActiveMenuItem(0);
+      if (location.pathname === "/transaksi") setActiveMenuItem(1);
+      if (location.pathname === "/pesanan") setActiveMenuItem(2);
+      if (location.pathname === "/produk") setActiveMenuItem(3);
+      if (location.pathname === "/artikel") setActiveMenuItem(4);
+    }, 100); //kasih delay animasinya kadang kagak jalan klo gk ada delay
+    return () => clearTimeout(timer);
+  }, [location]);
 
   const handleLogout = () => {
     clearUser();
     navigate("/");
   };
 
-  const handleMenuClick = (index) => {
+  const handleMenuClick = (index, to) => {
     setActiveMenuItem(index);
     document.getElementById("my-drawer-2").checked = false;
+    navigate(to); // Navigasi ke URL yang diberikan
   };
 
   return (
@@ -64,6 +55,8 @@ export default function Sidebar({ children }) {
             />
           </svg>
         </label>
+
+        {/* Menampilkan konten dari children */}
         {children}
       </div>
       <div className="drawer-side h-screen overflow-hidden">
@@ -72,7 +65,7 @@ export default function Sidebar({ children }) {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-neutral-5 text-neutral-1 h-screen w-[392px] px-6 py-5 flex flex-col gap-5">
+        <ul className="menu bg-neutral-5 text-neutral-1 h-screen w-[320px] px-6 py-5 flex flex-col gap-3">
           <li
             onClick={() =>
               (document.getElementById("my-drawer-2").checked = false)
@@ -86,50 +79,43 @@ export default function Sidebar({ children }) {
               />
             </div>
           </li>
-          <div className="flex gap-5 flex-col">
+          <div className="flex gap-2 flex-col">
             <MenuItem
-              icon="/admin/home/dashboard.svg"
+              icon="/admin/common/sidebar/dashboard.svg"
               label="Dashboard"
               isActive={activeMenuItem === 0}
-              onClick={() => handleMenuClick(0)}
+              onClick={() => handleMenuClick(0, "/dashboard")}
             />
             <MenuItem
-              icon="/admin/home/transaksi.svg"
+              icon="/admin/common/sidebar/transaksi.svg"
               label="Transaksi"
               isActive={activeMenuItem === 1}
-              onClick={() => handleMenuClick(1)}
+              onClick={() => handleMenuClick(1, "/transaksi")}
             />
             <MenuItem
-              icon="/admin/home/pesanan.svg"
+              icon="/admin/common/sidebar/pesanan.svg"
               label="Pesanan"
               isActive={activeMenuItem === 2}
-              onClick={() => handleMenuClick(2)}
+              onClick={() => handleMenuClick(2, "/pesanan")}
             />
             <MenuItem
-              icon="/admin/home/produk.svg"
+              icon="/admin/common/sidebar/produk.svg"
               label="Produk"
               isActive={activeMenuItem === 3}
-              onClick={() => handleMenuClick(3)}
+              onClick={() => handleMenuClick(3, "/produk")}
             />
             <MenuItem
-              icon="/admin/home/artikel.svg"
+              icon="/admin/common/sidebar/artikel.svg"
               label="Artikel"
               isActive={activeMenuItem === 4}
-              onClick={() => handleMenuClick(4)}
-            />
-            <MenuItem
-              icon="/admin/home/rating.svg"
-              label="Rating"
-              isActive={activeMenuItem === 5}
-              onClick={() => handleMenuClick(5)}
+              onClick={() => handleMenuClick(4, "/artikel")}
             />
           </div>
           <div className="mt-auto">
             <MenuItem
-              icon="/admin/home/logout.svg"
+              icon="/admin/common/sidebar/logout.svg"
               label="Logout"
               isActive={false}
-              isLogout={true}
               onClick={handleLogout}
             />
           </div>
