@@ -1,64 +1,12 @@
+import usePopularProducts from "../../../hooks/usePopularProducts";
 import ProductCard from "../../common/ProductCard";
 
-export default function PopularProduct() {
-  const products = [
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Tuna",
-      price: "Rp35.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.2,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Lele",
-      price: "Rp25.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.1,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Gurami",
-      price: "Rp45.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.6,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Patin",
-      price: "Rp30.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.3,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Bawal",
-      price: "Rp50.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.4,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Salmon",
-      price: "Rp40.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.5,
-      category: "ikan",
-    },
-    {
-      name: "Ikan Tuna",
-      price: "Rp35.000/ kg",
-      image: "/user/home/card-ikan.png",
-      rating: 4.2,
-      category: "ikan",
-    },
-  ];
+const PopularProduct = () => {
+  const { products, error } = usePopularProducts();
+
+  if (error) {
+    return console.log(error);
+  }
 
   return (
     <div className="px-4 sm:px-8 mt-4 sm:mt-6">
@@ -70,14 +18,16 @@ export default function PopularProduct() {
         {products.map((product, index) => (
           <ProductCard
             key={index}
-            name={product.name}
-            price={product.price}
-            image={product.image}
-            rating={product.rating}
-            category={product.category}
+            name={product.Nama}
+            price={`Rp${product.Harga.toLocaleString()}`}
+            image={product.Gambar}
+            rating={product.Rating}
+            category={product.Jenis || "Tidak Ada Kategori"}
           />
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default PopularProduct;

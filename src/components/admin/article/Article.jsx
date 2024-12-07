@@ -1,7 +1,7 @@
-export default function Home() {
+export default function Artcle() {
   return (
     <div className="bg-neutral-4 h-screen">
-      <h1>halo ini dashboard admin</h1>
+      <h1>ini artikel </h1>
     </div>
   );
 }

@@ -16,8 +16,8 @@ export default function ProductCard({ name, price, image, rating, category }) {
       className="card bg-neutral-5 w-[313px] shadow-xl flex-shrink-0 active:scale-95 hover:border-secondary-1 border-[1px] cursor-pointer"
       onClick={handleCardClick}
     >
-      <figure>
-        <img src={image} alt={name} />
+      <figure className="relative w-full h-48 bg-neutral-3 overflow-hidden">
+        <img src={image} alt={name} className="w-full h-full object-cover" />
       </figure>
       <div className="p-4">
         <div className="flex justify-between top-0">
