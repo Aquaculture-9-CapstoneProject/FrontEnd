@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
 import Step from "../../common/Step";
 
 export default function PaymentFailed() {
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -24,6 +26,7 @@ export default function PaymentFailed() {
             className="w-full py-3 px-6 bg-primary-5 text-neutral-5 rounded-md font-semibold
                hover:bg-primary-6 hover:text-neutral-6 
                active:bg-primary-7 active:text-neutral-8 transition duration-200"
+            onClick={() => navigate("/order")}
           >
             Lihat Dafar Pesanan
           </button>
@@ -33,6 +36,7 @@ export default function PaymentFailed() {
           border-2 border-transparent hover:border-neutral-1 
           hover:text-neutral-6 active:bg-neutral-6 active:text-neutral-8 
           transition duration-200 font-semibold"
+            onClick={() => navigate("/home")}
           >
             Kembali ke Beranda
           </button>
