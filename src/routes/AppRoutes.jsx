@@ -22,6 +22,7 @@ import DashboardPage from "../pages/admin/DashboardPage";
 import OrderPage from "../pages/admin/OrderPage";
 import ProductPage from "../pages/admin/ProductPage";
 import ArticlePage from "../pages/admin/ArticlePage";
+import Order from "../components/users/order/Order";
 
 export default function AppRoutes() {
   const { user } = useUserStore();
@@ -161,6 +162,15 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute allowedRole="user">
             <PaymentFailed />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/order"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Order />
           </ProtectedRoute>
         }
       />
