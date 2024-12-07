@@ -20,7 +20,6 @@ const DeleteTransaction = ({ transaction, onClose }) => {
           </svg>
         </div>
 
-        {/* Header Modal */}
         <h2 className="text-neutral-1 text-center text-base sm:text-xl font-semibold mb-2">
           Hapus Transaksi
         </h2>
@@ -28,7 +27,7 @@ const DeleteTransaction = ({ transaction, onClose }) => {
           Apakah Anda yakin ingin menghapus transaksi ini? Tindakan ini tidak dapat dibatalkan.
         </p>
 
-        {/* Tombol Aksi */}
+        {/* Tombol */}
         <div className="flex justify-center gap-4">
           <button
             onClick={onClose}
