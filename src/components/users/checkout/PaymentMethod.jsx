@@ -9,7 +9,7 @@ export default function PaymentMethod() {
           className="w-8 h-8"
         />
         <p className="text-base">Transfer Bank</p>
-        <input type="checkbox" defaultChecked className="checkbox ml-auto" />
+        <input type="radio" defaultChecked className="checkbox ml-auto" />
       </label>
     </div>
   );
