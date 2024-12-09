@@ -13,12 +13,12 @@ export default function Step({ currentStep }) {
     <div className="flex flex-col items-center self-stretch my-auto h-8 w-[31px]">
       <div
         className={`flex justify-center items-center px-2 w-8 h-8 rounded-full min-h-[32px] ${
-          isActive ? "bg-cyan-600 text-neutral-50" : "bg-neutral-200"
+          isActive ? "bg-secondary-5 text-neutral-50" : "bg-neutral-5"
         }`}
       >
         {number}
       </div>
-      <div className={`mt-1 text-nowrap ${isActive ? "text-neutral-800" : ""}`}>
+      <div className={`mt-1 text-nowrap ${isActive ? "text-neutral-1" : ""}`}>
         {label}
       </div>
     </div>
@@ -27,7 +27,7 @@ export default function Step({ currentStep }) {
   const ProgressBar = ({ isActive }) => (
     <div
       className={`flex flex-1 shrink self-stretch my-auto h-2 basis-0 ${
-        isActive ? "bg-cyan-600" : "bg-neutral-200"
+        isActive ? "bg-secondary-5" : "bg-neutral-5"
       }`}
     />
   );
