@@ -1,12 +1,15 @@
 import React from "react";
 
-export default function FilterSearch() {
+export default function FilterSearch({ onAddProductClick }) {
   return (
-    <div className="flex justify-between items-center mb-4 flex-wrap sm:flex-nowrap">
+    <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
+      {/* Heading */}
       <h2 className="text-sm sm:text-base font-semibold text-neutral-1 mb-2 sm:mb-0">
         Pesanan Bulan Ini
       </h2>
-      <div className="flex gap-2 items-center w-full sm:w-auto">
+
+      {/* Filter, Search, and Buttons */}
+      <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto justify-end">
         {/* Input Pencarian */}
         <div className="flex items-center border border-neutral-3 bg-neutral-5 rounded-md w-full sm:w-[200px]">
           <input
@@ -30,16 +33,26 @@ export default function FilterSearch() {
           </button>
         </div>
 
-        <button className="btn btn-sm mx-7 bg-neutral-5 border-neutral-4 text-neutral-1 text-xs sm:text-sm font-semibold flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.0001 8V10H2.00008V8H0.666748V10C0.666748 10.7333 1.26675 11.3333 2.00008 11.3333H10.0001C10.7334 11.3333 11.3334 10.7333 11.3334 10V8H10.0001ZM2.66675 4L3.60675 4.94L5.33341 3.22V8.66666H6.66675V3.22L8.39341 4.94L9.33341 4L6.00008 0.666664L2.66675 4Z" fill="#262626"/>
-</svg>
-            Export
+        {/* Tombol Export */}
+        <button className="btn btn-sm bg-neutral-5 border-neutral-4 text-neutral-1 text-xs sm:text-sm font-semibold flex items-center gap-2">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.0001 8V10H2.00008V8H0.666748V10C0.666748 10.7333 1.26675 11.3333 2.00008 11.3333H10.0001C10.7334 11.3333 11.3334 10.7333 11.3334 10V8H10.0001ZM2.66675 4L3.60675 4.94L5.33341 3.22V8.66666H6.66675V3.22L8.39341 4.94L9.33341 4L6.00008 0.666664L2.66675 4Z"
+              fill="#262626"
+            />
+          </svg>
+          Export
         </button>
 
         {/* Dropdown Filter */}
         <details className="dropdown dropdown-end">
-          <summary className="btn btn-sm mr-7 bg-neutral-5 border-neutral-4 text-neutral-1 text-xs sm:text-sm font-semibold flex items-center gap-2">
+          <summary className="btn btn-sm bg-neutral-5 border-neutral-4 text-neutral-1 text-xs sm:text-sm font-semibold flex items-center gap-2">
             <svg
               width="12"
               height="8"
@@ -54,7 +67,7 @@ export default function FilterSearch() {
             </svg>
             Filter
           </summary>
-          <ul className="mt-2 menu dropdown-content bg-neutral-5 text-xs sm:text-sm rounded-box z-[1] w-40 p-2 shadow">
+          <ul className="menu dropdown-content bg-neutral-5 text-xs sm:text-sm rounded-box z-[1] w-40 p-2 shadow">
             <li>
               <a>Ikan</a>
             </li>
@@ -64,8 +77,11 @@ export default function FilterSearch() {
           </ul>
         </details>
 
-        <button className="btn btn-sm bg-primary-5 text-neutral-5 text-xs sm:text-sm font-semibold flex items-center gap-2">
-            + Tambah Produk
+        {/* Tombol Tambah Produk */}
+        <button className="btn btn-sm bg-primary-5 text-neutral-5 text-xs sm:text-sm font-semibold flex items-center gap-2"
+        onClick={onAddProductClick}
+        >
+          + Tambah Produk
         </button>
       </div>
     </div>
