@@ -12,8 +12,10 @@ export default function Filter() {
   const { selectedCategories, toggleCategory } = useProductStore();
 
   return (
-    <div className="p-4 rounded-lg border-neutral-3 border-solid border-2 w-1/5 h-fit text-neutral-1">
-      <h1 className="text-xl font-semibold">Kategori</h1>
+    <div className="p-4 rounded-lg border-neutral-3 border-solid h-min border-2 w-full md:w-1/5 text-neutral-1">
+      <h1 className="text-xl font-semibold text-center md:text-left">
+        Kategori
+      </h1>
       <div className="flex flex-col gap-2 mt-4">
         {categories.map((category, index) => (
           <div key={index} className="flex items-center gap-3">
