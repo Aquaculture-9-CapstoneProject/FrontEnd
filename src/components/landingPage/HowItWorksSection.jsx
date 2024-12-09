@@ -1,22 +1,22 @@
-import React from "react";
-
 const HowItWorksSection = () => {
   return (
-    <div className="bg-primary-1 text-neutral-4 py-20 px-28 md:px-28">
-      <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-[104px]">
+    <div className="bg-primary-1 text-neutral-4 py-20 px-6 md:px-28">
+      <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-[60px] md:gap-[104px]">
         {/* Left Section */}
         <div>
-          <h3 className="text-2xl text-secondary-9 font-semibold">Kemudahan Belanja di BlueBay</h3>
+          <h3 className="text-2xl text-secondary-9 font-semibold">
+            Kemudahan Belanja di BlueBay
+          </h3>
           <h2 className="text-4xl font-semibold text-neutral-5 mt-5">
             Yuk, Lihat <br />
             <span className="text-secondary-9">Cara Kerja Website Kami!</span>
           </h2>
-          <p className="mt-4 text-xl text-normal mt-5">
+          <p className="mt-4 text-xl text-normal">
             Belanja produk akuakultur segar nggak pernah semudah ini. Ikuti
             langkah-langkah sederhana dan nikmati pengalaman belanja tanpa
             ribet!
           </p>
-          <button className="bg-[#0D5B82] text-neutral-5 font-semibold px-6 py-3 rounded-lg mt-16 w-[280px] h-[52px]">
+          <button className="bg-[#0D5B82] text-neutral-5 font-semibold px-6 py-3 rounded-lg mt-16 w-full sm:w-[280px] h-[52px]">
             Mulai Belanja
           </button>
         </div>
@@ -35,7 +35,9 @@ const HowItWorksSection = () => {
                 1
               </div>
               <div>
-                <h4 className="text-2xl text-secondary-9 font-semibold">Daftar Akun</h4>
+                <h4 className="text-2xl text-secondary-9 font-semibold">
+                  Daftar Akun
+                </h4>
                 <p className="text-base text-normal">
                   Buat akun dalam hitungan menit. Gratis dan gampang banget!
                 </p>
@@ -48,7 +50,9 @@ const HowItWorksSection = () => {
                 2
               </div>
               <div>
-                <h4 className="text-2xl text-secondary-9 font-semibold">Jelajahi BlueBay</h4>
+                <h4 className="text-2xl text-secondary-9 font-semibold">
+                  Jelajahi BlueBay
+                </h4>
                 <p className="text-base text-normal">
                   Cari produk favoritmu dari pembudidaya terpercaya.
                 </p>
@@ -61,7 +65,9 @@ const HowItWorksSection = () => {
                 3
               </div>
               <div>
-                <h4 className="text-2xl text-secondary-9 font-semibold">Pesan Sekarang</h4>
+                <h4 className="text-2xl text-secondary-9 font-semibold">
+                  Pesan Sekarang
+                </h4>
                 <p className="text-base text-normal">
                   Tinggal klik, pesan, dan kami yang urus sisanya.
                 </p>
@@ -74,7 +80,9 @@ const HowItWorksSection = () => {
                 4
               </div>
               <div>
-                <h4 className="text-2xl text-secondary-9 font-semibold">Lacak Pesanan</h4>
+                <h4 className="text-2xl text-secondary-9 font-semibold">
+                  Lacak Pesanan
+                </h4>
                 <p className="text-base text-normal">
                   Pantau perjalanan pesananmu hingga sampai ke depan pintu.
                 </p>
@@ -88,3 +96,4 @@ const HowItWorksSection = () => {
 };
 
 export default HowItWorksSection;
+

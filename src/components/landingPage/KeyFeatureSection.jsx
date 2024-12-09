@@ -1,8 +1,6 @@
-import React from "react";
-
 const KeyFeatureSection = () => {
   return (
-    <div className="bg-neutral-5 py-20 px-28 md:px-28">
+    <div className="bg-neutral-5 py-20 px-8 md:px-28">
       <div className="max-w-[1440px] mx-auto">
         {/* Section Heading */}
         <div className="text-center mb-14">
@@ -44,10 +42,19 @@ const KeyFeatureSection = () => {
             {/* Feature 2 */}
             <div className="flex items-start gap-8">
               <div className="w-[72px] h-[72px] flex items-center justify-center rounded-full">
-              <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="72" height="72" rx="36" fill="#0D5B82"/>
-<path d="M52 31V27C52 24.8 50.2 23 48 23H42C42 19.68 39.32 17 36 17C32.68 17 30 19.68 30 23H24C21.8 23 20 24.8 20 27V31C16.68 31 14 33.68 14 37C14 40.32 16.68 43 20 43V51C20 53.2 21.8 55 24 55H48C50.2 55 52 53.2 52 51V43C55.32 43 58 40.32 58 37C58 33.68 55.32 31 52 31ZM27 36C27 34.34 28.34 33 30 33C31.66 33 33 34.34 33 36C33 37.66 31.66 39 30 39C28.34 39 27 37.66 27 36ZM42 47H30C28.9 47 28 46.1 28 45C28 43.9 28.9 43 30 43H42C43.1 43 44 43.9 44 45C44 46.1 43.1 47 42 47ZM42 39C40.34 39 39 37.66 39 36C39 34.34 40.34 33 42 33C43.66 33 45 34.34 45 36C45 37.66 43.66 39 42 39Z" fill="#FAFAFA"/>
-</svg>
+                <svg
+                  width="72"
+                  height="72"
+                  viewBox="0 0 72 72"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="72" height="72" rx="36" fill="#0D5B82" />
+                  <path
+                    d="M52 31V27C52 24.8 50.2 23 48 23H42C42 19.68 39.32 17 36 17C32.68 17 30 19.68 30 23H24C21.8 23 20 24.8 20 27V31C16.68 31 14 33.68 14 37C14 40.32 16.68 43 20 43V51C20 53.2 21.8 55 24 55H48C50.2 55 52 53.2 52 51V43C55.32 43 58 40.32 58 37C58 33.68 55.32 31 52 31ZM27 36C27 34.34 28.34 33 30 33C31.66 33 33 34.34 33 36C33 37.66 31.66 39 30 39C28.34 39 27 37.66 27 36ZM42 47H30C28.9 47 28 46.1 28 45C28 43.9 28.9 43 30 43H42C43.1 43 44 43.9 44 45C44 46.1 43.1 47 42 47ZM42 39C40.34 39 39 37.66 39 36C39 34.34 40.34 33 42 33C43.66 33 45 34.34 45 36C45 37.66 43.66 39 42 39Z"
+                    fill="#FAFAFA"
+                  />
+                </svg>
               </div>
               <div>
                 <h4 className="text-2xl font-semibold text-neutral-1">
@@ -62,10 +69,19 @@ const KeyFeatureSection = () => {
             {/* Feature 3 */}
             <div className="flex items-start gap-8">
               <div className="w-[72px] h-[72px] flex items-center justify-center rounded-full">
-              <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="72" height="72" rx="36" fill="#0D5B82"/>
-<path d="M54.3 19.2825L52.66 20.9225L50.76 19.0025C49.98 18.2225 48.72 18.2225 47.92 19.0025L46 20.9225L44.08 19.0025C43.3 18.2225 42.02 18.2225 41.24 19.0025L39.34 20.9225L37.42 19.0025C36.64 18.2225 35.38 18.2225 34.6 19.0025L32.68 20.9225L30.76 19.0025C29.98 18.2225 28.72 18.2225 27.92 19.0025L26 20.9225L24.08 19.0025C23.3 18.2225 22.02 18.2225 21.24 19.0025L19.34 20.9225L17.7 19.2825C17.08 18.6625 16 19.1025 16 20.0025V49.5825C16 51.7825 17.8 53.5825 20 53.5825H52C54.2 53.5825 56 51.7825 56 49.5825V20.0025C56 19.1025 54.92 18.6625 54.3 19.2825ZM34 49.5825H20V37.5825H34V49.5825ZM52 49.5825H38V45.5825H52V49.5825ZM52 41.5825H38V37.5825H52V41.5825ZM52 33.5825H20V27.5825H52V33.5825Z" fill="#FAFAFA"/>
-</svg>
+                <svg
+                  width="72"
+                  height="72"
+                  viewBox="0 0 72 72"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="72" height="72" rx="36" fill="#0D5B82" />
+                  <path
+                    d="M54.3 19.2825L52.66 20.9225L50.76 19.0025C49.98 18.2225 48.72 18.2225 47.92 19.0025L46 20.9225L44.08 19.0025C43.3 18.2225 42.02 18.2225 41.24 19.0025L39.34 20.9225L37.42 19.0025C36.64 18.2225 35.38 18.2225 34.6 19.0025L32.68 20.9225L30.76 19.0025C29.98 18.2225 28.72 18.2225 27.92 19.0025L26 20.9225L24.08 19.0025C23.3 18.2225 22.02 18.2225 21.24 19.0025L19.34 20.9225L17.7 19.2825C17.08 18.6625 16 19.1025 16 20.0025V49.5825C16 51.7825 17.8 53.5825 20 53.5825H52C54.2 53.5825 56 51.7825 56 49.5825V20.0025C56 19.1025 54.92 18.6625 54.3 19.2825ZM34 49.5825H20V37.5825H34V49.5825ZM52 49.5825H38V45.5825H52V49.5825ZM52 41.5825H38V37.5825H52V41.5825ZM52 33.5825H20V27.5825H52V33.5825Z"
+                    fill="#FAFAFA"
+                  />
+                </svg>
               </div>
               <div>
                 <h4 className="text-2xl font-semibold text-neutral-1">
@@ -73,18 +89,18 @@ const KeyFeatureSection = () => {
                 </h4>
                 <p className="text-base text-normal text-neutral-1 mt-2">
                   Nikmati berbagai artikel informatif tentang akuakultur, resep
-                  masakan, dan tips menjaga produk tetap segar.
+                  masakan, dan tips menjaga produk tetap segar
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Right Section */}
-          <div className="relative">
+          {/* Right Section (Image) */}
+          <div className="w-full max-w-xs md:max-w-md mx-auto">
             <img
               src="laptopimage.png"
               alt="Laptop Mockup"
-              className="w-full max-w-xl mx-auto md:mx-0"
+              className="w-full h-auto"
             />
           </div>
         </div>
@@ -92,5 +108,5 @@ const KeyFeatureSection = () => {
     </div>
   );
 };
-
 export default KeyFeatureSection;
+
