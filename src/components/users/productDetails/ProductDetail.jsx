@@ -16,12 +16,14 @@ export default function ProductDetail() {
     <>
       <Navbar />
       <Breadcrumb items={breadcrumbItems} />
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-16 space-x-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-8 md:px-12 lg:px-16">
         <ProductImage />
         <ProductDescription />
         <ProductRating />
       </div>
-      <ProductRecomendation title="Rekomendasi Produk" />
+      <div className="hidden lg:flex">
+        <ProductRecomendation title="Rekomendasi Produk" />
+      </div>
     </>
   );
 }
