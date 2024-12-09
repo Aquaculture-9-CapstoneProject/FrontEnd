@@ -65,9 +65,9 @@ const TotalChart = () => {
         Total Transaksi
       </p>
 
-      <div className="flex flex-row items-center justify-center mt-5 w-full">
+      <div className="flex flex-row items-center justify-center w-full">
         {/* Chart */}
-        <div className="h-52 w-full">
+        <div className="h-full w-full">
           <Line data={data} options={options} />
         </div>
       </div>
