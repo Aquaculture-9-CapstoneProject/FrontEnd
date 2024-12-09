@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../../../utils/toastUtils";
 
 const reviews = [
   {
@@ -123,7 +124,7 @@ export default function ProductRating() {
         <div className="justify-between flex flex-row gap-8 mt-8">
           <button
             className="hover:bg-neutral-4 border-2 border-neutral-4 bg-neutral-5 flex items-center justify-center w-1/2 py-[14px] px-6 rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105 gap-2"
-            onClick={() => navigate("/cart")}
+            onClick={() => showToast("Berhasil menambahkan ke keranjang")}
           >
             <img src="./user/detail/add.svg" alt="add" />
             <p>Keranjang</p>

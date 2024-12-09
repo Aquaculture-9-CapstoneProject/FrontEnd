@@ -122,10 +122,13 @@ export default function Navbar() {
             <span className="font-semibold">{user?.name || "Guest"}</span>
           </li>
           <li>
+            <button onClick={() => navigate("/home")}>Beranda</button>
+          </li>
+          <li>
             <button onClick={handleLogout}>Logout</button>
           </li>
           <li>
-            <button>Daftar Pesanan</button>
+            <button onClick={() => navigate("/order")}>Daftar Pesanan</button>
           </li>
         </ul>
       </div>
