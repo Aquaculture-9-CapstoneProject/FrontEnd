@@ -8,9 +8,9 @@ export default function OrderDetail({ isOpen, onClose }) {
       address: "Jl. Pahlawan",
       date: "24 November 2024, 19.00",
       products: [
-        { name: "Ikan Tongkol", quantity: "x2 kg" },
-        { name: "Nugget Ikan", quantity: "x10 gram" },
-        { name: "Ikan Salmon", quantity: "x1 kg" }
+        { name: "Ikan Tongkol", quantity: "x2 kg", variation: "Tongkol Premium" },
+        { name: "Nugget Ikan", quantity: "x10 gram", variation: "Teri" },
+        { name: "Ikan Salmon", quantity: "x1 kg", variation: "Salmon Premium" }
       ],
       nominal: "Rp 56.000",
       status: "Perlu Dikirim"
@@ -55,7 +55,7 @@ export default function OrderDetail({ isOpen, onClose }) {
               <ul className="mt-2">
                 {staticOrder.products.map((product, index) => (
                   <li key={index} className="flex justify-between pt-2">
-                    <span>{product.name}</span>
+                    <span>{product.name} <br/> <span className="text-xs text-neutral-3">{product.variation}</span></span>
                     <span>{product.quantity}</span>
                   </li>
                 ))}

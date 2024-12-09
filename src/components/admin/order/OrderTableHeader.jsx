@@ -12,7 +12,6 @@ export default function OrderTableHeader() {
       <th className="font-semibold text-neutral-3 text-[10px] border-b border-neutral-3">Alamat</th>
       <th className="font-semibold text-neutral-3 text-[10px] border-b border-neutral-3">Nominal</th>
       <th className="font-semibold text-neutral-3 text-[10px] border-b border-neutral-3">Status</th>
-      <th className="font-semibold text-neutral-3 text-[10px] border-b border-neutral-3">Aksi</th>
     </tr>
   );
 }

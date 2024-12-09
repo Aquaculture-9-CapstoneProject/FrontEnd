@@ -120,7 +120,7 @@ const Navbar = () => {
             <a href="#keunggulan">Keunggulan</a>
           </li>
           <li className="hover:text-primary-5 cursor-pointer">
-            <a href="#artikel">Artikel</a>
+            <a href="#fitur">Fitur</a>
           </li>
           <li className="hover:text-primary-5 cursor-pointer">
             <a href="#testimoni">Testimoni</a>
