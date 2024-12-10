@@ -1,13 +1,40 @@
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../../store/useUsersStore";
+import { useProductStore } from "../../store/useProductStore";
+import { searchProducts } from "../../services/productServices";
+import { useState } from "react";
 
 export default function Navbar() {
   const { user, clearUser } = useUserStore();
   const navigate = useNavigate();
+  const { setSearchResults } = useProductStore();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleLogout = () => {
     clearUser();
     navigate("/");
+  };
+
+  const handleKeyDown = async (e) => {
+    if (e.key === "Enter") {
+      const query = e.target.value.trim();
+      if (query) {
+        // Menyimpan query pencarian di store dan menavigasi ke halaman produk
+        await handleSearch(query);
+        navigate(`/products?name=${encodeURIComponent(query)}`);
+      }
+    }
+  };
+
+  const handleSearch = async (query) => {
+    if (query) {
+      try {
+        const results = await searchProducts(query); // Panggil API untuk mencari produk
+        setSearchResults(results); // Simpan hasil pencarian di store
+      } catch (error) {
+        console.error("Search failed:", error);
+      }
+    }
   };
 
   return (
@@ -25,17 +52,12 @@ export default function Navbar() {
         {/* Input */}
         <input
           type="text"
+          value={searchQuery} // Mengikat input dengan state searchQuery
+          onChange={(e) => setSearchQuery(e.target.value)} // Update state saat input berubah
           placeholder="Cari di BluyBay"
           className="p-3 py-3 rounded-lg border-2 border-neutral-4 border-solid w-full h-12 focus:outline-none"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              const query = e.target.value.trim();
-              if (query) {
-                navigate(`/search?query=${encodeURIComponent(query)}`);
-              }
-            }
-          }}
-        />
+          onKeyDown={handleKeyDown} // Menangani pencarian saat tombol enter ditekan
+        />{" "}
         <button className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-neutral-600">
           <svg
             width="25"

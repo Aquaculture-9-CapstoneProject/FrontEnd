@@ -57,7 +57,7 @@ export default function UserRoutes() {
       />
 
       <Route
-        path="/search"
+        path="/products"
         element={
           <ProtectedRoute allowedRole="user">
             <Search />

@@ -8,6 +8,7 @@ export default function Filter() {
     "ikan hias",
     "produk olahan",
     "benih",
+    "lainnya",
   ];
   const { selectedCategories, toggleCategory } = useProductStore();
 

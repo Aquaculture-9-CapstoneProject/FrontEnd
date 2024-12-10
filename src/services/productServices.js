@@ -27,3 +27,34 @@ export const fetchPopularProducts = async () => {
     throw errorMessage;
   }
 };
+
+export const searchProducts = async (query) => {
+  try {
+    const response = await apiClient.get(`/products`, {
+      params: { nama: query },
+    });
+
+    return response.data.product;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message || error.message || "Gagal mencari produk.";
+    console.error("Error searching products:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const fetchProductsByCategory = async (category) => {
+  try {
+    const response = await apiClient.get("/products", {
+      params: { kategori: category },
+    });
+    return response.data.product;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal mengambil produk berdasarkan kategori.";
+    console.error("Error fetching products by category:", errorMessage);
+    throw errorMessage;
+  }
+};
