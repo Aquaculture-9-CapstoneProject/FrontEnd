@@ -1,3 +1,5 @@
+import useUserStore from "../../../store/useUsersStore";
+
 const ProfileField = ({ label, value }) => {
   return (
     <div className="flex flex-col w-full">
@@ -10,11 +12,17 @@ const ProfileField = ({ label, value }) => {
 };
 
 const ProfileData = () => {
+  const { user } = useUserStore();
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   const profileFields = [
-    { label: "Nama Lengkap", value: "Amelia Putri" },
-    { label: "Email", value: "ameliaputri@gmail.com" },
-    { label: "Nomor Telepon", value: "0851-1234-5678" },
-    { label: "Alamat", value: "Perumahan Harmoni Indah, Blok C5" },
+    { label: "Nama Lengkap", value: user.name },
+    { label: "Email", value: user.email },
+    { label: "Nomor Telepon", value: user.phone },
+    { label: "Alamat", value: user.address },
     { label: "Password", value: "*********" },
   ];
 
@@ -25,9 +33,9 @@ const ProfileData = () => {
           <ProfileField label={field.label} value={field.value} />
         </div>
       ))}
-      <div className="flex gap-2 items-center mt-6 w-full text-base font-semibold text-neutral-50 justify-end">
+      <div className="flex gap-2 items-center mt-6 w-full text-base font-semibold text-neutral-5 justify-end">
         <button
-          className="overflow-hidden px-6 py-3.5 my-auto bg-sky-800 rounded-md min-h-[52px]"
+          className="overflow-hidden px-6 py-3.5 my-auto bg-primary-5 rounded-md min-h-[52px]"
           onClick={() => {}}
           tabIndex={0}
         >
