@@ -2,11 +2,13 @@ import React from "react";
 
 export default function Breadcrumb({ items }) {
   return (
-    <div className="flex items-center mt-5 mx-16">
+    <div className="flex items-center flex-wrap gap-2 mt-5 mx-4 sm:mx-8 md:mx-12 lg:mx-16">
       {items.map((item, index) => (
         <React.Fragment key={index}>
           <p
-            className={`text-primary-5 ${index === items.length - 1 ? "font-semibold text-sm" : ""}`}
+            className={`text-primary-5 text-sm sm:text-base ${
+              index === items.length - 1 ? "font-semibold" : ""
+            }`}
           >
             {item}
           </p>

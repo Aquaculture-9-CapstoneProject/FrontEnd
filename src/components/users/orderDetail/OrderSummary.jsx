@@ -45,8 +45,11 @@ export default function OrderSummary() {
       </h1>
 
       {orders.map((order) => (
-        <div key={order.id} className="flex items-center justify-between">
-          <div className="mt-5 flex gap-5">
+        <div
+          key={order.id}
+          className="flex items-center justify-between flex-wrap sm:flex-nowrap"
+        >
+          <div className="mt-5 flex gap-5 sm:w-auto w-full">
             <img
               className="rounded-lg w-16 h-16"
               src={order.image}
@@ -61,7 +64,7 @@ export default function OrderSummary() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center items-end gap-2">
+          <div className="flex flex-col justify-center items-end gap-2 sm:w-auto w-full mt-3 sm:mt-0">
             <h1 className="text-base font-semibold text-neutral-1 mt-1">
               Rp {order.price.toLocaleString("id-ID")}
             </h1>
@@ -70,7 +73,7 @@ export default function OrderSummary() {
               onClick={() => setSelectedOrder(order)}
             >
               Beri rating & ulasan
-            </button>{" "}
+            </button>
           </div>
         </div>
       ))}
@@ -80,6 +83,7 @@ export default function OrderSummary() {
         onClose={() => setSelectedOrder(null)}
         order={selectedOrder}
       />
+
       <div className="flex flex-col gap-3 mt-8">
         <div className="flex justify-between text-neutral-1">
           <p className="text-base">Subtotal</p>
@@ -96,11 +100,14 @@ export default function OrderSummary() {
           <p className="text-base">Rp 10.000</p>
         </div>
       </div>
+
       <hr className="my-2 border-t border-neutral-3" />
+
       <div className="flex justify-between text-neutral-1">
         <p className="text-xl font-semibold">Total</p>
         <p className="text-xl font-semibold">Rp 170.000</p>
       </div>
+
       <div className="mt-4 pt-4">
         <p className="text-xl font-semibold text-neutral-1">Ringkasan</p>
         <hr className="my-1 border-t border-neutral-3" />

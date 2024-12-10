@@ -4,61 +4,69 @@ export default function Step({ currentStep }) {
   const navigate = useNavigate();
 
   const steps = [
-    {
-      label: "Pembelian",
-      icon: "/user/common/step/step1",
-      doneIcon: "/user/common/step/step1-done.png",
-    },
-    {
-      label: "Pembayaran",
-      icon: "/user/common/step/step2",
-      doneIcon: "/user/common/step/step2-done.png",
-    },
-    {
-      label: "Status Pembayaran",
-      icon: "/user/common/step/step3",
-      doneIcon: "/user/common/step/step3-done.png",
-    },
+    { number: 1, label: "Pembelian", isActive: currentStep >= 1 },
+    { number: 2, label: "Pembayaran", isActive: currentStep >= 2 },
+    { number: 3, label: "Status Pembayaran", isActive: currentStep >= 3 },
   ];
 
-  return (
-    <div className="px-16 py-6 flex">
+  const StepItem = ({ number, label, isActive }) => (
+    <div className="flex flex-col items-center self-stretch my-auto h-8 w-[31px]">
       <div
-        className="flex align-top -mt-8 items-center gap-2 w-[17%] cursor-pointer"
-        onClick={() => navigate(-1)} // Navigate back
+        className={`flex justify-center items-center px-2 w-8 h-8 rounded-full min-h-[32px] ${
+          isActive ? "bg-secondary-5 text-neutral-50" : "bg-neutral-4"
+        }`}
       >
-        <img src="/user/checkout/back.svg" alt="back" />
+        {number}
+      </div>
+      <div className={`mt-1 text-nowrap ${isActive ? "text-neutral-1" : ""}`}>
+        {label}
+      </div>
+    </div>
+  );
+
+  const ProgressBar = ({ isActive }) => (
+    <div
+      className={`flex flex-1 shrink self-stretch my-auto h-2 basis-0 ${
+        isActive ? "bg-secondary-5" : "bg-neutral-4"
+      }`}
+    />
+  );
+
+  const ProgressSteps = () => (
+    <div className="flex flex-col px-7 text-base max-w-[569px] max-md:pl-5">
+      <div className="flex flex-wrap items-start w-full max-md:max-w-full">
+        {steps.map((step, index) => (
+          <div
+            key={step.number}
+            className={`flex items-center ${
+              index === 0 ? "w-[31px]" : "flex-1 shrink basis-0 min-w-[240px]"
+            }`}
+          >
+            {index > 0 && <ProgressBar isActive={index < currentStep} />}
+            <StepItem
+              number={step.number}
+              label={step.label}
+              isActive={step.isActive}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="px-4 py-6 hidden  md:flex flex-col md:flex-row items-center md:px-16">
+      {/* Tombol Kembali */}
+      <div
+        className="flex items-center gap-2 cursor-pointer z-10 mb-4 md:mb-0"
+        onClick={() => navigate(-1)}
+      >
+        <img src="/user/checkout/back.svg" alt="Kembali" />
         <h1 className="font-semibold">Kembali</h1>
       </div>
 
-      {/* Progress Steps */}
-      <div className="flex justify-center w-8/12 ml-8">
-        <ol className="flex items-center justify-center w-full">
-          {steps.map((step, index) => (
-            <li key={index}>
-              <div className="flex items-center mb-1">
-                <img
-                  src={index < currentStep ? step.doneIcon : step.icon + ".png"}
-                  alt={`step${index + 1}`}
-                />
-                {index < steps.length - 1 && (
-                  <div
-                    className={`h-2 w-60 ${
-                      index < currentStep - 1
-                        ? "bg-secondary-5"
-                        : "bg-neutral-4"
-                    }`}
-                  />
-                )}
-              </div>
-              <h1
-                className={`${index === 1 ? "-ml-8" : index === 2 ? "-ml-14" : "-ml-6"}`}
-              >
-                {step.label}
-              </h1>
-            </li>
-          ))}
-        </ol>
+      <div className="flex-1 justify-center flex -ml-[10%]">
+        <ProgressSteps />
       </div>
     </div>
   );

@@ -20,8 +20,7 @@ export default function ProductDescription() {
           <p className="text-neutral-5 text-sm px-3 py-1 bg-primary-5 rounded-full text-center w-32">
             Kategori Ikan
           </p>
-
-          <h1 className="font-bold text-4xl">Ikan Salmon</h1>
+          <h1 className="font-bold text-2xl md:text-4xl">Ikan Salmon</h1>
           <div className="flex gap-10">
             <div className="flex items-center gap-2">
               <p className="text-xl text-neutral-1 font-semibold">4.5</p>
@@ -39,12 +38,12 @@ export default function ProductDescription() {
               </svg>
             </div>
             <div>
-              <p className="text-xl text-secondary-5 font-semibold">
+              <p className="text-base md:text-xl text-primary-5 font-semibold">
                 623 Ulasan
               </p>
             </div>
             <div>
-              <p className="text-xl text-primary-5 font-semibold">
+              <p className="text-base md:text-xl text-primary-5 font-semibold">
                 1.000 Terjual
               </p>
             </div>
@@ -64,7 +63,9 @@ export default function ProductDescription() {
         </div>
         <div className="mt-10 flex flex-col gap-10">
           <div className="flex-col flex gap-3">
-            <h1 className="text-4xl font-bold text-neutral-1">Rp 40.000</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-neutral-1">
+              Rp 40.000
+            </h1>
             <p className="text-sm text-neutral-1">*Harga per kg</p>
           </div>
           <div className="flex-col flex gap-3">

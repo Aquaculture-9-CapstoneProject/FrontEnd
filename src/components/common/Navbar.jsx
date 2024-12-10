@@ -138,6 +138,12 @@ export default function Navbar() {
             <button onClick={() => navigate("/order")}>Daftar Pesanan</button>
           </li>
           <li>
+            <button onClick={() => navigate("/cart")}>Keranjang</button>
+          </li>
+          <li>
+            <button onClick={handleLogout}>Logout</button>
+          </li>
+          <li>
             <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>

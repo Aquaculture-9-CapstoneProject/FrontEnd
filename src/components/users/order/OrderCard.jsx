@@ -46,50 +46,51 @@ export default function OrderCard() {
       {orders.map((order) => (
         <div
           key={order.id}
-          className="mx-16 px-8 py-6 border-[1px] border-solid border-neutral-3 rounded-2xl"
+          className="mx-4 sm:mx-16 px-6 sm:px-8 py-6 border-[1px] border-solid border-neutral-3 rounded-2xl"
         >
-          <div className="flex gap-6 items-center">
+          <div className="flex flex-wrap gap-4 sm:gap-6 items-center">
             <h1 className="text-base font-semibold">{order.title}</h1>
-            <p className="text-base">{order.date}</p>
+            <p className="text-sm sm:text-base">{order.date}</p>
             <div
-              className={`badge ${order.bgStatus} text-neutral-5 py-3 text-xs px-3`}
+              className={`badge ${order.bgStatus} text-neutral-5 py-2 sm:py-3 text-xs sm:text-sm px-2 sm:px-3`}
             >
               {order.status}
             </div>
           </div>
-          <div className="flex items-center justify-between">
-            <div className="mt-5 flex gap-5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-5">
+            <div className="flex gap-4 sm:gap-5">
               <img
-                className="rounded-lg w-16 h-16"
+                className="rounded-lg w-16 h-16 sm:w-20 sm:h-20"
                 src={order.image}
                 alt={order.productName}
               />
               <div>
-                <h1 className="text-neutral-1 font-semibold text-xl">
+                <h1 className="text-neutral-1 font-semibold text-lg sm:text-xl">
                   {order.productName}
                 </h1>
-                <p className="text-sm text-neutral-2">{order.details}</p>
+                <p className="text-xs sm:text-sm text-neutral-2">
+                  {order.details}
+                </p>
                 <p className="text-xs mt-3 text-neutral-2">
                   {order.additionalInfo}
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-col justify-center items-center">
-              <p className="text-sm text-neutral-2">Total belanja</p>
-              <h1 className="text-xl font-bold text-neutral-1 mt-1">
+            <div className="mt-4 sm:mt-0 flex flex-col items-end sm:items-center">
+              <p className="text-xs sm:text-sm text-neutral-2">Total belanja</p>
+              <h1 className="text-lg sm:text-xl font-bold text-neutral-1 mt-1">
                 {order.total}
               </h1>
             </div>
           </div>
 
-          {/* Tombol berdasarkan status */}
-          <div className="flex justify-end mt-2 py-5 gap-8">
+          <div className="flex flex-wrap justify-end gap-3 sm:gap-8 mt-4 sm:mt-2">
             {order.status === "Dikirim" && (
               <>
                 <button
                   type="button"
-                  className="text-sm py-2 px-3 bg-neutral-4 text-neutral-7 rounded-md 
+                  className="text-xs sm:text-sm py-2 px-3 bg-neutral-4 text-neutral-7 rounded-md 
                      border-2 border-transparent hover:border-neutral-1 
                      hover:text-neutral-6 active:bg-neutral-6 active:text-neutral-8 
                      transition duration-200 font-semibold"
@@ -99,7 +100,7 @@ export default function OrderCard() {
                 </button>
                 <button
                   type="button"
-                  className="text-sm py-2 px-3 bg-primary-5 text-neutral-5 rounded-md font-semibold
+                  className="text-xs sm:text-sm py-2 px-3 bg-primary-5 text-neutral-5 rounded-md font-semibold
                      hover:bg-primary-6 hover:text-neutral-6 
                      active:bg-primary-7 active:text-neutral-8 transition duration-200"
                 >
@@ -110,7 +111,7 @@ export default function OrderCard() {
             {order.status === "Selesai" && (
               <button
                 type="button"
-                className="text-sm py-2 px-3 bg-primary-5 text-neutral-5 rounded-md font-semibold
+                className="text-xs sm:text-sm py-2 px-3 bg-primary-5 text-neutral-5 rounded-md font-semibold
                    hover:bg-primary-6 hover:text-neutral-6 
                    active:bg-primary-7 active:text-neutral-8 transition duration-200"
                 onClick={() => navigate("/order-detail")}
@@ -121,7 +122,7 @@ export default function OrderCard() {
             {order.status === "Dibatalkan" && (
               <button
                 type="button"
-                className="text-sm py-2 px-3 bg-neutral-4 text-neutral-7 rounded-md 
+                className="text-xs sm:text-sm py-2 px-3 bg-neutral-4 text-neutral-7 rounded-md 
                    border-2 border-transparent hover:border-neutral-1 
                    hover:text-neutral-6 active:bg-neutral-6 active:text-neutral-8 
                    transition duration-200 font-semibold"
