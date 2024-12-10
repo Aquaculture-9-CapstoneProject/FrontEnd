@@ -12,7 +12,7 @@ export default function Order() {
     date: "24 November 2024, 19:00",
     address: "Jl. Pahlawan",
     nominal: "Rp. 56.000",
-    status: index % 2 === 0 ? "Sedang Dikirim" : "Selesai",
+    status: index % 2 === 0 ? "Dikirim" : "Selesai",
   }));
 
   const ordersPerPage = 14;

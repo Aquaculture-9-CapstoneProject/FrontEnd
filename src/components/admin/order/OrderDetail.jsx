@@ -13,7 +13,7 @@ export default function OrderDetail({ isOpen, onClose }) {
         { name: "Ikan Salmon", quantity: "x1 kg", variation: "Salmon Premium" }
       ],
       nominal: "Rp 56.000",
-      status: "Perlu Dikirim"
+      status: "Dikirim"
     };
   
     return (
