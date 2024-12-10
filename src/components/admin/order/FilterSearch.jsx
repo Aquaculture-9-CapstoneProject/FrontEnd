@@ -49,10 +49,7 @@ export default function FilterSearch() {
           </summary>
           <ul className="mt-2 menu dropdown-content bg-neutral-5 text-xs sm:text-sm rounded-box z-[1] w-40 p-2 shadow">
             <li>
-              <a>Perlu Dikirim</a>
-            </li>
-            <li>
-              <a>Sedang Dikirim</a>
+              <a>Dikirim</a>
             </li>
             <li>
               <a>Selesai</a>

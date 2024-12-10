@@ -44,9 +44,7 @@ export default function OrderTableBody({ orders }) {
           <td className="text-neutral-2 text-xs border-b border-neutral-4 sm:max-w-[100px] md:max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
             <span
               className={`badge px-2 ${
-                order.status === "Perlu Dikirim"
-                  ? "bg-neutral-5 border border-neutral-1 text-neutral-1 text-[10px]"
-                  : order.status === "Sedang Dikirim"
+                order.status === "Dikirim"
                   ? "bg-neutral-5 border border-secondary-5 text-secondary-5 text-[10px]"
                   : "text-neutral-1 text-[10px]"
               }`}
