@@ -11,7 +11,7 @@ export default function Cart() {
         <h1 className="text-[24px] sm:text-[28px] font-semibold text-neutral-1 mb-3">
           Keranjang Belanja
         </h1>
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap xl:flex-nowrap gap-6">
           <ProductTable />
           <Summary />
         </div>
