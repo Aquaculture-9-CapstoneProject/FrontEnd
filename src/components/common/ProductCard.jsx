@@ -13,7 +13,7 @@ export default function ProductCard({ name, price, image, rating, category }) {
 
   return (
     <div
-      className="card bg-neutral-5 w-[313px] shadow-xl flex-shrink-0 active:scale-95 hover:border-secondary-1 border-[1px] cursor-pointer"
+      className="card bg-neutral-5 shadow-xl flex-shrink-0 active:scale-95 hover:border-secondary-1 border-[1px] cursor-pointer"
       onClick={handleCardClick}
     >
       <figure className="relative w-full h-48 bg-neutral-3 overflow-hidden">

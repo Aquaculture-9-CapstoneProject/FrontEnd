@@ -3,10 +3,10 @@ import { recommendedProducts } from "../../../dataDummy/recomendedProduct";
 export default function ProductTable() {
   return (
     <div className="overflow-x-auto border-[1px] border-neutral-3 rounded-lg w-full">
-      <table className="table">
+      <table className="table w-full">
         <thead>
           <tr>
-            <th className="text-xl font-semibold text-neutral-1 py-4">
+            <th className="text-sm sm:text-xl font-semibold text-neutral-1 py-3 sm:py-4">
               List Produk
             </th>
           </tr>

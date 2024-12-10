@@ -125,6 +125,10 @@ export default function Navbar() {
             <button onClick={() => navigate("/home")}>Beranda</button>
           </li>
           <li>
+            <button onClick={() => navigate("/cart")}>Keranjang</button>
+          </li>
+
+          <li>
             <button onClick={handleLogout}>Logout</button>
           </li>
           <li>
