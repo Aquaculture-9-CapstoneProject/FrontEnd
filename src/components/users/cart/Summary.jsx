@@ -11,27 +11,24 @@ export default function Summary() {
     return sum + price * quantity;
   }, 0);
 
-  // Fungsi untuk format harga dengan Rp.
   const formatPrice = (price) => {
-    return `Rp. ${price.toLocaleString("id-ID")}`; // Format ke format Indonesia
+    return `Rp. ${price.toLocaleString("id-ID")}`;
   };
 
   return (
-    <div>
-      <div className="rounded-lg w-96 border-2 border-neutral-3 p-4">
-        <h2 className="card-title">Ringkasan Belanja</h2>
-        <div className="flex mt-4 justify-between">
-          <p>Total Harga</p>
-          <p>{formatPrice(totalPrice)}</p> {/* Format harga total */}
-        </div>
-        <div className="justify-between flex flex-row gap-8 mt-8">
-          <button
-            className="bg-primary-5 text-neutral-5 hover:bg-primary-6 w-full text-center px-6 py-[14px] rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105"
-            onClick={() => navigate("/checkout")}
-          >
-            Beli
-          </button>
-        </div>
+    <div className="w-full md:w-96 border-2 border-neutral-3 p-4 rounded-lg mt-4 md:mt-0 h-min">
+      <h2 className="text-lg md:text-xl font-bold">Ringkasan Belanja</h2>
+      <div className="flex mt-4 justify-between">
+        <p>Total Harga</p>
+        <p>{formatPrice(totalPrice)}</p>
+      </div>
+      <div className="flex justify-between gap-4 mt-8">
+        <button
+          className="bg-primary-5 text-neutral-5 hover:bg-primary-6 w-full text-center px-4 py-2 rounded-md font-semibold transition-transform duration-200 transform hover:scale-105"
+          onClick={() => navigate("/checkout")}
+        >
+          Beli
+        </button>
       </div>
     </div>
   );
