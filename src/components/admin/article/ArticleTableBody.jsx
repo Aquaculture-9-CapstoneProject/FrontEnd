@@ -1,77 +1,71 @@
 import React, { useState } from "react";
-import ProductDetail from "./ProductDetail";
-import DeleteProduct from "./DeleteProduct";
-import EditProduct from "./EditProduct";
+import ArticleDetail from "./ArticleDetail";
+import DeleteArticle from "./DeleteArticle";
+import EditArticle from "./EditArticle";
 
-export default function ProductTableBody({ products }) {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+export default function ArticleTableBody({ articles }) {
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State untuk modal delete
-  const [productToDelete, setProductToDelete] = useState(null); // Produk yang akan dihapus
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [articleToDelete, setArticleToDelete] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const handleOpenModal = (product) => {
-    setSelectedProduct(product);
+  const handleOpenModal = (article) => {
+    setSelectedArticle(article);
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setSelectedProduct(null);
+    setSelectedArticle(null);
     setIsModalOpen(false);
   };
 
-  const handleOpenDeleteModal = (product) => {
-    setProductToDelete(product); // Set produk yang akan dihapus
-    setIsDeleteModalOpen(true); // Buka modal delete
+  const handleOpenDeleteModal = (article) => {
+    setArticleToDelete(article);
+    setIsDeleteModalOpen(true);
   };
 
   const handleCloseDeleteModal = () => {
-    setProductToDelete(null); // Reset produk yang akan dihapus
-    setIsDeleteModalOpen(false); // Tutup modal delete
+    setArticleToDelete(null);
+    setIsDeleteModalOpen(false);
   };
 
-  const handleOpenEditModal = (product) => {
-    setSelectedProduct(product);
+  const handleOpenEditModal = (article) => {
+    setSelectedArticle(article);
     setIsEditModalOpen(true);
   };
 
   const handleCloseEditModal = () => {
-    setSelectedProduct(null);
+    setSelectedArticle(null);
     setIsEditModalOpen(false);
   };
 
   return (
     <>
-      {products.map((product, index) => (
+      {articles.map((article, index) => (
         <tr key={index}>
-          <td
-            className="text-secondary-5 text-xs border-b border-neutral-4 cursor-pointer hover:underline"
-            onClick={() => handleOpenModal(product)}
-          >
-            {product.id}
-          </td>
           <td className="border-b border-neutral-4">
             <img
-              src={product.image}
-              alt={product.productName}
-              className="product-image rounded-full w-[34px] h-[34px] object-cover"
+              src={article.image}
+              alt={article.title}
+              className="article-image rounded-lg max-w-[120px] object-cover"
             />
           </td>
-          <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {product.productName}
+          <td
+            className="text-secondary-5 text-xs border-b border-neutral-4 cursor-pointer hover:underline"
+            onClick={() => handleOpenModal(article)}
+          >
+            {article.title}
           </td>
           <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {product.category}
+            {article.category}
           </td>
           <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {product.price}
-          </td>
-          <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {product.stock}
+            {article.date}
           </td>
           <td className="border-b border-neutral-4">
             <div className="flex items-center gap-2">
-              <button onClick={() => handleOpenEditModal(product)}>
+              <button onClick={() => handleOpenEditModal(article)}>
                 <svg
                   width="16"
                   height="16"
@@ -85,7 +79,7 @@ export default function ProductTableBody({ products }) {
                   />
                 </svg>
               </button>
-              <button onClick={() => handleOpenDeleteModal(product)}>
+              <button onClick={() => handleOpenDeleteModal(article)}>
                 <svg
                   width="12"
                   height="16"
@@ -104,24 +98,24 @@ export default function ProductTableBody({ products }) {
         </tr>
       ))}
 
-      {/* Modal Detail Produk */}
-      <ProductDetail
-        product={selectedProduct}
+      {/* Modal Detail Artikel */}
+      <ArticleDetail
+        article={selectedArticle}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
 
-      {/* Modal Hapus Produk */}
+      {/* Modal Hapus Artikel */}
       {isDeleteModalOpen && (
-        <DeleteProduct
-          product={productToDelete}
+        <DeleteArticle
+          article={articleToDelete}
           onClose={handleCloseDeleteModal}
         />
       )}
 
-      {/* Modal Edit Produk */}
-      <EditProduct
-        product={selectedProduct}
+      {/* Modal Edit Artikel */}
+      <EditArticle
+        article={selectedArticle}
         isOpen={isEditModalOpen}
         onClose={handleCloseEditModal}
       />

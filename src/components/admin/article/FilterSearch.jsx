@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FilterSearch({ onAddProductClick }) {
+export default function FilterSearch({ onAddArticleClick }) {
   return (
     <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
       {/* Heading */}
@@ -67,21 +67,21 @@ export default function FilterSearch({ onAddProductClick }) {
             </svg>
             Filter
           </summary>
-          <ul className="menu dropdown-content bg-neutral-5 text-xs sm:text-sm rounded-box z-[1] w-40 p-2 shadow mt-2">
+          <ul className="menu dropdown-content bg-neutral-5 text-xs sm:text-sm rounded-box z-[1] w-40 p-2 mt-2 shadow">
             <li>
-              <a>Ikan</a>
+              <a>Panduan</a>
             </li>
             <li>
-              <a>Udang</a>
+              <a>Tips</a>
             </li>
           </ul>
         </details>
 
-        {/* Tombol Tambah Produk */}
+        {/* Tombol Tambah Artikel */}
         <button className="btn btn-sm bg-primary-5 text-neutral-5 text-xs sm:text-sm font-semibold flex items-center gap-2"
-        onClick={onAddProductClick}
+        onClick={onAddArticleClick}
         >
-          + Tambah Produk
+          + Tambah Artikel
         </button>
       </div>
     </div>
