@@ -15,6 +15,7 @@ import PaymentFailed from "../components/users/paymentFailed/PaymentFailed";
 import Order from "../components/users/order/Order";
 import OrderDetail from "../components/users/orderDetail/OrderDetail";
 import { Fragment } from "react";
+import Profile from "../components/users/profile/Profile";
 
 export default function UserRoutes() {
   return (
@@ -138,6 +139,15 @@ export default function UserRoutes() {
         element={
           <ProtectedRoute allowedRole="user">
             <OrderDetail />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute allowedRole="user">
+            <Profile />
           </ProtectedRoute>
         }
       />

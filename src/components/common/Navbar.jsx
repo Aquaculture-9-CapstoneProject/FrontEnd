@@ -86,7 +86,12 @@ export default function Navbar() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-10"
           >
             <li>
-              <span className="font-semibold">{user?.name || "Guest"}</span>
+              <button
+                onClick={() => navigate("/profile")}
+                className="font-semibold"
+              >
+                {user?.name || "Guest"}
+              </button>
             </li>
             <li>
               <button onClick={() => navigate("/order")}>Daftar Pesanan</button>
@@ -119,20 +124,27 @@ export default function Navbar() {
           className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-10"
         >
           <li>
-            <span className="font-semibold">{user?.name || "Guest"}</span>
+            <button
+              onClick={() => navigate("/profile")}
+              className="font-semibold"
+            >
+              {user?.name || "Guest"}
+            </button>
           </li>
           <li>
             <button onClick={() => navigate("/home")}>Beranda</button>
           </li>
           <li>
+            <button onClick={() => navigate("/order")}>Daftar Pesanan</button>
+          </li>
+          <li>
             <button onClick={() => navigate("/cart")}>Keranjang</button>
           </li>
-
           <li>
             <button onClick={handleLogout}>Logout</button>
           </li>
           <li>
-            <button onClick={() => navigate("/order")}>Daftar Pesanan</button>
+            <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       </div>
