@@ -5,22 +5,24 @@ export default function ProductTable() {
   const removeProduct = useCartStore((state) => state.removeProduct);
 
   return (
-    <div className="overflow-x-auto border-[1px] border-neutral-3 rounded-lg w-8/12">
+    <div className="overflow-x-auto border-[1px] border-neutral-3 rounded-lg w-full md:w-8/12">
       <table className="table">
         {/* Head */}
         <thead>
           <tr>
-            <th className="text-xl font-bold text-neutral-1 py-4">Produk</th>
-            <th className="text-center font-bold text-neutral-1 text-xl py-4">
+            <th className="text-sm md:text-xl font-bold text-neutral-1 py-2 md:py-4">
+              Produk
+            </th>
+            <th className="text-center font-bold text-neutral-1 text-sm md:text-xl py-2 md:py-4">
               Jumlah
             </th>
-            <th className="text-center font-bold text-neutral-1 text-xl py-4">
+            <th className="text-center font-bold text-neutral-1 text-sm md:text-xl py-2 md:py-4">
               Harga
             </th>
-            <th className="text-center font-bold text-neutral-1 text-xl py-4">
+            <th className="text-center font-bold text-neutral-1 text-sm md:text-xl py-2 md:py-4">
               Aksi
             </th>
-          </tr>
+          </tr>{" "}
         </thead>
         <tbody>
           {products.map((product) => (

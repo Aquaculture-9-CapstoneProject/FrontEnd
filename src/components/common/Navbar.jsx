@@ -89,10 +89,10 @@ export default function Navbar() {
               <span className="font-semibold">{user?.name || "Guest"}</span>
             </li>
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <button onClick={() => navigate("/order")}>Daftar Pesanan</button>
             </li>
-            <li className="lg:hidden">
-              <button>Chat Bot</button>
+            <li>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>
@@ -122,10 +122,17 @@ export default function Navbar() {
             <span className="font-semibold">{user?.name || "Guest"}</span>
           </li>
           <li>
+            <button onClick={() => navigate("/home")}>Beranda</button>
+          </li>
+          <li>
+            <button onClick={() => navigate("/cart")}>Keranjang</button>
+          </li>
+
+          <li>
             <button onClick={handleLogout}>Logout</button>
           </li>
           <li>
-            <button>ChatBot</button>
+            <button onClick={() => navigate("/order")}>Daftar Pesanan</button>
           </li>
         </ul>
       </div>

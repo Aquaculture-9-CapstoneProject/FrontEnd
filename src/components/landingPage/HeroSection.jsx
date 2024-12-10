@@ -8,7 +8,10 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="hero bg-neutral-5 pt-16 md:pt-36 px-6 md:px-28 max-w-[1440px] mx-auto flex flex-wrap items-center">
+    <div
+      id="beranda"
+      className="hero bg-neutral-5 pt-28 md:pt-36 px-6 md:px-28 max-w-[1440px] mx-auto flex flex-wrap items-center"
+    >
       {/* Left Content */}
       <div className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0">
         <h1 className="text-2xl md:text-4xl font-semibold text-neutral-1 leading-snug">
@@ -22,7 +25,7 @@ const HeroSection = () => {
         </p>
         <button
           onClick={handleButtonClick}
-          className="btn bg-primary-4 mt-8 md:mt-16 text-neutral-5 border-none w-[140px] md:w-[184px] h-[40px] md:h-[48px]"
+          className="btn bg-primary-4 mt-8 md:mt-16 text-neutral-5 border-none w-[140px] md:w-[184px] h-[40px] md:h-[48px] rounded-md"
         >
           Belanja Sekarang
         </button>

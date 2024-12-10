@@ -21,7 +21,7 @@ export default function Transaction() {
   const currentTransactions = transactions.slice(startIndex, startIndex + transactionsPerPage);
 
   return (
-    <div className="bg-[#E4EDF1]">
+    <div className="bg-[#E4EDF1] h-full">
       <TransactionHeader />
       <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md">
         <FilterSearch />

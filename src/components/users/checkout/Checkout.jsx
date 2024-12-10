@@ -16,15 +16,16 @@ export default function Checkout() {
       <Navbar />
       <Step currentStep={1} />
 
-      <div className="px-16 mb-10">
-        <h1 className="font-semibold text-[28px] mb-5">Pembelian</h1>
-        <div className="grid grid-cols-10 gap-6">
-          <div className="col-span-6 flex flex-col gap-5">
+      <div className="px-4 sm:px-8 md:px-16 mb-10">
+        <h1 className="font-semibold text-[24px] md:text-[28px] mb-5 mt-3">
+          Pembelian
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-10 gap-6">
+          <div className="col-span-1 md:col-span-6 flex flex-col gap-5">
             <AddressSection />
             <ProductList />
           </div>
-
-          <div className="col-span-4 flex flex-col gap-5">
+          <div className="col-span-1 md:col-span-4 flex flex-col gap-5">
             <PaymentMethod />
             <OrderSummary />
           </div>

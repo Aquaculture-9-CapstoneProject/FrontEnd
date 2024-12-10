@@ -17,8 +17,8 @@ const BenefitSection = () => {
     },
     {
       icon: "./landingPage/icon4.svg",
-      title: "Customer Support 24/7",
-      description: "Kami selalu siap membantu Anda.",
+      title: "Informasi Produk Lengkap",
+      description: "Semua info produk jelas, no ribet",
     },
   ];
 

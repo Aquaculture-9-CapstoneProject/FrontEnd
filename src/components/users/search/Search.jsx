@@ -11,7 +11,7 @@ export default function Search() {
   return (
     <>
       <Navbar />
-      <div className="flex px-16 py-6 gap-8">
+      <div className="flex flex-col md:flex-row px-4 md:px-16 py-6 gap-4 md:gap-8">
         <Filter />
         <FilterProduct />
       </div>

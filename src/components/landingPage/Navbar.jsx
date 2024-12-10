@@ -17,14 +17,23 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    isMenuOpen
-      ? document.addEventListener("click", handleClickOutside)
-      : document.removeEventListener("click", handleClickOutside);
+    if (isMenuOpen) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
 
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [handleClickOutside, isMenuOpen]);
+
+  const handleToggleMenu = () => {
+    // Gunakan setTimeout untuk sedikit menunda perubahan status menu
+    setTimeout(() => {
+      setIsMenuOpen((prevState) => !prevState);
+    }, 0);
+  };
 
   const handleNavigate = (path) => {
     setIsMenuOpen(false);
@@ -32,7 +41,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-neutral-5 border-b-neutral-4 border-[1px] z-20 fixed px-8 lg:px-28 flex items-center justify-between">
+    <div className="navbar bg-neutral-5 border-b-neutral-4 border-[1px] z-20 fixed px-4 lg:px-28 flex items-center justify-between w-full">
       <div className="flex-none">
         <img src="./logo.svg" alt="logo" className="w-24 h-12" />
       </div>
@@ -43,8 +52,9 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
+            aria-label="Toggle menu"
             className="btn btn-ghost"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={handleToggleMenu} // Gunakan handler yang sudah diperbarui
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +120,7 @@ const Navbar = () => {
             <a href="#keunggulan">Keunggulan</a>
           </li>
           <li className="hover:text-primary-5 cursor-pointer">
-            <a href="#artikel">Artikel</a>
+            <a href="#fitur">Fitur</a>
           </li>
           <li className="hover:text-primary-5 cursor-pointer">
             <a href="#testimoni">Testimoni</a>

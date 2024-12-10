@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../../../utils/toastUtils";
 
 const reviews = [
   {
@@ -113,8 +114,9 @@ export default function ProductRating() {
   };
 
   return (
-    <div className="mt-5">
-      <div className="rounded-lg w-96 border-2 border-neutral-3 p-4">
+    <div className="mt-5 px-4">
+      {/* Ringkasan Pembelian */}
+      <div className="rounded-lg max-w-sm w-full border-2 border-neutral-3 p-4 mx-auto">
         <h2 className="card-title">Ringkasan Pembelian</h2>
         <div className="flex mt-4 justify-between">
           <p>Total Harga</p>
@@ -123,19 +125,21 @@ export default function ProductRating() {
         <div className="justify-between flex flex-row gap-8 mt-8">
           <button
             className="hover:bg-neutral-4 border-2 border-neutral-4 bg-neutral-5 flex items-center justify-center w-1/2 py-[14px] px-6 rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105 gap-2"
-            onClick={() => navigate("/cart")}
+            onClick={() => showToast("Berhasil menambahkan ke keranjang")}
           >
             <img src="./user/detail/add.svg" alt="add" />
             <p>Keranjang</p>
           </button>
           <button
-            className="bg-primary-5 text-neutral-5 hover:bg-primary-6 w-1/2 text-center px-6 py-[14px] rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105"
+            className="bg-primary-5 text-neutral-5 hover:bg-primary-6 w-full sm:w-1/2 text-center px-6 py-[14px] rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105"
             onClick={() => navigate("/checkout")}
           >
             Beli
           </button>
         </div>
       </div>
+
+      {/* Ulasan Pembeli */}
       <div className="mt-8">
         <h1 className="text-xl font-semibold text-neutral-1">Ulasan Pembeli</h1>
         <div className="flex items-center gap-4 mt-3 text-neutral-1">
@@ -162,7 +166,7 @@ export default function ProductRating() {
           {filteredReviews.map((review) => (
             <div
               key={review.id}
-              className="flex flex-col gap-2 px-6 py-6 border-2 border-neutral-4 rounded-2xl"
+              className="flex flex-col gap-2 px-6 py-6 border-2 border-neutral-4 rounded-2xl max-w-sm w-full mx-auto"
             >
               <div className="flex">
                 {[...Array(review.stars)].map((_, index) => (

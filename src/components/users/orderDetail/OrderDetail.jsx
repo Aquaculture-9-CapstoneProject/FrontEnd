@@ -12,7 +12,7 @@ export default function OrderDetail() {
 
       <div className="px-16 py-5 flex items-center justify-between">
         <div
-          className="flex items-center gap-2 w-[17%] cursor-pointer"
+          className="hidden md:flex items-center gap-2 w-[17%] cursor-pointer"
           onClick={() => navigate(-1)} // Navigate back
         >
           <img src="/user/checkout/back.svg" alt="back" />

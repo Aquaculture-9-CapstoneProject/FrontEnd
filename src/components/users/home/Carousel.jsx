@@ -20,7 +20,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className="mt-4 sm:mt-6 relative">
+    <div className="mt-4 sm:mt-6 relative hidden md:flex">
       <div className="carousel w-full px-6">
         {slides.map((slide, index) => (
           <div
