@@ -17,7 +17,7 @@ export default function Category() {
 
   const handleClick = (label) => {
     setSelectedCategories([label]);
-    navigate("/search");
+    navigate("/products");
   };
 
   return (
