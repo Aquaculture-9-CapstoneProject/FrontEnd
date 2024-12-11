@@ -1,11 +1,17 @@
 import ProductCard from "../../common/ProductCard";
 import useCheapestProducts from "../../../hooks/useCheapersProduct";
+import SkeletonCard from "../../common/SkeletonCard";
 
 export default function CheapestProduct() {
-  const { products, error } = useCheapestProducts();
+  const { products, loading, error } = useCheapestProducts();
 
   if (error) {
-    console.log(error);
+    console.error(error);
+    return (
+      <div className="px-4 sm:px-8 mt-4 sm:mt-6">
+        <p className="text-error-5">Terjadi kesalahan saat memuat data.</p>
+      </div>
+    );
   }
 
   return (
@@ -15,24 +21,29 @@ export default function CheapestProduct() {
       </h1>
 
       <div className="relative bg-primary-1 rounded-2xl overflow-hidden mt-4">
-        {/* Background Image */}
         <div
           className="absolute bottom-0 left-0 w-full h-[95px] sm:h-[120px] bg-no-repeat bg-contain sm:bg-cover z-0"
           style={{ backgroundImage: "url('/user/home/bg-cheap.png')" }}
         ></div>
-
-        {/* Product List */}
         <div className="relative z-10 flex gap-6 px-4 sm:px-8 py-6 overflow-x-auto no-scrollbar">
-          {products.map((product, index) => (
-            <ProductCard
-              key={index}
-              name={product.Nama}
-              price={`Rp${product.Harga.toLocaleString()}`}
-              image={product.Gambar}
-              rating={product.Rating}
-              category={product.Jenis || "Tidak Ada Kategori"}
-            />
-          ))}
+          {loading ? (
+            Array.from({ length: 8 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))
+          ) : products.length === 0 ? (
+            <p className="text-neutral-1">Tidak ada produk yang ditemukan.</p>
+          ) : (
+            products.map((product, index) => (
+              <ProductCard
+                key={index}
+                name={product.Nama}
+                price={product.Harga}
+                image={product.Gambar}
+                rating={product.Rating}
+                category={product.Kategori || "Tidak Ada Kategori"}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>
