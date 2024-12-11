@@ -1,4 +1,5 @@
 import { useProductStore } from "../../../store/useProductStore";
+import { useSearch } from "../../../hooks/useSearch";
 
 export default function Filter() {
   const categories = [
@@ -11,6 +12,7 @@ export default function Filter() {
     "lainnya",
   ];
   const { selectedCategories, toggleCategory } = useProductStore();
+  useSearch();
 
   return (
     <div className="p-4 rounded-lg border-neutral-3 border-solid h-min border-2 w-full md:w-1/5 text-neutral-1">

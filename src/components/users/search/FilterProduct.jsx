@@ -1,9 +1,10 @@
 import { useProductStore } from "../../../store/useProductStore";
 import ProductCard from "../../common/ProductCard";
+import { useSearch } from "../../../hooks/useSearch";
 
 export default function FilterProduct() {
-  const { productResult } = useProductStore();
-  const { selectedCategories } = useProductStore();
+  const { productResult, isLoading } = useProductStore();
+  const { selectedCategories } = useSearch();
 
   return (
     <div className="w-full md:w-9/12">
@@ -20,28 +21,37 @@ export default function FilterProduct() {
         )}
       </h1>
 
-      {productResult.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 mt-6">
-          {productResult.map((product) => (
-            <div
-              key={product.ID} // Gunakan ID dari data
-              className="w-full max-w-full md:max-w-[300px] mx-auto"
-            >
-              <ProductCard
-                key={product.ID}
-                name={product.Nama}
-                price={product.Harga}
-                image={product.Gambar}
-                rating={product.Rating}
-                category={product.Kategori}
-              />
-            </div>
-          ))}
+      {/* Efek loading */}
+      {isLoading ? (
+        <div className="text-center mt-6">
+          <span className="loading loading-spinner loading-lg"></span>
         </div>
       ) : (
-        <p className="text-gray-1  mt-4 text-center md:text-left">
-          Tidak ada produk ditemukan.
-        </p>
+        <>
+          {productResult.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 mt-6">
+              {productResult.map((product) => (
+                <div
+                  key={product.ID} // Gunakan ID dari data
+                  className="w-full max-w-full md:max-w-[300px] mx-auto"
+                >
+                  <ProductCard
+                    key={product.ID}
+                    name={product.Nama}
+                    price={product.Harga}
+                    image={product.Gambar}
+                    rating={product.Rating}
+                    category={product.Kategori}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-1 mt-4 text-center md:text-left">
+              Tidak ada produk ditemukan.
+            </p>
+          )}
+        </>
       )}
     </div>
   );
