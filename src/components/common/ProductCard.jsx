@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { formatCurrency } from "../../utils/currency";
 
 export default function ProductCard({ name, price, image, rating, category }) {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function ProductCard({ name, price, image, rating, category }) {
             {name}
           </h2>
           <h2 className="text-xl font-semibold w-40 text-end max-w-[120px] overflow-hidden text-ellipsis">
-            {price}
+            {formatCurrency(price)}
           </h2>
         </div>
         <p className="font-normal text-[14px]">{category}</p>

@@ -37,10 +37,10 @@ export default function CheapestProduct() {
               <ProductCard
                 key={index}
                 name={product.Nama}
-                price={`Rp${product.Harga.toLocaleString()}`}
+                price={product.Harga}
                 image={product.Gambar}
                 rating={product.Rating}
-                category={product.Jenis || "Tidak Ada Kategori"}
+                category={product.Kategori || "Tidak Ada Kategori"}
               />
             ))
           )}
