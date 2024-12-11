@@ -52,6 +52,9 @@ export default function FilterSearch() {
             <li>
               <a>Gagal</a>
             </li>
+            <li>
+              <a>Pending</a>
+            </li>
           </ul>
         </details>
       </div>
