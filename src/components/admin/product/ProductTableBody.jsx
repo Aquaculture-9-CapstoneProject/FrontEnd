@@ -42,7 +42,14 @@ export default function ProductTableBody({ products }) {
 
   return (
     <>
-      {products.map((product, index) => (
+      {products.length === 0 ? (
+        <tr>
+          <td colSpan="6" className="text-center text-neutral-3 text-base py-4">
+            Belum ada produk yang ditambahkan
+          </td>
+        </tr>
+      ) : (
+      products.map((product, index) => (
         <tr key={index}>
           <td
             className="text-secondary-5 text-xs border-b border-neutral-4 cursor-pointer hover:underline"
@@ -102,7 +109,7 @@ export default function ProductTableBody({ products }) {
             </div>
           </td>
         </tr>
-      ))}
+      )))}
 
       {/* Modal Detail Produk */}
       <ProductDetail
