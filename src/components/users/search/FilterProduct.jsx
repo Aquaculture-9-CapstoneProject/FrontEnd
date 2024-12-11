@@ -1,22 +1,34 @@
+import { useSearchParams } from "react-router-dom";
 import { useProductStore } from "../../../store/useProductStore";
 import ProductCard from "../../common/ProductCard";
 
 export default function FilterProduct() {
   const { productResult, isLoading, selectedCategories } = useProductStore();
-  console.log(productResult);
+  const [searchParams] = useSearchParams();
+
+  const searchName = searchParams.get("name");
 
   return (
     <div className="w-full md:w-9/12">
       <h1 className="text-lg text-center md:text-left">
-        {selectedCategories.length > 0 ? (
+        {selectedCategories.length > 0 && searchName ? (
           <>
             Menampilkan hasil pencarian untuk{" "}
+            <span className="font-bold">{searchName}</span> di kategori{" "}
             <span className="font-bold">{selectedCategories.join(", ")}</span>
           </>
-        ) : (
+        ) : selectedCategories.length > 0 ? (
           <>
-            <span className="font-bold">Semua Produk</span>
+            Menampilkan produk untuk kategori{" "}
+            <span className="font-bold">{selectedCategories.join(", ")}</span>
           </>
+        ) : searchName ? (
+          <>
+            Menampilkan hasil pencarian untuk{" "}
+            <span className="font-bold">{searchName}</span>
+          </>
+        ) : (
+          <span className="font-bold">Semua Produk</span>
         )}
       </h1>
 
