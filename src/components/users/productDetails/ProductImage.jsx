@@ -1,12 +1,16 @@
+import useProductDetailStore from "../../../store/useProductDetailStore";
+
 export default function ProductImage() {
+  const { productDetail } = useProductDetailStore();
+
   return (
-    <div className=" mt-5 flex flex-col gap-6">
+    <div className="mt-5 flex flex-col gap-6">
       {/* Image Section */}
       <div>
         <div className="mb-4">
           <img
-            src="./user/detail/ikan-salmon.png"
-            alt="image product"
+            src={productDetail.Gambar}
+            alt={`image of ${productDetail.Nama}`}
             className="w-full h-auto rounded-lg"
           />
         </div>
@@ -16,8 +20,8 @@ export default function ProductImage() {
             .map((_, index) => (
               <img
                 key={index}
-                src="./user/detail/ikan-salmon.png"
-                alt={`image product ${index + 1}`}
+                src={productDetail.Gambar}
+                alt={`additional image ${index + 1} of ${productDetail.Nama}`}
                 className="w-full h-auto rounded-lg"
               />
             ))}
@@ -41,15 +45,12 @@ export default function ProductImage() {
           </svg>
           <h1 className="font-bold text-base">Tips Penyimpanan</h1>
         </div>
-        <p className="text-sm">
-          Simpan di suhu -18°C untuk menjaga kualitas hingga masa kedaluwarsa.
-          Jika sudah dicairkan, segera olah untuk hasil terbaik.
-        </p>
+        <p className="text-sm">{productDetail.TipsPenyimpanan}</p>
       </div>
 
       {/* Article Section */}
       <div className="flex justify-between items-center rounded-md border-neutral-4 btn">
-        <h1>Cari artikel terkait produk</h1>
+        <h1>Cari artikel terkait {productDetail.Nama}</h1>
         <svg
           width="20"
           height="20"

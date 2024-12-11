@@ -10,7 +10,7 @@ export default function Transaction() {
     orderId: "P0001",
     date: "24 November 2024, 19:00",
     paymentMethod: "Transfer Bank",
-    status: index % 2 === 0 ? "Berhasil" : "Gagal",
+    status: index % 3 === 0 ? "Berhasil" : index % 3 === 1 ? "Gagal" : "Pending",
   }));
 
   const transactionsPerPage = 14;

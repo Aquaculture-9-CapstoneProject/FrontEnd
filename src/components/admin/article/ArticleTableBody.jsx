@@ -42,7 +42,14 @@ export default function ArticleTableBody({ articles }) {
 
   return (
     <>
-      {articles.map((article, index) => (
+      {articles.length === 0 ? (
+        <tr>
+          <td colSpan="6" className="text-center text-neutral-3 text-base py-4">
+            Belum ada artikel yang ditambahkan
+          </td>
+        </tr>
+      ) : (
+      articles.map((article, index) => (
         <tr key={index}>
           <td className="border-b border-neutral-4">
             <img
@@ -96,7 +103,7 @@ export default function ArticleTableBody({ articles }) {
             </div>
           </td>
         </tr>
-      ))}
+      )))}
 
       {/* Modal Detail Artikel */}
       <ArticleDetail

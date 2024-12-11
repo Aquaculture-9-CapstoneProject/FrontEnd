@@ -17,7 +17,14 @@ export default function OrderTableBody({ orders }) {
 
   return (
     <>
-      {orders.map((order, index) => (
+      {orders.length === 0 ? (
+        <tr>
+          <td colSpan="6" className="text-center text-neutral-3 text-base py-4">
+            Belum ada riwayat pesanan
+          </td>
+        </tr>
+      ) : (
+      orders.map((order, index) => (
         <tr key={index}>
           <td
             className="text-secondary-5 text-xs border-b border-neutral-4 cursor-pointer hover:underline"
@@ -53,7 +60,7 @@ export default function OrderTableBody({ orders }) {
             </span>
           </td>
         </tr>
-      ))}
+      )))}
 
       {/* Render Modal OrderDetail */}
       <OrderDetail

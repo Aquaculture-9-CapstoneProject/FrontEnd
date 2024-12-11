@@ -1,51 +1,62 @@
+import { useSearchParams } from "react-router-dom";
 import { useProductStore } from "../../../store/useProductStore";
-import { products } from "../../../dataDummy/product";
 import ProductCard from "../../common/ProductCard";
 
 export default function FilterProduct() {
-  const { selectedCategories } = useProductStore();
+  const { productResult, isLoading, selectedCategories } = useProductStore();
+  const [searchParams] = useSearchParams();
 
-  const filteredProducts = selectedCategories.length
-    ? products.filter((product) =>
-        selectedCategories.includes(product.category),
-      )
-    : products;
+  const searchName = searchParams.get("name");
 
   return (
     <div className="w-full md:w-9/12">
       <h1 className="text-lg text-center md:text-left">
-        {selectedCategories.length > 0 ? (
+        {selectedCategories.length > 0 && searchName ? (
           <>
             Menampilkan hasil pencarian untuk{" "}
+            <span className="font-bold">{searchName}</span> di kategori{" "}
             <span className="font-bold">{selectedCategories.join(", ")}</span>
           </>
-        ) : (
+        ) : selectedCategories.length > 0 ? (
           <>
-            <span className="font-bold">Semua Produk</span>
+            Menampilkan produk untuk kategori{" "}
+            <span className="font-bold">{selectedCategories.join(", ")}</span>
           </>
+        ) : searchName ? (
+          <>
+            Menampilkan hasil pencarian untuk{" "}
+            <span className="font-bold">{searchName}</span>
+          </>
+        ) : (
+          <span className="font-bold">Semua Produk</span>
         )}
       </h1>
 
-      {filteredProducts.length > 0 ? (
+      {isLoading ? (
+        <div className="text-center mt-6">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      ) : productResult.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 mt-6">
-          {filteredProducts.map((product) => (
+          {productResult.map((product) => (
             <div
-              key={product.id}
+              key={product.ID}
               className="w-full max-w-full md:max-w-[300px] mx-auto"
             >
               <ProductCard
-                key={product.id}
-                name={product.name}
-                price={product.price}
-                image={product.image}
-                rating={product.rating}
-                category={product.category}
+                key={product.ID}
+                id={product.ID}
+                name={product.Nama}
+                price={product.Harga}
+                image={product.Gambar}
+                rating={product.Rating}
+                category={product.Kategori}
               />
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-gray-500 mt-4 text-center md:text-left">
+        <p className="text-gray-1 mt-4 text-center md:text-left">
           Tidak ada produk ditemukan.
         </p>
       )}

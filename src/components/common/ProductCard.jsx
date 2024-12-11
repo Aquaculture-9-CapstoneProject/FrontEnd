@@ -1,10 +1,23 @@
 import { useNavigate } from "react-router-dom";
+import { formatCurrency } from "../../utils/currency";
+import useProductDetailStore from "../../store/useProductDetailStore";
 
-export default function ProductCard({ name, price, image, rating, category }) {
+export default function ProductCard({
+  id,
+  name,
+  price,
+  image,
+  rating,
+  category,
+}) {
   const navigate = useNavigate();
+  const fetchProductDetail = useProductDetailStore(
+    (state) => state.fetchProductDetail,
+  );
 
-  const handleCardClick = () => {
-    navigate("/detail");
+  const handleCardClick = async () => {
+    navigate("/detail"); // Navigasi ke halaman detail
+    await fetchProductDetail(id); // Fetch detail produk berdasarkan ID
   };
 
   const handleBuyClick = () => {
@@ -13,7 +26,7 @@ export default function ProductCard({ name, price, image, rating, category }) {
 
   return (
     <div
-      className="card bg-neutral-5 shadow-xl flex-shrink-0 active:scale-95 hover:border-secondary-1 border-[1px] cursor-pointer"
+      className="card bg-neutral-5 shadow-xl flex-shrink-0 active:scale-95 hover:border-secondary-1 border-[1px] cursor-pointer md:max-w-80"
       onClick={handleCardClick}
     >
       <figure className="relative w-full h-48 bg-neutral-3 overflow-hidden">
@@ -25,7 +38,7 @@ export default function ProductCard({ name, price, image, rating, category }) {
             {name}
           </h2>
           <h2 className="text-xl font-semibold w-40 text-end max-w-[120px] overflow-hidden text-ellipsis">
-            {price}
+            {formatCurrency(price)}
           </h2>
         </div>
         <p className="font-normal text-[14px]">{category}</p>

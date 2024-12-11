@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import { useParams } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import Navbar from "../../common/Navbar";
@@ -83,6 +84,8 @@ export default function FilteredArticles() {
     ],
   };
 
+  const navigate = useNavigate();
+
   const articles = articlesData[topic] || []; // Ambil artikel berdasarkan topik
 
   const articlesPerPage = 9; // Jumlah artikel per halaman
@@ -115,6 +118,14 @@ export default function FilteredArticles() {
       <Navbar />
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 bg-neutral-5">
         <section className="py-10 px-4 md:px-8 min-h-screen flex flex-col justify-between">
+          {/* Breadcrumb */}
+          <div className="breadcrumbs text-sm text-neutral-2 mb-8">
+            <ul>
+              <li><a onClick={() => navigate("/home")}>Beranda</a></li>
+              <li><a onClick={() => navigate("/article")}>Artikel dan Berita</a></li>
+              <li><span className="font-semibold text-primary-5">{formatTopicText(topic)}</span></li>
+            </ul>
+          </div>
           {/* Header */}
           <div className="mb-6">
             <h2 className="text-2xl font-semibold text-neutral-1">
