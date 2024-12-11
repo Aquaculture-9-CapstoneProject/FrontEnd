@@ -31,6 +31,7 @@ const PopularProduct = () => {
           products.map((product, index) => (
             <ProductCard
               key={index}
+              id={product.ID}
               name={product.Nama}
               price={product.Harga}
               image={product.Gambar}

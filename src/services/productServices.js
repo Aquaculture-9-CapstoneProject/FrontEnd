@@ -72,3 +72,17 @@ export const allProducts = async () => {
     throw errorMessage;
   }
 };
+
+export const getProductDetail = async (productId) => {
+  try {
+    const response = await apiClient.get(`/products/${productId}`);
+    return response.data.Produk;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal mengambil detail produk.";
+    console.error("Error fetching product detail:", errorMessage);
+    throw errorMessage;
+  }
+};

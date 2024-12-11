@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../utils/toastUtils";
+import useProductDetailStore from "../../../store/useProductDetailStore";
+import { formatCurrency } from "../../../utils/currency";
 
 const reviews = [
   {
@@ -99,6 +101,7 @@ const reviews = [
 export default function ProductRating() {
   const [filter, setFilter] = useState("All");
   const [filteredReviews, setFilteredReviews] = useState(reviews);
+  const { productDetail, totalPrice } = useProductDetailStore();
   const navigate = useNavigate();
 
   const handleFilterChange = (stars) => {
@@ -120,7 +123,7 @@ export default function ProductRating() {
         <h2 className="card-title">Ringkasan Pembelian</h2>
         <div className="flex mt-4 justify-between">
           <p>Total Harga</p>
-          <p>Rp 160.000</p>
+          <p className="font-semibold text-xl">{formatCurrency(totalPrice)}</p>
         </div>
         <div className="justify-between flex flex-row gap-8 mt-8">
           <button
@@ -143,7 +146,7 @@ export default function ProductRating() {
       <div className="mt-8">
         <h1 className="text-xl font-semibold text-neutral-1">Ulasan Pembeli</h1>
         <div className="flex items-center gap-4 mt-3 text-neutral-1">
-          <p className="font-semibold text-4xl">4.5</p>
+          <p className="font-semibold text-4xl">{productDetail.Rating}</p>
           <img src="./user/detail/star.svg" alt="star" />
           <p className="text-2xl mt-2">/5.0</p>
         </div>

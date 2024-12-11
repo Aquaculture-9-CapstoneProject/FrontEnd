@@ -1,11 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../utils/currency";
+import useProductDetailStore from "../../store/useProductDetailStore";
 
-export default function ProductCard({ name, price, image, rating, category }) {
+export default function ProductCard({
+  id,
+  name,
+  price,
+  image,
+  rating,
+  category,
+}) {
   const navigate = useNavigate();
+  const fetchProductDetail = useProductDetailStore(
+    (state) => state.fetchProductDetail,
+  );
 
-  const handleCardClick = () => {
-    navigate("/detail");
+  const handleCardClick = async () => {
+    navigate("/detail"); // Navigasi ke halaman detail
+    await fetchProductDetail(id); // Fetch detail produk berdasarkan ID
   };
 
   const handleBuyClick = () => {
