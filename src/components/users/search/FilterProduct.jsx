@@ -45,6 +45,7 @@ export default function FilterProduct() {
             >
               <ProductCard
                 key={product.ID}
+                id={product.ID}
                 name={product.Nama}
                 price={product.Harga}
                 image={product.Gambar}

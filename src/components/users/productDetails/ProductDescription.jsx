@@ -1,10 +1,16 @@
 import { useState } from "react";
+import useProductDetailStore from "../../../store/useProductDetailStore";
+import { formatCurrency } from "../../../utils/currency";
 
 export default function ProductDescription() {
-  const [quantity, setQuantity] = useState(1); // Starting with 1
+  const { productDetail } = useProductDetailStore();
+  const [quantity, setQuantity] = useState(1);
+  const keunggulan = productDetail.Keunggulan?.split("\n") || [];
 
   const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    if (quantity < productDetail.Stok) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    }
   };
 
   const handleDecrement = () => {
@@ -18,12 +24,16 @@ export default function ProductDescription() {
       <div className="py-5">
         <div className="flex flex-col gap-3">
           <p className="text-neutral-5 text-sm px-3 py-1 bg-primary-5 rounded-full text-center w-32">
-            Kategori Ikan
+            {productDetail.Kategori}
           </p>
-          <h1 className="font-bold text-2xl md:text-4xl">Ikan Salmon</h1>
+          <h1 className="font-bold text-2xl md:text-4xl">
+            {productDetail.Nama}
+          </h1>
           <div className="flex gap-10">
             <div className="flex items-center gap-2">
-              <p className="text-xl text-neutral-1 font-semibold">4.5</p>
+              <p className="text-xl text-neutral-1 font-semibold">
+                {productDetail.Rating}
+              </p>
               <svg
                 width="24"
                 height="24"
@@ -39,12 +49,12 @@ export default function ProductDescription() {
             </div>
             <div>
               <p className="text-base md:text-xl text-primary-5 font-semibold">
-                623 Ulasan
+                {productDetail.TotalReview} Ulasan
               </p>
             </div>
             <div>
               <p className="text-base md:text-xl text-primary-5 font-semibold">
-                1.000 Terjual
+                {productDetail.Terjual} Terjual
               </p>
             </div>
           </div>
@@ -58,20 +68,20 @@ export default function ProductDescription() {
             >
               <rect y="0.5" width="8" height="8" rx="4" fill="#106E9E" />
             </svg>
-            <p>Status panen saat ini sedang baik</p>
+            <p>{productDetail.Status}</p>
           </div>
         </div>
         <div className="mt-10 flex flex-col gap-10">
           <div className="flex-col flex gap-3">
             <h1 className="text-2xl md:text-4xl font-bold text-neutral-1">
-              Rp 40.000
+              {formatCurrency(productDetail.Harga)}
             </h1>
             <p className="text-sm text-neutral-1">*Harga per kg</p>
           </div>
           <div className="flex-col flex gap-3">
             <p className="text-base text-neutral-2 font-semibold">Variasi</p>
             <p className="btn font-semibold text-xs text-neutral-1 w-fit bg-neutral-5 border-neutral-4">
-              Salmon Premium
+              {productDetail.Variasi}
             </p>
           </div>
           <div className="flex-col flex gap-3">
@@ -95,7 +105,7 @@ export default function ProductDescription() {
               <p className="text-base">
                 Stok:{" "}
                 <span className="text-primary-5 font-bold text-base">
-                  100kg
+                  {productDetail.Stok}kg
                 </span>
               </p>
             </div>
@@ -117,7 +127,8 @@ export default function ProductDescription() {
               </svg>
 
               <p className="text-neutral-1">
-                Dikirim dari <span className="font-semibold">kota Jepara</span>
+                Dikirim dari{" "}
+                <span className="font-semibold">{productDetail.KotaAsal}</span>
               </p>
             </div>
             <div className="flex gap-2">
@@ -140,32 +151,16 @@ export default function ProductDescription() {
             <p className="text-base text-neutral-1 font-semibold">
               Deskripsi Produk
             </p>
-            <p className="text-sm">
-              Hadirkan cita rasa autentik dengan ikan salmon segar, pilihan
-              terbaik untuk sajian sehat dan berkualitas. Ikan salmon kami
-              berasal dari perairan bersih dan diolah dengan standar kebersihan
-              tinggi untuk menjaga kesegaran serta tekstur alaminya. Cocok untuk
-              berbagai kreasi masakan seperti sashimi, sushi, atau hidangan
-              panggang.
-            </p>
+            <p className="text-sm">{productDetail.Deskripsi}</p>
           </div>
           <div className="flex-col flex gap-3">
             <p className="text-base text-neutral-1 font-semibold">
-              Deskripsi Produk
+              Keunggulan Produk
             </p>
             <ul className="list-disc pl-4 text-sm">
-              <li>
-                Segar dan Higienis: Dikemas segera setelah panen untuk menjaga
-                kesegaran.
-              </li>
-              <li>
-                Kaya Nutrisi: Mengandung Omega-3, protein, dan vitamin untuk
-                mendukung gaya hidup sehat.
-              </li>
-              <li>Tanpa Pengawet: 100% alami tanpa bahan tambahan.</li>
-              <li>
-                Tekstur Lembut: Daging salmon yang lembut dan mudah diolah.
-              </li>
+              {keunggulan.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
             </ul>
           </div>
         </div>

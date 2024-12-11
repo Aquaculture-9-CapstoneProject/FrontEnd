@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../utils/toastUtils";
+import useProductDetailStore from "../../../store/useProductDetailStore";
 
 const reviews = [
   {
@@ -99,6 +100,7 @@ const reviews = [
 export default function ProductRating() {
   const [filter, setFilter] = useState("All");
   const [filteredReviews, setFilteredReviews] = useState(reviews);
+  const { productDetail } = useProductDetailStore();
   const navigate = useNavigate();
 
   const handleFilterChange = (stars) => {
@@ -143,7 +145,7 @@ export default function ProductRating() {
       <div className="mt-8">
         <h1 className="text-xl font-semibold text-neutral-1">Ulasan Pembeli</h1>
         <div className="flex items-center gap-4 mt-3 text-neutral-1">
-          <p className="font-semibold text-4xl">4.5</p>
+          <p className="font-semibold text-4xl">{productDetail.Rating}</p>
           <img src="./user/detail/star.svg" alt="star" />
           <p className="text-2xl mt-2">/5.0</p>
         </div>
