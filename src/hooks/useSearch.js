@@ -1,33 +1,36 @@
 import { useEffect } from "react";
 import { useProductStore } from "../store/useProductStore";
-import { fetchProductsByCategory } from "../services/productServices";
+import {
+  fetchProductsByCategory,
+  allProducts,
+} from "../services/productServices";
 
-export function useSearch() {
+export const useSearch = () => {
   const { selectedCategories, setSearchResults, setIsLoading } =
     useProductStore();
 
   useEffect(() => {
     const fetchData = async () => {
-      if (selectedCategories.length === 0) return; // Tidak fetch jika tidak ada kategori
-
-      setIsLoading(true); // Set loading state
-
+      setIsLoading(true);
       try {
-        const products = [];
-        for (const category of selectedCategories) {
-          const result = await fetchProductsByCategory(category);
-          products.push(...result);
+        if (selectedCategories.length === 0) {
+          const products = await allProducts();
+          setSearchResults(products);
+        } else {
+          const products = await Promise.all(
+            selectedCategories.map((category) =>
+              fetchProductsByCategory(category),
+            ),
+          );
+          setSearchResults(products.flat());
         }
-        setSearchResults(products); // Update state di store
       } catch (error) {
-        console.error("Failed to fetch products:", error);
+        console.error("Error fetching products:", error);
       } finally {
-        setIsLoading(false); // Set loading state selesai
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [selectedCategories, setSearchResults, setIsLoading]);
-
-  return { selectedCategories };
-}
+  }, [selectedCategories, setIsLoading, setSearchResults]);
+};
