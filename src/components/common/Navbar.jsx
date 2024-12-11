@@ -1,41 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../../store/useUsersStore";
-import { useProductStore } from "../../store/useProductStore";
-import { searchProducts } from "../../services/productServices";
-import { useState } from "react";
+import useNavbar from "../../hooks/useNavbar";
 
 export default function Navbar() {
-  const { user, clearUser } = useUserStore();
+  const {
+    user,
+    searchQuery,
+    setSearchQuery,
+    handleLogout,
+    handleKeyDown,
+    handleSearch,
+  } = useNavbar(); // Use the custom hook
   const navigate = useNavigate();
-  const { setSearchResults } = useProductStore();
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleLogout = () => {
-    clearUser();
-    navigate("/");
-  };
-
-  const handleKeyDown = async (e) => {
-    if (e.key === "Enter") {
-      const query = e.target.value.trim();
-      if (query) {
-        // Menyimpan query pencarian di store dan menavigasi ke halaman produk
-        await handleSearch(query);
-        navigate(`/products?name=${encodeURIComponent(query)}`);
-      }
-    }
-  };
-
-  const handleSearch = async (query) => {
-    if (query) {
-      try {
-        const results = await searchProducts(query); // Panggil API untuk mencari produk
-        setSearchResults(results); // Simpan hasil pencarian di store
-      } catch (error) {
-        console.error("Search failed:", error);
-      }
-    }
-  };
 
   return (
     <div className="navbar flex justify-between items-center bg-neutral-5 border-b-neutral-4 border-[1px] px-8 py-4">
@@ -58,7 +33,10 @@ export default function Navbar() {
           className="p-3 py-3 rounded-lg border-2 border-neutral-4 border-solid w-full h-12 focus:outline-none"
           onKeyDown={handleKeyDown} // Menangani pencarian saat tombol enter ditekan
         />{" "}
-        <button className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-neutral-600">
+        <button
+          className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-neutral-600"
+          onClick={handleSearch}
+        >
           <svg
             width="25"
             height="24"
