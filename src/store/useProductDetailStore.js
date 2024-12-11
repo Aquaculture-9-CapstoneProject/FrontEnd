@@ -8,16 +8,27 @@ const useProductDetailStore = create(
       productDetail: null,
       isLoading: false,
       error: null,
+      totalPrice: 0,
 
       fetchProductDetail: async (productId) => {
         set({ isLoading: true, error: null });
         try {
           const product = await getProductDetail(productId);
-          set({ productDetail: product, isLoading: false });
+          set({
+            productDetail: product,
+            isLoading: false,
+            totalPrice: product ? product.Harga : 0,
+          });
         } catch (err) {
           set({ error: err, isLoading: false });
         }
       },
+      updateTotalPrice: (quantity) =>
+        set((state) => ({
+          totalPrice: state.productDetail
+            ? state.productDetail.Harga * quantity
+            : 0,
+        })),
 
       clearProductDetail: () => set({ productDetail: null, error: null }),
     }),

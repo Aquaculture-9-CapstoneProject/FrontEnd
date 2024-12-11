@@ -3,19 +3,23 @@ import useProductDetailStore from "../../../store/useProductDetailStore";
 import { formatCurrency } from "../../../utils/currency";
 
 export default function ProductDescription() {
-  const { productDetail } = useProductDetailStore();
+  const { productDetail, updateTotalPrice } = useProductDetailStore();
   const [quantity, setQuantity] = useState(1);
   const keunggulan = productDetail.Keunggulan?.split("\n") || [];
 
   const handleIncrement = () => {
     if (quantity < productDetail.Stok) {
-      setQuantity((prevQuantity) => prevQuantity + 1);
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+      updateTotalPrice(newQuantity);
     }
   };
 
   const handleDecrement = () => {
     if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      updateTotalPrice(newQuantity);
     }
   };
 

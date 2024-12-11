@@ -16,8 +16,8 @@ export default function ProductCard({
   );
 
   const handleCardClick = async () => {
-    await fetchProductDetail(id); // Fetch detail produk berdasarkan ID
     navigate("/detail"); // Navigasi ke halaman detail
+    await fetchProductDetail(id); // Fetch detail produk berdasarkan ID
   };
 
   const handleBuyClick = () => {
