@@ -1,10 +1,13 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
 
 export default function ArticleContent() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const navigate = useNavigate();
 
   // Data dummy artikel (nanti bisa diganti dengan data dari backend)
   const articleData = {
@@ -13,6 +16,7 @@ export default function ArticleContent() {
     time: "08.03 WIB",
     readTime: "5 menit",
     image: "user/home/bg-article.png",
+    topic: "Resep dan Kuliner",
     content: `
       Lorem ipsum dolor sit amet consectetur. Eu fringilla ullamcorper massa at malesuada in nibh risus tempor. Congue nunc dictumst pharetra at risus pharetra varius massa risus. Phasellus enim fames quis orci feugiat ut pharetra nam. Pharetra feugiat id odio sagittis.
 
@@ -29,48 +33,20 @@ export default function ArticleContent() {
     `,
   };
 
-  const RightArrowSVG = () => (
-    <svg
-      width="7"
-      height="12"
-      viewBox="0 0 7 12"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.35354 6.35378L1.35354 11.3538C1.30708 11.4002 1.25193 11.4371 1.19124 11.4622C1.13054 11.4874 1.06549 11.5003 0.99979 11.5003C0.934092 11.5003 0.869038 11.4874 0.808342 11.4622C0.747645 11.4371 0.692495 11.4002 0.646039 11.3538C0.599584 11.3073 0.562734 11.2522 0.537593 11.1915C0.512452 11.1308 0.499512 11.0657 0.499512 11C0.499512 10.9343 0.512452 10.8693 0.537593 10.8086C0.562734 10.7479 0.599584 10.6927 0.646039 10.6463L5.29291 6.00003L0.646039 1.35378C0.552219 1.25996 0.499512 1.13272 0.499512 1.00003C0.499512 0.867352 0.552219 0.740104 0.646039 0.646284C0.73986 0.552464 0.867108 0.499756 0.99979 0.499756C1.13247 0.499756 1.25972 0.552464 1.35354 0.646284L6.35354 5.64628C6.40003 5.69272 6.43691 5.74786 6.46207 5.80856C6.48723 5.86926 6.50018 5.93433 6.50018 6.00003C6.50018 6.06574 6.48723 6.13081 6.46207 6.1915C6.43691 6.2522 6.40003 6.30735 6.35354 6.35378Z"
-        fill="#A3A3A3"
-      />
-    </svg>
-  );
-
   return (
     <div>
       <Navbar />
       <div className="max-w-[1440px] mx-auto px-4 md:px-80 bg-neutral-5">
         <div className="py-8">
           {/* Breadcrumb */}
-          <nav className="text-sm text-neutral-2 mb-6">
-            <ol className="list-none p-0 inline-flex">
-              <li className="hover:underline">Beranda</li>
-              <li className="mx-2 mt-1">
-                <RightArrowSVG />
-              </li>
-              <li className="hover:underline">Artikel dan Berita</li>
-              <li className="mx-2 mt-1">
-                <RightArrowSVG />
-              </li>
-              <li className="hover:underline">Resep dan Kuliner</li>
-              <li className="mx-2 mt-1">
-                <RightArrowSVG />
-              </li>
-              <li>
-                <span className="font-semibold text-primary-5">
-                  {articleData.title}
-                </span>
-              </li>
-            </ol>
-          </nav>
+          <div className="breadcrumbs text-sm text-neutral-2">
+            <ul>
+              <li><a onClick={() => navigate("/home")}>Beranda</a></li>
+              <li><a onClick={() => navigate("/article")}>Artikel dan Berita</a></li>
+              <li><a onClick={() => navigate("/article-topic")}>{articleData.topic}</a></li>
+              <li><span className="font-semibold text-primary-5">{articleData.title}</span></li>
+            </ul>
+          </div>
 
           {/* Judul dan Metadata */}
           <header className="mb-8">

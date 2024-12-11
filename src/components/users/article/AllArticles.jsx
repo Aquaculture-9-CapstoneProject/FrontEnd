@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import Navbar from "../../common/Navbar";
 
@@ -93,6 +94,8 @@ export default function Article() {
     },
   ];
 
+  const navigate = useNavigate();
+
   const articlesPerPage = 9; // Jumlah artikel per halaman
   const [currentPage, setCurrentPage] = useState(1); // State untuk halaman aktif
 
@@ -121,6 +124,14 @@ export default function Article() {
       <Navbar />
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 bg-neutral-5">
         <section className="py-10 px-4 md:px-8 min-h-screen flex flex-col justify-between">
+          {/* Breadcrumb */}
+          <div className="breadcrumbs text-sm text-neutral-2 mb-8">
+            <ul>
+              <li><a onClick={() => navigate("/home")}>Beranda</a></li>
+              <li><a onClick={() => navigate("/article")}>Artikel dan Berita</a></li>
+              <li><span className="font-semibold text-primary-5">Artikel Terbaru</span></li>
+            </ul>
+          </div>
           {/* Header */}
           <div className="mb-6">
             <h2 className="text-2xl font-semibold text-neutral-1">
