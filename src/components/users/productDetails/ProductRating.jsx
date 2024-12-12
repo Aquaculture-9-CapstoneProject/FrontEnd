@@ -10,6 +10,7 @@ export default function ProductRating() {
   const [filter, setFilter] = useState("All");
   const [filteredReviews, setFilteredReviews] = useState(reviews);
   const { productDetail, totalPrice, quantity } = useProductDetailStore();
+  const [isloading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleFilterChange = (stars) => {
@@ -25,12 +26,15 @@ export default function ProductRating() {
   };
 
   const handleAddToCart = async (id, quantity) => {
+    setIsLoading(true);
     try {
       await addToCart(Number(id), quantity);
       showToast("Berhasil menambahkan ke keranjang");
     } catch (error) {
       showToast("Gagal menambahkan ke keranjang");
       console.error("Error adding to cart:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -48,8 +52,14 @@ export default function ProductRating() {
             className="hover:bg-neutral-4 border-2 border-neutral-4 bg-neutral-5 flex items-center justify-center w-1/2 py-[14px] px-6 rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105 gap-2"
             onClick={() => handleAddToCart(productDetail.ID, quantity)}
           >
-            <img src="./user/detail/add.svg" alt="add" />
-            <p>Keranjang</p>
+            {!isloading ? (
+              <>
+                <img src="./user/detail/add.svg" alt="add" />
+                <p>Keranjang</p>
+              </>
+            ) : (
+              <span className="loading loading-spinner loading-md"></span>
+            )}
           </button>
           <button
             className="bg-primary-5 text-neutral-5 hover:bg-primary-6 w-full sm:w-1/2 text-center px-6 py-[14px] rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105"
