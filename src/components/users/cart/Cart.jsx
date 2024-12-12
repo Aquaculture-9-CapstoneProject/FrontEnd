@@ -2,8 +2,40 @@ import Navbar from "../../common/Navbar";
 import ProductRecomendation from "../../common/ProductRecomendation";
 import ProductTable from "./ProductTable";
 import Summary from "./Summary";
-
+import { fetchCart } from "../../../services/productServices";
+import { useEffect } from "react";
+import useCartStore from "../../../store/useCartStore";
 export default function Cart() {
+  const { setProducts, setTotal, setIsLoading, isLoading } = useCartStore();
+
+  useEffect(() => {
+    const loadCart = async () => {
+      setIsLoading(true);
+      try {
+        const data = await fetchCart();
+        setProducts(data.Keranjang);
+        setTotal(data.Total);
+      } catch (error) {
+        console.error("Failed to load cart:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadCart();
+  }, [setProducts, setTotal, setIsLoading]);
+
+  if (isLoading) {
+    return (
+      <>
+        <Navbar />
+        <div className="text-center mt-6">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Navbar />

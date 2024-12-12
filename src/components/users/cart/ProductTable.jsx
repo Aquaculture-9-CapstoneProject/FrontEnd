@@ -1,23 +1,7 @@
-import { fetchCart } from "../../../services/productServices";
 import useCartStore from "../../../store/useCartStore";
-import { useEffect } from "react";
 
 export default function ProductTable() {
-  const { setProducts, products, removeProduct, setTotal } = useCartStore();
-
-  useEffect(() => {
-    const loadCart = async () => {
-      try {
-        const data = await fetchCart();
-        setProducts(data.Keranjang);
-        setTotal(data.Total);
-      } catch (error) {
-        console.error("Failed to load cart:", error);
-      }
-    };
-
-    loadCart();
-  }, [setProducts, setTotal]);
+  const { products, removeProduct, loadingProducts } = useCartStore();
 
   return (
     <div className="overflow-x-auto border-[1px] border-neutral-3 rounded-lg w-full md:w-8/12">
@@ -39,20 +23,32 @@ export default function ProductTable() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <ProductRow
-              key={product.ID}
-              product={product}
-              onDelete={removeProduct}
-            />
-          ))}
+          {products.length === 0 ? (
+            <tr>
+              <td
+                colSpan="4"
+                className="text-center py-4 font-semibold text-neutral-3"
+              >
+                Belum ada produk yang ditambahkan
+              </td>
+            </tr>
+          ) : (
+            products.map((product) => (
+              <ProductRow
+                key={product.ID}
+                product={product}
+                onDelete={removeProduct}
+                isLoading={loadingProducts[product.ID] || false}
+              />
+            ))
+          )}
         </tbody>
       </table>
     </div>
   );
 }
 
-function ProductRow({ product, onDelete }) {
+function ProductRow({ product, onDelete, isLoading }) {
   const setQuantity = useCartStore((state) => state.setQuantity);
   const quantity = product.Kuantitas;
   const itemProduct = product.product;
@@ -98,8 +94,16 @@ function ProductRow({ product, onDelete }) {
       </td>
       <td className="text-center py-4">{formatPrice(product.Subtotal)}</td>
       <td className="text-center py-4">
-        <button onClick={() => onDelete(product.ID)}>
-          <img src="./user/cart/delete.svg" alt="delete" className="w-5 h-5" />
+        <button onClick={() => onDelete(product.ID)} disabled={isLoading}>
+          {isLoading ? (
+            <span className="loading loading-spinner loading-xs"></span>
+          ) : (
+            <img
+              src="./user/cart/delete.svg"
+              alt="delete"
+              className="w-5 h-5"
+            />
+          )}
         </button>
       </td>
     </tr>

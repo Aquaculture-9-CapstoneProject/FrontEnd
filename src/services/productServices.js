@@ -117,3 +117,17 @@ export const fetchCart = async () => {
     throw errorMessage;
   }
 };
+
+export const removeFromCart = async (productId) => {
+  try {
+    const response = await apiClient.delete(`/cart/${productId}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal menghapus produk dari keranjang.";
+    console.error("Error removing product from cart:", errorMessage);
+    throw errorMessage;
+  }
+};
