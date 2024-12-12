@@ -145,3 +145,17 @@ export const checkoutFromCart = async () => {
     throw errorMessage;
   }
 };
+
+export const fetchOrders = async () => {
+  try {
+    const response = await apiClient.get("orders/checkout");
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal mengambil data pesanan.";
+    console.error("Error fetching orders:", errorMessage);
+    throw errorMessage;
+  }
+};
