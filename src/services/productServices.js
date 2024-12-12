@@ -103,3 +103,17 @@ export const addToCart = async (productId, quantity) => {
     throw errorMessage;
   }
 };
+
+export const fetchCart = async () => {
+  try {
+    const response = await apiClient.get("/cart");
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal mengambil keranjang belanja.";
+    console.error("Error fetching cart:", errorMessage);
+    throw errorMessage;
+  }
+};

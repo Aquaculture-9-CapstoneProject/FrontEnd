@@ -1,13 +1,27 @@
+import { fetchCart } from "../../../services/productServices";
 import useCartStore from "../../../store/useCartStore";
+import { useEffect } from "react";
 
 export default function ProductTable() {
-  const products = useCartStore((state) => state.products);
-  const removeProduct = useCartStore((state) => state.removeProduct);
+  const { setProducts, products, removeProduct, setTotal } = useCartStore();
+
+  useEffect(() => {
+    const loadCart = async () => {
+      try {
+        const data = await fetchCart();
+        setProducts(data.Keranjang);
+        setTotal(data.Total);
+      } catch (error) {
+        console.error("Failed to load cart:", error);
+      }
+    };
+
+    loadCart();
+  }, [setProducts, setTotal]);
 
   return (
     <div className="overflow-x-auto border-[1px] border-neutral-3 rounded-lg w-full md:w-8/12">
       <table className="table">
-        {/* Head */}
         <thead>
           <tr>
             <th className="text-sm md:text-xl font-bold text-neutral-1 py-2 md:py-4">
@@ -22,12 +36,12 @@ export default function ProductTable() {
             <th className="text-center font-bold text-neutral-1 text-sm md:text-xl py-2 md:py-4">
               Aksi
             </th>
-          </tr>{" "}
+          </tr>
         </thead>
         <tbody>
           {products.map((product) => (
             <ProductRow
-              key={product.id}
+              key={product.ID}
               product={product}
               onDelete={removeProduct}
             />
@@ -40,14 +54,14 @@ export default function ProductTable() {
 
 function ProductRow({ product, onDelete }) {
   const setQuantity = useCartStore((state) => state.setQuantity);
-  const quantity = product.quantity;
+  const quantity = product.Kuantitas;
+  const itemProduct = product.product;
 
-  const increment = () => setQuantity(product.id, quantity + 1);
-  const decrement = () => setQuantity(product.id, Math.max(1, quantity - 1));
+  const increment = () => setQuantity(itemProduct.ID, quantity + 1);
+  const decrement = () =>
+    setQuantity(itemProduct.ID, Math.max(1, quantity - 1));
 
-  const formatPrice = (price) => {
-    return `Rp. ${price.toLocaleString("id-ID")}`;
-  };
+  const formatPrice = (price) => `Rp. ${price.toLocaleString("id-ID")}`;
 
   return (
     <tr>
@@ -56,12 +70,12 @@ function ProductRow({ product, onDelete }) {
           <input type="checkbox" className="checkbox" />
           <div className="avatar">
             <div className="rounded-lg h-16 w-16">
-              <img src={product.image} alt={product.name} />
+              <img src={itemProduct.Gambar} alt={itemProduct.Nama} />
             </div>
           </div>
           <div>
-            <div className="font-bold">{product.name}</div>
-            <div className="text-sm opacity-50">{product.category}</div>
+            <div className="font-bold">{itemProduct.Nama}</div>
+            <div className="text-sm opacity-50">{itemProduct.Kategori}</div>
           </div>
         </div>
       </td>
@@ -82,13 +96,9 @@ function ProductRow({ product, onDelete }) {
           />
         </div>
       </td>
-      <td className="text-center py-4">{formatPrice(product.price)}</td>
+      <td className="text-center py-4">{formatPrice(product.Subtotal)}</td>
       <td className="text-center py-4">
-        <button
-          onClick={() => {
-            onDelete(product.id);
-          }}
-        >
+        <button onClick={() => onDelete(product.ID)}>
           <img src="./user/cart/delete.svg" alt="delete" className="w-5 h-5" />
         </button>
       </td>
