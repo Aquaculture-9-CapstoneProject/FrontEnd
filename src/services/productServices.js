@@ -131,3 +131,17 @@ export const removeFromCart = async (productId) => {
     throw errorMessage;
   }
 };
+
+export const checkoutFromCart = async () => {
+  try {
+    const response = await apiClient.post("/cart/checkout");
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal melakukan checkout.";
+    console.error("Error checking out:", errorMessage);
+    throw errorMessage;
+  }
+};
