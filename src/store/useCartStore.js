@@ -21,10 +21,22 @@ const useCartStore = create((set) => ({
         loadingProducts: { ...state.loadingProducts, [id]: true },
       }));
       await removeFromCart(id);
-      set((state) => ({
-        products: state.products.filter((product) => product.ID !== id),
-        loadingProducts: { ...state.loadingProducts, [id]: false },
-      }));
+
+      set((state) => {
+        const updatedProducts = state.products.filter(
+          (product) => product.ID !== id,
+        );
+        const updatedTotal = updatedProducts.reduce(
+          (acc, product) => acc + product.Subtotal,
+          0,
+        );
+
+        return {
+          products: updatedProducts,
+          total: updatedTotal,
+          loadingProducts: { ...state.loadingProducts, [id]: false },
+        };
+      });
     } catch (error) {
       console.error("Gagal menghapus produk dari keranjang:", error);
       set((state) => ({
