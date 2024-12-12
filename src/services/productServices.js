@@ -86,3 +86,20 @@ export const getProductDetail = async (productId) => {
     throw errorMessage;
   }
 };
+
+export const addToCart = async (productId, quantity) => {
+  try {
+    const response = await apiClient.post("/cart/tambah", {
+      product_id: productId,
+      quantity: quantity,
+    });
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal menambahkan produk ke keranjang.";
+    console.error("Error adding product to cart:", errorMessage);
+    throw errorMessage;
+  }
+};
