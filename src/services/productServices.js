@@ -176,3 +176,19 @@ export const orderFromCard = async (id, quantity) => {
     throw errorMessage;
   }
 };
+
+export const payment = async (id) => {
+  try {
+    const response = await apiClient.post("/payments", {
+      orderID: id,
+    });
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal melakukan pembayaran.";
+    console.error("Error making payment:", errorMessage);
+    throw errorMessage;
+  }
+};

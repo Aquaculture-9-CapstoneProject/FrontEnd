@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../../utils/currency";
 import { useCheckoutStore } from "../../../store/useCheckoutStore";
+import { payment } from "../../../services/productServices";
 
 export default function OrderSummary() {
   const navigate = useNavigate();
   const { orderData, loading } = useCheckoutStore();
+  console.log("orderData", orderData);
 
   const subtotal = orderData?.details
     ? orderData.details.reduce((sum, item) => sum + item.Subtotal, 0)
@@ -16,6 +18,12 @@ export default function OrderSummary() {
   if (!orderData) {
     return <div>Loading order data...</div>;
   }
+
+  const handleOrder = async (id) => {
+    console.log(id);
+    await payment(id);
+    navigate("/payment");
+  };
   return (
     <>
       <div className="p-3 sm:p-4 rounded-lg border-[1px] border-neutral-3 border-solid select-none">
@@ -52,7 +60,7 @@ export default function OrderSummary() {
       <button
         type="button"
         className="btn bg-primary-5 text-neutral-5 w-full sm:w-auto"
-        onClick={() => navigate("/payment")}
+        onClick={() => handleOrder(orderData.ID)}
       >
         Buat Pesanan
       </button>
