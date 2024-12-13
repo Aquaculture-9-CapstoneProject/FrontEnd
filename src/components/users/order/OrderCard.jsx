@@ -89,7 +89,7 @@ export default function OrderCard() {
             </div>
 
             <div className="flex flex-wrap justify-end gap-3 sm:gap-8 mt-4 sm:mt-2">
-              {order.status === "Dikirim" && (
+              {order.StatusBarang === "DIKIRIM" && (
                 <>
                   <button
                     type="button"
@@ -111,7 +111,7 @@ export default function OrderCard() {
                   </button>
                 </>
               )}
-              {order.status === "Selesai" && (
+              {order.StatusBarang === "SELESAI" && (
                 <button
                   type="button"
                   className="text-xs sm:text-sm py-2 px-3 bg-primary-5 text-neutral-5 rounded-md font-semibold
@@ -122,7 +122,7 @@ export default function OrderCard() {
                   Lihat Detail Pesanan
                 </button>
               )}
-              {order.status === "Dibatalkan" && (
+              {!order.StatusBarang && (
                 <button
                   type="button"
                   className="text-xs sm:text-sm py-2 px-3 bg-neutral-4 text-neutral-7 rounded-md 
