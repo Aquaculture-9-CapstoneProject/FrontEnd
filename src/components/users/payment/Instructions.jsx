@@ -74,6 +74,7 @@ export default function Instructions() {
                hover:text-neutral-6 active:bg-neutral-6 active:text-neutral-8 
                transition duration-200 font-semibold"
           onClick={() => navigate("/payment-failed")}
+          disabled
         >
           Batalkan Pesanan
         </button>
@@ -83,6 +84,7 @@ export default function Instructions() {
                hover:bg-primary-6 hover:text-neutral-6 
                active:bg-primary-7 active:text-neutral-8 transition duration-200"
           onClick={() => navigate("/payment-succes")}
+          disabled
         >
           Cek Status Pembayaran
         </button>

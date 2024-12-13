@@ -17,21 +17,20 @@ export default function Checkout() {
 
   useEffect(() => {
     const fetchCheckoutData = async () => {
-      setLoading(true); // Menyetel loading menjadi true
+      setLoading(true);
       try {
         const data = await fetchOrders();
         const lastData = data.orders[data.orders.length - 1];
-        setOrderData(lastData); // Menyimpan data ke dalam store
-        console.log("Order data:", lastData);
+        setOrderData(lastData);
       } catch (error) {
         console.error("Error fetching checkout data:", error);
       } finally {
-        setLoading(false); // Menyetel loading menjadi false setelah selesai
+        setLoading(false);
       }
     };
 
     fetchCheckoutData();
-  }, [setLoading, setOrderData]); // Pastikan efek berjalan saat store berubah
+  }, [setLoading, setOrderData]);
 
   if (loading) {
     return (

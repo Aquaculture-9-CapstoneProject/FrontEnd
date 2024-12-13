@@ -9,7 +9,7 @@ export default function PaymentMethod() {
           className="w-8 h-8"
         />
         <p className="text-base">Pembayaran Virtual</p>
-        <input type="radio" defaultChecked className="checkbox ml-auto" />
+        <input type="radio" defaultChecked className="radio ml-auto" />
       </label>
     </div>
   );

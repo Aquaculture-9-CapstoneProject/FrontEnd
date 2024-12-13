@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../../utils/currency";
 import { useCheckoutStore } from "../../../store/useCheckoutStore";
 import { payment } from "../../../services/productServices";
+import usePaymentStore from "../../../store/usePaymentStore";
 
 export default function OrderSummary() {
+  const { setPaymentData } = usePaymentStore();
   const navigate = useNavigate();
   const { orderData, loading } = useCheckoutStore();
 
@@ -19,8 +21,21 @@ export default function OrderSummary() {
   }
 
   const handleOrder = async (id) => {
-    await payment(id);
-    navigate("/payment");
+    try {
+      const response = await payment(id);
+      console.log("Response dari API payment:", response);
+
+      setPaymentData({
+        invoice_id: response.invoiceData.invoice_id,
+        invoice_url: response.invoiceData.invoice_url,
+        jumlah: response.invoiceData.jumlah,
+      });
+
+      navigate("/payment");
+    } catch (error) {
+      console.error("Error saat memproses pembayaran:", error);
+      alert(error); // Tampilkan pesan error ke pengguna
+    }
   };
   return (
     <>
