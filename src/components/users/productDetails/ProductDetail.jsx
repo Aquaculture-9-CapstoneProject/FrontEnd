@@ -7,9 +7,15 @@ import useProductDetailStore from "../../../store/useProductDetailStore";
 import ProductRecomendation from "../../common/ProductRecomendation";
 
 export default function ProductDetail() {
-  const breadcrumbItems = ["Beranda", "Produk", "Ikan", "Ikan Salmon"];
-  const breadcrumbLinks = ["/home", "/products", "/products", "/detail"];
   const { productDetail, isLoading } = useProductDetailStore();
+
+  const breadcrumbLinks = ["/home", "/products", "/products", "/detail"];
+  const breadcrumbItems = [
+    "Beranda",
+    "Produk",
+    productDetail.Kategori,
+    productDetail.Nama,
+  ];
 
   if (isLoading) {
     return (

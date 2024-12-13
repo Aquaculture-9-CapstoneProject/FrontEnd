@@ -9,6 +9,7 @@ const useProductDetailStore = create(
       isLoading: false,
       error: null,
       totalPrice: 0,
+      quantity: 1,
 
       fetchProductDetail: async (productId) => {
         set({ isLoading: true, error: null });
@@ -18,19 +19,30 @@ const useProductDetailStore = create(
             productDetail: product,
             isLoading: false,
             totalPrice: product ? product.Harga : 0,
+            quantity: 1,
           });
         } catch (err) {
           set({ error: err, isLoading: false });
         }
       },
-      updateTotalPrice: (quantity) =>
+
+      updateTotalPrice: () =>
         set((state) => ({
           totalPrice: state.productDetail
-            ? state.productDetail.Harga * quantity
+            ? state.productDetail.Harga * state.quantity
             : 0,
         })),
 
-      clearProductDetail: () => set({ productDetail: null, error: null }),
+      setQuantity: (newQuantity) =>
+        set((state) => {
+          if (state.productDetail && newQuantity <= state.productDetail.Stok) {
+            return { quantity: newQuantity };
+          }
+          return state;
+        }),
+
+      clearProductDetail: () =>
+        set({ productDetail: null, error: null, quantity: 1, totalPrice: 0 }),
     }),
     {
       name: "product-detail-store",
