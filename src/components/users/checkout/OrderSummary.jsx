@@ -6,7 +6,6 @@ import { payment } from "../../../services/productServices";
 export default function OrderSummary() {
   const navigate = useNavigate();
   const { orderData, loading } = useCheckoutStore();
-  console.log("orderData", orderData);
 
   const subtotal = orderData?.details
     ? orderData.details.reduce((sum, item) => sum + item.Subtotal, 0)
@@ -20,7 +19,6 @@ export default function OrderSummary() {
   }
 
   const handleOrder = async (id) => {
-    console.log(id);
     await payment(id);
     navigate("/payment");
   };
