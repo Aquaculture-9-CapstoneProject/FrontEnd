@@ -5,7 +5,6 @@ import useOrderDetailStore from "../../../store/useOrderDetailStore";
 export default function OrderSummary() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const { orderDetail } = useOrderDetailStore();
-  console.log(orderDetail);
   const { payment } = orderDetail || {};
   const orders = payment?.order?.details || [];
 
@@ -96,27 +95,29 @@ export default function OrderSummary() {
         <p className="text-xl font-semibold text-neutral-1">Ringkasan</p>
         <hr className="my-1 border-t border-neutral-3" />
         <div className="flex flex-col gap-3 mt-4">
-          <div className="flex justify-between text-neutral-1">
+          <div className="flex justify-between text-neutral-1 items-center">
             <p className="text-base">Nomor Pesanan</p>
-            <p className="text-base">{payment.invoice_id}</p>
+            <p className="text-base text-ellipsis overflow-hidden">
+              {payment.invoice_id}
+            </p>
           </div>
-          <div className="flex justify-between text-neutral-1">
+          <div className="flex justify-between text-neutral-1 items-center">
             <p className="text-base">Waktu Pemesanan</p>
             <p className="text-base">{payment.Tanggal}</p>
           </div>
         </div>
 
         <div className="flex flex-col gap-3 mt-4">
-          <div className="flex justify-between gap-2 text-neutral-1">
+          <div className="flex justify-between gap-2 text-neutral-1 items-center">
             <p className="text-base">Metode Pembayaran</p>
             <p className="text-base">Transfer Bank</p>
           </div>
         </div>
 
-        <div className="flex justify-between mt-8">
+        <div className="flex justify-between mt-8 items-center">
           <p className="text-xl font-semibold">Status Pesanan</p>
           <p className="text-xl font-semibold text-secondary-3">
-            {payment.status_barang || "Di Proses"}
+            {payment.status_barang === "SELESAI" ? "Selesai" : "Dikirim"}
           </p>
         </div>
       </div>

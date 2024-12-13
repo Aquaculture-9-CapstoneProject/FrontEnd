@@ -6,6 +6,7 @@ import {
 } from "../../../services/productServices";
 import { formatCurrency } from "../../../utils/currency";
 import useOrderDetailStore from "../../../store/useOrderDetailStore";
+import { formatDate } from "../../../utils/formatDate";
 
 export default function OrderCard() {
   const navigate = useNavigate();
@@ -68,11 +69,17 @@ export default function OrderCard() {
           >
             <div className="flex flex-wrap gap-4 sm:gap-6 items-center">
               <h1 className="text-base font-semibold">Belanja</h1>
-              <p className="text-sm sm:text-base">{order.order.CreatedAt}</p>
+              <p className="text-sm sm:text-base">
+                {formatDate(order.order.CreatedAt)}
+              </p>
               <div
-                className={`badge bg-primary-1 text-neutral-5 py-2 sm:py-3 text-xs sm:text-sm px-2 sm:px-3`}
+                className={`badge ${
+                  order.StatusBarang === "SELESAI"
+                    ? "bg-primary-5"
+                    : "bg-secondary-5"
+                } text-neutral-5 py-2 sm:py-3 text-xs sm:text-sm px-2 sm:px-3`}
               >
-                {order.StatusBarang || "Di Proses"}
+                {order.StatusBarang === "SELESAI" ? "Selesai" : "Dikirim"}
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-5">
@@ -112,7 +119,7 @@ export default function OrderCard() {
             <div className="flex flex-wrap justify-end gap-3 sm:gap-8 mt-4 sm:mt-2">
               <button
                 type="button"
-                className="text-xs sm:text-sm py-2 px-3 bg-neutral-4 text-neutral-7 rounded-md 
+                className="text-xs sm:text-sm py-2 px-3 bg-neutral-4 text-neutral-7 rounded-md w-full md:w-1/6
                      border-2 border-transparent hover:border-neutral-1 
                      hover:text-neutral-6 active:bg-neutral-6 active:text-neutral-8 
                      transition duration-200 font-semibold"

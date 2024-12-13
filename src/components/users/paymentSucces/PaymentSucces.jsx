@@ -5,8 +5,7 @@ import usePaymentStore from "../../../store/usePaymentStore";
 import { useEffect, useState } from "react";
 import { fetchPaymentDetail } from "../../../services/productServices";
 import { formatCurrency } from "../../../utils/currency";
-import { format } from "date-fns";
-import { id } from "date-fns/locale";
+import { formatDate } from "../../../utils/formatDate";
 
 export default function PaymentSucces() {
   const navigate = useNavigate();
@@ -14,16 +13,11 @@ export default function PaymentSucces() {
   const [paymentDetail, setPaymentDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return format(date, "d MMMM yyyy, HH.mm 'WIB'", { locale: id });
-  };
   useEffect(() => {
     const fetchDetail = async () => {
       try {
         const data = await fetchPaymentDetail(paymentData.invoice_id);
         setPaymentDetail(data.response.payment);
-        console.log(data.response.payment);
         setLoading(false);
       } catch (err) {
         setError(err);
