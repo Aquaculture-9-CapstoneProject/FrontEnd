@@ -220,3 +220,17 @@ export const fetchPaymentDetail = async (id) => {
     throw errorMessage;
   }
 };
+
+export const fetchOrder = async () => {
+  try {
+    const response = await apiClient.get("/payments/detailorder");
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal mengambil data pesanan.";
+    console.error("Error fetching orders:", errorMessage);
+    throw errorMessage;
+  }
+};
