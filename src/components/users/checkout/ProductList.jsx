@@ -8,8 +8,8 @@ export default function ProductTable() {
     const fetchCheckoutData = async () => {
       try {
         const data = await fetchOrders();
-        setProducts(data.orders[0]?.details || []);
-        console.log(data.orders[0]?.details);
+        const lastData = data.orders.length - 1;
+        setProducts(data.orders[lastData]?.details || []);
       } catch (error) {
         console.error("Error fetching checkout data:", error);
       }

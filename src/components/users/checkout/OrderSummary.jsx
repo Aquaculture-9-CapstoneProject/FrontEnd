@@ -1,12 +1,29 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { fetchOrders } from "../../../services/productServices";
+import { formatCurrency } from "../../../utils/currency";
 
 export default function OrderSummary() {
   const navigate = useNavigate();
+  const [orderData, setOrderData] = useState(null);
 
-  const subtotal = 100000;
-  const biayaLayanan = 5000;
-  const ongkir = 20000;
-  const total = subtotal + biayaLayanan + ongkir;
+  useEffect(() => {
+    const fetchCheckoutData = async () => {
+      try {
+        const data = await fetchOrders();
+        const lastData = data.orders[data.orders.length - 1];
+        setOrderData(lastData);
+      } catch (error) {
+        console.error("Error fetching checkout data:", error);
+      }
+    };
+
+    fetchCheckoutData();
+  }, []);
+
+  const subtotal = orderData?.details
+    ? orderData.details.reduce((sum, item) => sum + item.Subtotal, 0)
+    : 0;
 
   return (
     <>
@@ -18,22 +35,26 @@ export default function OrderSummary() {
         <div className="flex flex-col gap-2">
           <div className="flex justify-between text-sm sm:text-base">
             <p>Subtotal</p>
-            <p className="font-semibold">Rp {subtotal.toLocaleString()}</p>
+            <p className="font-semibold">{formatCurrency(subtotal)}</p>
           </div>
           <div className="flex justify-between text-sm sm:text-base">
             <p>Biaya Layanan</p>
-            <p className="font-semibold">Rp {biayaLayanan.toLocaleString()}</p>
+            <p className="font-semibold">
+              {formatCurrency(orderData.BiayaLayanan)}
+            </p>
           </div>
           <div className="flex justify-between text-sm sm:text-base">
             <p>Ongkir</p>
-            <p className="font-semibold">Rp {ongkir.toLocaleString()}</p>
+            <p className="font-semibold">
+              {formatCurrency(orderData.BiayaOngkir)}
+            </p>
           </div>
 
           <hr className="border-neutral-3 my-2" />
 
           <div className="flex justify-between text-base sm:text-lg">
             <p>Total</p>
-            <p className="font-semibold">Rp {total.toLocaleString()}</p>
+            <p className="font-semibold">{formatCurrency(orderData.Total)}</p>
           </div>
         </div>
       </div>
