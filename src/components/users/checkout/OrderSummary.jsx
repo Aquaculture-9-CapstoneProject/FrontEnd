@@ -1,30 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { fetchOrders } from "../../../services/productServices";
 import { formatCurrency } from "../../../utils/currency";
+import { useCheckoutStore } from "../../../store/useCheckoutStore";
 
 export default function OrderSummary() {
   const navigate = useNavigate();
-  const [orderData, setOrderData] = useState(null);
-
-  useEffect(() => {
-    const fetchCheckoutData = async () => {
-      try {
-        const data = await fetchOrders();
-        const lastData = data.orders[data.orders.length - 1];
-        setOrderData(lastData);
-      } catch (error) {
-        console.error("Error fetching checkout data:", error);
-      }
-    };
-
-    fetchCheckoutData();
-  }, []);
+  const { orderData, loading } = useCheckoutStore();
 
   const subtotal = orderData?.details
     ? orderData.details.reduce((sum, item) => sum + item.Subtotal, 0)
     : 0;
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (!orderData) {
+    return <div>Loading order data...</div>;
+  }
   return (
     <>
       <div className="p-3 sm:p-4 rounded-lg border-[1px] border-neutral-3 border-solid select-none">

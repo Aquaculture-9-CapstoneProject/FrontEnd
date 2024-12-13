@@ -1,23 +1,12 @@
-import { useState, useEffect } from "react";
-import { fetchOrders } from "../../../services/productServices";
+import { useCheckoutStore } from "../../../store/useCheckoutStore";
+import { formatCurrency } from "../../../utils/currency";
 
 export default function ProductTable() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchCheckoutData = async () => {
-      try {
-        const data = await fetchOrders();
-        const lastData = data.orders.length - 1;
-        setProducts(data.orders[lastData]?.details || []);
-      } catch (error) {
-        console.error("Error fetching checkout data:", error);
-      }
-    };
-
-    fetchCheckoutData();
-  }, []);
-
+  const { orderData } = useCheckoutStore();
+  if (!orderData) {
+    return <div>Loading order data...</div>;
+  }
+  const { details } = orderData;
   return (
     <div className="overflow-x-auto border-[1px] border-neutral-3 rounded-lg w-full">
       <table className="table w-full">
@@ -29,7 +18,7 @@ export default function ProductTable() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {details.map((product) => (
             <ProductRow key={product.ID} product={product} />
           ))}
         </tbody>
@@ -39,8 +28,6 @@ export default function ProductTable() {
 }
 
 function ProductRow({ product }) {
-  const formatPrice = (price) => `Rp. ${price.toLocaleString("id-ID")}`;
-
   return (
     <tr>
       <td className="py-4">
@@ -64,7 +51,7 @@ function ProductRow({ product }) {
         </div>
       </td>
       <td className="py-4 text-center text-base font-semibold">
-        {formatPrice(product.Subtotal)}
+        {formatCurrency(product.Subtotal)}
       </td>
     </tr>
   );

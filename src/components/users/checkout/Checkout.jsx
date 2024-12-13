@@ -5,17 +5,49 @@ import OrderSummary from "./OrderSummary";
 import PaymentMethod from "./PaymentMethod";
 import ProductList from "./ProductList";
 import Step from "../../common/Step";
+import { useCheckoutStore } from "../../../store/useCheckoutStore";
+import { fetchOrders } from "../../../services/productServices";
 
 export default function Checkout() {
+  const { loading, setLoading, setOrderData } = useCheckoutStore(); // Mengakses store
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const fetchCheckoutData = async () => {
+      setLoading(true); // Menyetel loading menjadi true
+      try {
+        const data = await fetchOrders();
+        const lastData = data.orders[data.orders.length - 1];
+        setOrderData(lastData); // Menyimpan data ke dalam store
+        console.log("Order data:", lastData);
+      } catch (error) {
+        console.error("Error fetching checkout data:", error);
+      } finally {
+        setLoading(false); // Menyetel loading menjadi false setelah selesai
+      }
+    };
+
+    fetchCheckoutData();
+  }, [setLoading, setOrderData]); // Pastikan efek berjalan saat store berubah
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <div className="text-center mt-6">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
       <Navbar />
       <Step currentStep={1} />
-
       <div className="px-4 sm:px-8 md:px-16 mb-10">
         <h1 className="font-semibold text-[24px] md:text-[28px] mb-5 mt-3">
           Pembelian
