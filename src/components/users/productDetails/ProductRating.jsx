@@ -4,13 +4,14 @@ import { showToast } from "../../../utils/toastUtils";
 import useProductDetailStore from "../../../store/useProductDetailStore";
 import { formatCurrency } from "../../../utils/currency";
 import { reviews } from "../../../dataDummy/review";
-import { addToCart } from "../../../services/productServices";
+import { addToCart, orderFromCard } from "../../../services/productServices";
 
 export default function ProductRating() {
   const [filter, setFilter] = useState("All");
   const [filteredReviews, setFilteredReviews] = useState(reviews);
   const { productDetail, totalPrice, quantity } = useProductDetailStore();
-  const [isloading, setIsLoading] = useState(false);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isBuying, setIsBuying] = useState(false);
   const navigate = useNavigate();
 
   const handleFilterChange = (stars) => {
@@ -26,7 +27,7 @@ export default function ProductRating() {
   };
 
   const handleAddToCart = async (id, quantity) => {
-    setIsLoading(true);
+    setIsAddingToCart(true);
     try {
       await addToCart(Number(id), quantity);
       showToast("Berhasil menambahkan ke keranjang");
@@ -34,7 +35,19 @@ export default function ProductRating() {
       showToast("Gagal menambahkan ke keranjang");
       console.error("Error adding to cart:", error);
     } finally {
-      setIsLoading(false);
+      setIsAddingToCart(false);
+    }
+  };
+
+  const handleBuyClick = async (id, quantity) => {
+    setIsBuying(true);
+    try {
+      await orderFromCard(id, quantity);
+      navigate("/checkout");
+    } catch (error) {
+      console.error("Error during the purchase:", error);
+    } finally {
+      setIsBuying(false);
     }
   };
 
@@ -52,7 +65,7 @@ export default function ProductRating() {
             className="hover:bg-neutral-4 border-2 border-neutral-4 bg-neutral-5 flex items-center justify-center w-1/2 py-[14px] px-6 rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105 gap-2"
             onClick={() => handleAddToCart(productDetail.ID, quantity)}
           >
-            {!isloading ? (
+            {!isAddingToCart ? (
               <>
                 <img src="./user/detail/add.svg" alt="add" />
                 <p>Keranjang</p>
@@ -63,9 +76,13 @@ export default function ProductRating() {
           </button>
           <button
             className="bg-primary-5 text-neutral-5 hover:bg-primary-6 w-full sm:w-1/2 text-center px-6 py-[14px] rounded-md font-semibold transition duration-200 ease-in-out transform hover:scale-105"
-            onClick={() => navigate("/checkout")}
+            onClick={() => handleBuyClick(productDetail.ID, quantity)}
           >
-            Beli
+            {!isBuying ? (
+              "Beli"
+            ) : (
+              <span className="loading loading-spinner loading-md"></span>
+            )}
           </button>
         </div>
       </div>
