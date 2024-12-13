@@ -192,3 +192,31 @@ export const payment = async (id) => {
     throw errorMessage;
   }
 };
+
+export const fetchPaymentStatus = async (id) => {
+  try {
+    const response = await apiClient.get(`/payments/${id}/status`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal mengambil status pembayaran.";
+    console.error("Error fetching payment status:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const fetchPaymentDetail = async (id) => {
+  try {
+    const response = await apiClient.get(`/payments/detail/${id}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal mengambil detail pembayaran.";
+    console.error("Error fetching payment detail:", errorMessage);
+    throw errorMessage;
+  }
+};

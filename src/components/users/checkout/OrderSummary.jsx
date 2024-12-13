@@ -3,11 +3,13 @@ import { formatCurrency } from "../../../utils/currency";
 import { useCheckoutStore } from "../../../store/useCheckoutStore";
 import { payment } from "../../../services/productServices";
 import usePaymentStore from "../../../store/usePaymentStore";
+import { useState } from "react";
 
 export default function OrderSummary() {
   const { setPaymentData } = usePaymentStore();
   const navigate = useNavigate();
   const { orderData, loading } = useCheckoutStore();
+  const [isLoading, setIsLoading] = useState(false);
 
   const subtotal = orderData?.details
     ? orderData.details.reduce((sum, item) => sum + item.Subtotal, 0)
@@ -21,6 +23,7 @@ export default function OrderSummary() {
   }
 
   const handleOrder = async (id) => {
+    setIsLoading(true);
     try {
       const response = await payment(id);
       console.log("Response dari API payment:", response);
@@ -31,12 +34,16 @@ export default function OrderSummary() {
         jumlah: response.invoiceData.jumlah,
       });
 
+      window.open(response.invoiceData.invoice_url, "_blank");
+
       navigate("/payment");
     } catch (error) {
       console.error("Error saat memproses pembayaran:", error);
-      alert(error); // Tampilkan pesan error ke pengguna
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <>
       <div className="p-3 sm:p-4 rounded-lg border-[1px] border-neutral-3 border-solid select-none">
@@ -75,7 +82,11 @@ export default function OrderSummary() {
         className="btn bg-primary-5 text-neutral-5 w-full sm:w-auto"
         onClick={() => handleOrder(orderData.ID)}
       >
-        Buat Pesanan
+        {isLoading ? (
+          <span className="loading loading-spinner loading-xs"></span>
+        ) : (
+          "Buat Pesanan"
+        )}
       </button>
     </>
   );

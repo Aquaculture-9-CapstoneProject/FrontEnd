@@ -46,7 +46,7 @@ export default function Checkout() {
   return (
     <>
       <Navbar />
-      <Step currentStep={1} />
+      <Step currentStep={1} backPath={-1} />
       <div className="px-4 sm:px-8 md:px-16 mb-10">
         <h1 className="font-semibold text-[24px] md:text-[28px] mb-5 mt-3">
           Pembelian
