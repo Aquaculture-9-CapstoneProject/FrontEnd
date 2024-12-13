@@ -32,8 +32,6 @@ export default function Payment() {
           navigate("/payment-succes");
         } else if (statusData.status === "EXPIRED") {
           navigate("/payment-failed");
-        } else {
-          navigate("/payment-failed");
         }
       } catch (error) {
         console.error("Failed to fetch payment status:", error);

@@ -12,11 +12,11 @@ export default function AddressSection() {
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
           <h1 className="font-semibold text-base text-neutral-1">Rumah - </h1>
           <p className="text-base text-neutral-1">
-            {user?.name} ({user?.phone})
+            {user?.name} ({user?.phone}){" "}
           </p>
         </div>
         <p className="text-sm sm:text-base text-neutral-1 mt-2">
-          {user?.address}
+          {user?.address} {/* Menampilkan alamat dari user */}
         </p>
       </div>
     </div>

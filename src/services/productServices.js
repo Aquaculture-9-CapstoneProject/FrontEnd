@@ -234,3 +234,17 @@ export const fetchOrder = async () => {
     throw errorMessage;
   }
 };
+
+export const fetchOrderDetail = async (id) => {
+  try {
+    const response = await apiClient.get(`/payments/detail/${id}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal mengambil detail pesanan.";
+    console.error("Error fetching order detail:", errorMessage);
+    throw errorMessage;
+  }
+};
