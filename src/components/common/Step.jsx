@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Step({ currentStep }) {
+export default function Step({ currentStep, backPath }) {
   const navigate = useNavigate();
 
   const steps = [
@@ -59,7 +59,7 @@ export default function Step({ currentStep }) {
       {/* Tombol Kembali */}
       <div
         className="flex items-center gap-2 cursor-pointer z-10 mb-4 md:mb-0"
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(backPath)}
       >
         <img src="/user/checkout/back.svg" alt="Kembali" />
         <h1 className="font-semibold">Kembali</h1>
