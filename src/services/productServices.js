@@ -159,3 +159,20 @@ export const fetchOrders = async () => {
     throw errorMessage;
   }
 };
+
+export const orderFromCard = async (id, quantity) => {
+  try {
+    const response = await apiClient.post("/orders", {
+      product_id: id,
+      quantity: quantity,
+    });
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.Message ||
+      error.message ||
+      "Gagal melakukan pesanan.";
+    console.error("Error ordering from cart:", errorMessage);
+    throw errorMessage;
+  }
+};
