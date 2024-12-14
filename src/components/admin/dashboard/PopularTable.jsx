@@ -1,21 +1,8 @@
-import { useEffect, useState } from "react";
-import { fetchPopularProducts } from "../../../services/productServices";
+import useDashboardStore from "../../../store/useDashboardStore";
 
 export default function PopularTable() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchCategoryData = async () => {
-      try {
-        const response = await fetchPopularProducts();
-        setProducts(response.data);
-      } catch (err) {
-        console.error("Gagal mengambil data kategori:", err);
-      }
-    };
-
-    fetchCategoryData();
-  }, [setProducts]);
+  const { data } = useDashboardStore();
+  const products = data.popularProducts;
 
   return (
     <div className="flex flex-col overflow-hidden px-6 py-4 rounded-xl bg-neutral-5 max-w-[517px] max-md:px-5">
