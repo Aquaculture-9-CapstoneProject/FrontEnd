@@ -1,6 +1,4 @@
-import React from "react";
-
-const DeleteProduct = ({ product, onClose }) => {
+const DeleteProduct = ({ onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-neutral-1 bg-opacity-50 px-4">
       <div className="bg-neutral-5 max-w-[487px] w-full sm:w-[360px] py-6 px-8 sm:px-6 rounded-lg shadow-lg">
@@ -24,7 +22,8 @@ const DeleteProduct = ({ product, onClose }) => {
           Hapus Produk
         </h2>
         <p className="text-neutral-1 text-xs sm:text-sm text-center mb-4 leading-5">
-          Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.
+          Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat
+          dibatalkan.
         </p>
 
         {/* Tombol */}

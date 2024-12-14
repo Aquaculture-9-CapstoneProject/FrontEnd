@@ -40,8 +40,6 @@ export default function Product() {
     }
   };
 
-  console.log("currentProducts", products);
-
   return (
     <div className="bg-[#E4EDF1] h-full">
       <ProductHeader />
