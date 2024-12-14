@@ -5,19 +5,19 @@ import EditProduct from "./EditProduct";
 
 export default function ProductTableBody({ products }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const handleOpenModal = (product) => {
+  const handleOpenDetailModal = (product) => {
     setSelectedProduct(product);
-    setIsModalOpen(true);
+    setIsDetailModalOpen(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseDetailModal = () => {
     setSelectedProduct(null);
-    setIsModalOpen(false);
+    setIsDetailModalOpen(false);
   };
 
   const handleOpenDeleteModal = (product) => {
@@ -33,6 +33,7 @@ export default function ProductTableBody({ products }) {
   const handleOpenEditModal = (product) => {
     setSelectedProduct(product);
     setIsEditModalOpen(true);
+    console.log("Selected Product:", product); // Debugging
   };
 
   const handleCloseEditModal = () => {
@@ -53,7 +54,7 @@ export default function ProductTableBody({ products }) {
           <tr key={product.ID}>
             <td
               className="text-secondary-5 text-xs border-b border-neutral-4 cursor-pointer hover:underline"
-              onClick={() => handleOpenModal(product)}
+              onClick={() => handleOpenDetailModal(product)}
             >
               {product.ID}
             </td>
@@ -112,8 +113,12 @@ export default function ProductTableBody({ products }) {
         ))
       )}
       {/* Modals */}
-      {isModalOpen && (
-        <ProductDetail product={selectedProduct} onClose={handleCloseModal} />
+      {isDetailModalOpen && (
+        <ProductDetail
+          product={selectedProduct}
+          onClose={handleCloseDetailModal}
+          isOpen={isDetailModalOpen}
+        />
       )}
       {isDeleteModalOpen && (
         <DeleteProduct
@@ -122,7 +127,11 @@ export default function ProductTableBody({ products }) {
         />
       )}
       {isEditModalOpen && (
-        <EditProduct product={selectedProduct} onClose={handleCloseEditModal} />
+        <EditProduct
+          product={selectedProduct}
+          onClose={handleCloseEditModal}
+          isOpen={isEditModalOpen}
+        />
       )}
     </>
   );
