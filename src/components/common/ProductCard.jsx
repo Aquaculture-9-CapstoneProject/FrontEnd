@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../utils/currency";
 import useProductDetailStore from "../../store/useProductDetailStore";
+import { orderFromCard } from "../../services/productServices";
+import { useState } from "react";
 
 export default function ProductCard({
   id,
@@ -15,13 +17,24 @@ export default function ProductCard({
     (state) => state.fetchProductDetail,
   );
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleCardClick = async () => {
-    navigate("/detail"); // Navigasi ke halaman detail
-    await fetchProductDetail(id); // Fetch detail produk berdasarkan ID
+    navigate("/detail");
+    await fetchProductDetail(id);
   };
 
-  const handleBuyClick = () => {
-    navigate("/checkout");
+  const handleBuyClick = async (e) => {
+    e.stopPropagation();
+    setIsLoading(true);
+    try {
+      await orderFromCard(id, 1);
+      navigate("/checkout");
+    } catch (error) {
+      console.error("Error during the purchase:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -60,12 +73,14 @@ export default function ProductCard({
           </div>
           <button
             className="btn bg-primary-4 px-5 text-neutral-5"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleBuyClick();
-            }}
+            onClick={handleBuyClick}
+            disabled={isLoading}
           >
-            Beli
+            {isLoading ? (
+              <span className="loading loading-spinner loading-xs"></span>
+            ) : (
+              "Beli"
+            )}
           </button>
         </div>
       </div>

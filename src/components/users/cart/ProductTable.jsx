@@ -1,13 +1,11 @@
 import useCartStore from "../../../store/useCartStore";
 
 export default function ProductTable() {
-  const products = useCartStore((state) => state.products);
-  const removeProduct = useCartStore((state) => state.removeProduct);
+  const { products, removeProduct, loadingProducts } = useCartStore();
 
   return (
     <div className="overflow-x-auto border-[1px] border-neutral-3 rounded-lg w-full md:w-8/12">
       <table className="table">
-        {/* Head */}
         <thead>
           <tr>
             <th className="text-sm md:text-xl font-bold text-neutral-1 py-2 md:py-4">
@@ -22,32 +20,44 @@ export default function ProductTable() {
             <th className="text-center font-bold text-neutral-1 text-sm md:text-xl py-2 md:py-4">
               Aksi
             </th>
-          </tr>{" "}
+          </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <ProductRow
-              key={product.id}
-              product={product}
-              onDelete={removeProduct}
-            />
-          ))}
+          {products.length === 0 ? (
+            <tr>
+              <td
+                colSpan="4"
+                className="text-center py-4 font-semibold text-neutral-3"
+              >
+                Belum ada produk yang ditambahkan
+              </td>
+            </tr>
+          ) : (
+            products.map((product) => (
+              <ProductRow
+                key={product.ID}
+                product={product}
+                onDelete={removeProduct}
+                isLoading={loadingProducts[product.ID] || false}
+              />
+            ))
+          )}
         </tbody>
       </table>
     </div>
   );
 }
 
-function ProductRow({ product, onDelete }) {
+function ProductRow({ product, onDelete, isLoading }) {
   const setQuantity = useCartStore((state) => state.setQuantity);
-  const quantity = product.quantity;
+  const quantity = product.Kuantitas;
+  const itemProduct = product.product;
 
-  const increment = () => setQuantity(product.id, quantity + 1);
-  const decrement = () => setQuantity(product.id, Math.max(1, quantity - 1));
+  const increment = () => setQuantity(itemProduct.ID, quantity + 1);
+  const decrement = () =>
+    setQuantity(itemProduct.ID, Math.max(1, quantity - 1));
 
-  const formatPrice = (price) => {
-    return `Rp. ${price.toLocaleString("id-ID")}`;
-  };
+  const formatPrice = (price) => `Rp. ${price.toLocaleString("id-ID")}`;
 
   return (
     <tr>
@@ -56,12 +66,12 @@ function ProductRow({ product, onDelete }) {
           <input type="checkbox" className="checkbox" />
           <div className="avatar">
             <div className="rounded-lg h-16 w-16">
-              <img src={product.image} alt={product.name} />
+              <img src={itemProduct.Gambar} alt={itemProduct.Nama} />
             </div>
           </div>
           <div>
-            <div className="font-bold">{product.name}</div>
-            <div className="text-sm opacity-50">{product.category}</div>
+            <div className="font-bold">{itemProduct.Nama}</div>
+            <div className="text-sm opacity-50">{itemProduct.Kategori}</div>
           </div>
         </div>
       </td>
@@ -82,14 +92,18 @@ function ProductRow({ product, onDelete }) {
           />
         </div>
       </td>
-      <td className="text-center py-4">{formatPrice(product.price)}</td>
+      <td className="text-center py-4">{formatPrice(product.Subtotal)}</td>
       <td className="text-center py-4">
-        <button
-          onClick={() => {
-            onDelete(product.id);
-          }}
-        >
-          <img src="./user/cart/delete.svg" alt="delete" className="w-5 h-5" />
+        <button onClick={() => onDelete(product.ID)} disabled={isLoading}>
+          {isLoading ? (
+            <span className="loading loading-spinner loading-xs"></span>
+          ) : (
+            <img
+              src="./user/cart/delete.svg"
+              alt="delete"
+              className="w-5 h-5"
+            />
+          )}
         </button>
       </td>
     </tr>

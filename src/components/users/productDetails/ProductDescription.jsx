@@ -1,28 +1,26 @@
-import { useState } from "react";
 import useProductDetailStore from "../../../store/useProductDetailStore";
 import { formatCurrency } from "../../../utils/currency";
 
 export default function ProductDescription() {
-  const { productDetail, updateTotalPrice } = useProductDetailStore();
-  const [quantity, setQuantity] = useState(1);
+  const { productDetail, updateTotalPrice, quantity, setQuantity } =
+    useProductDetailStore();
   const keunggulan = productDetail.Keunggulan?.split("\n") || [];
 
   const handleIncrement = () => {
-    if (quantity < productDetail.Stok) {
-      const newQuantity = quantity + 1;
+    const newQuantity = quantity + 1;
+    if (newQuantity <= productDetail.Stok) {
       setQuantity(newQuantity);
-      updateTotalPrice(newQuantity);
+      updateTotalPrice();
     }
   };
 
   const handleDecrement = () => {
-    if (quantity > 1) {
-      const newQuantity = quantity - 1;
+    const newQuantity = quantity - 1;
+    if (newQuantity > 0) {
       setQuantity(newQuantity);
-      updateTotalPrice(newQuantity);
+      updateTotalPrice();
     }
   };
-
   return (
     <div className="">
       <div className="py-5">

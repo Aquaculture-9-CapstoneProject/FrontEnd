@@ -1,15 +1,19 @@
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import useDashboardStore from "../../../store/useDashboardStore";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const StatusChartt = () => {
-  const data = {
+  const { data } = useDashboardStore();
+  const dataArray = data.chartData.status.data;
+
+  const dataChart = {
     // labels: ["Berhasil", "Gagal"],
     datasets: [
       {
         label: "Status Transaksi",
-        data: [70, 30],
+        data: dataArray,
         backgroundColor: ["#1F92C5", "#E11D48"],
         hoverOffset: 4,
       },
@@ -24,7 +28,7 @@ const StatusChartt = () => {
       <div className="flex flex-row items-center justify-center mt-5 w-full">
         {/* Chart */}
         <div className="h-52 w-52">
-          <Doughnut data={data} />
+          <Doughnut data={dataChart} />
         </div>
 
         {/* Labels */}

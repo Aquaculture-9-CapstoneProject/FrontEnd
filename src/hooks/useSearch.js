@@ -6,14 +6,14 @@ import {
 } from "../services/productServices";
 
 export const useSearch = () => {
-  const { selectedCategories, setSearchResults, setIsLoading } =
+  const { selectedCategories, setSearchResults, setIsLoading, productResult } =
     useProductStore();
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        if (selectedCategories.length === 0) {
+        if (selectedCategories.length === 0 || productResult.length === 0) {
           const products = await allProducts();
           setSearchResults(products);
         } else {

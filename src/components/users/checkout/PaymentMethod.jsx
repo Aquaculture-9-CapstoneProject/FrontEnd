@@ -8,8 +8,8 @@ export default function PaymentMethod() {
           alt="payment"
           className="w-8 h-8"
         />
-        <p className="text-base">Transfer Bank</p>
-        <input type="radio" defaultChecked className="checkbox ml-auto" />
+        <p className="text-base">Pembayaran Virtual</p>
+        <input type="radio" defaultChecked className="radio ml-auto" />
       </label>
     </div>
   );

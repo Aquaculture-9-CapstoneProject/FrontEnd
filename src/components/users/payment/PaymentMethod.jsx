@@ -1,14 +1,25 @@
-export default function PaymentMethod({ accountNumber }) {
+export default function PaymentMethod({ link }) {
   return (
-    <div className="rounded-2xl border-[1px] border-solid border-neutral-3 w-full mt-4 py-4 sm:py-[26px] px-4 sm:px-[29px] flex flex-col gap-3 sm:gap-5">
-      <h1 className="font-semibold text-lg sm:text-xl text-neutral-1 text-center">
-        Metode Pembayaran: Transfer Bank
-      </h1>
-      <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 justify-center items-center">
-        <p className="text-lg sm:text-[28px] text-neutral-1 text-center sm:text-left">
-          {accountNumber}
+    <div>
+      <div className="flex flex-col gap-2 sm:gap-5 justify-center items-center">
+        <img
+          src="./user/payment/pending.png"
+          className="object-contain w-full aspect-square max-w-[308px]"
+          alt="pending"
+        />
+        <p className="text-sm leading-6 text-center text-black max-w-[426px]">
+          Kami sedang mengarahkan kamu ke halaman pembayaran. Jika belum pindah,
+          klik di{" "}
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-secondary-2 underline"
+          >
+            sini
+          </a>{" "}
+          untuk melanjutkan.
         </p>
-        <img src="./user/payment/copy.svg" alt="copy" className="w-4 sm:w-5" />
       </div>
     </div>
   );

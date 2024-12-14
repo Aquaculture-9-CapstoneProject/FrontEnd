@@ -11,8 +11,8 @@ export default function CountdownTimer({ hours, minutes, seconds }) {
   }, [counter]);
 
   return (
-    <div className="flex flex-wrap gap-4 sm:gap-6 items-center mt-3 sm:mt-5">
-      <p className="text-xs sm:text-sm">Kadaluarsa dalam</p>
+    <div className="flex flex-wrap justify-center gap-4 sm:gap-6 items-center mt-3 sm:mt-5">
+      <p className="text-xs sm:text-sm">Pembayaran Kadaluarsa dalam</p>
       <div className="flex gap-2 bg-error-5 items-center px-2 sm:px-4 rounded-lg py-1">
         <img
           src="./user/payment/schedule.svg"

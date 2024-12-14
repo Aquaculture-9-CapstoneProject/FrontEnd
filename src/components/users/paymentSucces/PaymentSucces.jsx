@@ -1,14 +1,56 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
 import Step from "../../common/Step";
+import usePaymentStore from "../../../store/usePaymentStore";
+import { useEffect, useState } from "react";
+import { fetchPaymentDetail } from "../../../services/productServices";
+import { formatCurrency } from "../../../utils/currency";
+import { formatDate } from "../../../utils/formatDate";
 
 export default function PaymentSucces() {
   const navigate = useNavigate();
+  const { paymentData } = usePaymentStore();
+  const [paymentDetail, setPaymentDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchDetail = async () => {
+      try {
+        const data = await fetchPaymentDetail(paymentData.invoice_id);
+        setPaymentDetail(data.response.payment);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    if (paymentData?.invoice_id) {
+      fetchDetail();
+    }
+  }, [paymentData?.invoice_id]);
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <div className="text-center mt-6">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      </>
+    );
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const { order, Tanggal, jumlah } = paymentDetail;
 
   return (
     <>
       <Navbar />
-      <Step currentStep={3} />
+      <Step currentStep={3} backPath="/cart" />
 
       <div className="flex flex-col items-center justify-center px-4 sm:px-8 text-neutral-1">
         <h1 className="font-semibold text-2xl sm:text-[28px] mb-5 text-center mt-4">
@@ -30,40 +72,40 @@ export default function PaymentSucces() {
           <div className="flex flex-col gap-2 text-xs sm:text-sm">
             <div className="flex justify-between">
               <span>Nomor Pesanan</span>
-              <span>P0000001234</span>
+              <span>{paymentDetail.invoice_id}</span>
             </div>
             <div className="flex justify-between">
               <span>Waktu Pemesanan</span>
-              <span>27 November 2024, 11.26 WIB</span>
+              <span>{formatDate(Tanggal)}</span>
             </div>
             <div className="flex justify-between">
               <span>Nomor Transaksi</span>
-              <span>TR0012193890</span>
+              <span>{paymentDetail.id}</span>
             </div>
             <div className="flex justify-between">
               <span>Metode Pembayaran</span>
-              <span>Transfer Bank</span>
+              <span>{order.metode_pembayaran}</span>
             </div>
             <div className="flex justify-between">
               <span>Waktu Pembayaran</span>
-              <span>27 November 2024, 11.26 WIB</span>
+              <span>{formatDate(Tanggal)}</span>
             </div>
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span>Rp 160.000</span>
+              <span>{formatCurrency(order.details[0].Subtotal)}</span>
             </div>
             <div className="flex justify-between">
               <span>Biaya Layanan</span>
-              <span>Rp 2.000</span>
+              <span>{formatCurrency(order.biaya_layanan)}</span>
             </div>
             <div className="flex justify-between">
               <span>Ongkir</span>
-              <span>Rp 10.000</span>
+              <span>{formatCurrency(order.biaya_ongkir)}</span>
             </div>
             <hr className="my-2 border-t border-neutral-3" />
             <div className="flex justify-between text-lg sm:text-xl font-semibold">
               <span>Total Harga</span>
-              <span>Rp 100.000</span>
+              <span>{formatCurrency(jumlah)}</span>
             </div>
           </div>
         </div>
