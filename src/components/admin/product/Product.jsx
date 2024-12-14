@@ -18,25 +18,29 @@ export default function Product() {
     error,
   } = useAdminProductStore();
 
-  const productsPerPage = 14; // Tetapkan jumlah produk per halaman
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
-
-  const currentProducts = products.slice(
-    (currentPage - 1) * productsPerPage,
-    currentPage * productsPerPage,
-  );
 
   useEffect(() => {
     fetchProducts(currentPage);
   }, [currentPage, fetchProducts]);
 
   const handlePrevious = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      const newPage = currentPage - 1;
+      setCurrentPage(newPage);
+      fetchProducts(newPage);
+    }
   };
 
   const handleNext = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages) {
+      const newPage = currentPage + 1;
+      setCurrentPage(newPage);
+      fetchProducts(newPage);
+    }
   };
+
+  console.log("currentProducts", products);
 
   return (
     <div className="bg-[#E4EDF1] h-full">
@@ -54,7 +58,7 @@ export default function Product() {
         ) : error ? (
           <p>Error: {error}</p>
         ) : (
-          <ProductTable products={currentProducts} />
+          <ProductTable products={products} />
         )}
       </div>
       <Pagination
