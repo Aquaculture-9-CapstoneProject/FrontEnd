@@ -7,6 +7,8 @@ import {
   totalArticles,
   ordersCompleted,
   ordersShipped,
+  totalIncomeDummy,
+  transactionStatus,
 } from "../services/adminServices";
 import { fetchPopularProducts } from "../services/productServices";
 
@@ -26,6 +28,16 @@ const useDashboardStore = create((set) => ({
       shipped: null,
       completed: null,
     },
+    chartData: {
+      total: {
+        labels: [],
+        data: [],
+      },
+      status: {
+        labels: [],
+        data: [],
+      },
+    },
   },
   fetchDashboardData: async () => {
     set({ loading: true, error: null });
@@ -39,6 +51,8 @@ const useDashboardStore = create((set) => ({
         shippedOrders,
         completedOrders,
         popularProducts,
+        totalData,
+        statusData,
       ] = await Promise.all([
         topCategories(),
         totalIncome(),
@@ -48,6 +62,8 @@ const useDashboardStore = create((set) => ({
         ordersShipped(),
         ordersCompleted(),
         fetchPopularProducts(),
+        totalIncomeDummy(),
+        transactionStatus(),
       ]);
 
       set({
@@ -67,6 +83,16 @@ const useDashboardStore = create((set) => ({
           overview: {
             shipped: `${shippedOrders.totalPesananDikrim} pesanan`,
             completed: `${completedOrders.totalPesananDiterima} pesanan`,
+          },
+          chartData: {
+            total: {
+              labels: totalData.message.map((item) => item.Bulan),
+              data: totalData.message.map((item) => item.Jumlah),
+            },
+            status: {
+              labels: ["Berhasil", "Gagal"],
+              data: [statusData.jumlahBerhasil, statusData.jumlahGagal],
+            },
           },
         },
         loading: false,
