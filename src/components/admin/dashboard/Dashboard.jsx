@@ -10,7 +10,9 @@ export default function Dashboard() {
   return (
     <div className="bg-[#E4EDF1] h-full">
       {/* Header */}
-      <DahsboardHeader />
+      <div className="mb-24">
+        <DahsboardHeader />
+      </div>
 
       <DashboardStats />
 

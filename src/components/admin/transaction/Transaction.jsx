@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TransactionHeader from "./TransactionHeader";
 import FilterSearch from "./FilterSearch";
 import TransactionTable from "./TransactionTable";
 import Pagination from "./Pagination";
+import useTransactionStore from "../../../store/useTransactionStore";
 
 export default function Transaction() {
-  const transactions = Array.from({ length: 30 }, (_, index) => ({
-    id: `TR${index + 1}`.padStart(6, "0"),
-    orderId: "P0001",
-    date: "24 November 2024, 19:00",
-    paymentMethod: "Transfer Bank",
-    status: index % 3 === 0 ? "Berhasil" : index % 3 === 1 ? "Gagal" : "Pending",
-  }));
+  const { transactions, isLoading, error, fetchTransactions } = useTransactionStore();
+
+    useEffect(() => {
+        fetchTransactions();
+    }, [fetchTransactions]);
 
   const transactionsPerPage = 14;
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,10 +21,18 @@ export default function Transaction() {
 
   return (
     <div className="bg-[#E4EDF1] h-full">
-      <TransactionHeader />
+      <div className="mb-28">
+        <TransactionHeader />
+      </div>      
       <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md">
         <FilterSearch />
-        <TransactionTable transactions={currentTransactions} />
+        {isLoading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>Error: {error}</p>
+            ) : (
+                <TransactionTable transactions={transactions} />
+            )}
       </div>
       <Pagination
         currentPage={currentPage}

@@ -1,4 +1,4 @@
-export default function TransactionTableBody({ transactions, openModal }) {
+export default function TransactionTableBody({ transactions, onDeleteClick }) {
   return (
     <tbody>
       {transactions.length === 0 ? (
@@ -11,15 +11,15 @@ export default function TransactionTableBody({ transactions, openModal }) {
         transactions.map((transaction, index) => (
           <tr key={index}>
             <td className="text-neutral-2 text-xs border-b border-neutral-4">{transaction.id}</td>
-            <td className="text-neutral-2 text-xs border-b border-neutral-4">{transaction.orderId}</td>
-            <td className="text-neutral-2 text-xs border-b border-neutral-4">{transaction.date}</td>
-            <td className="text-neutral-2 text-xs border-b border-neutral-4">{transaction.paymentMethod}</td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4">{transaction.id_pesanan}</td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4">{transaction.created_at}</td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4">{transaction.metode_pembayaran}</td>
             <td>
               <span
                 className={`badge ${
-                  transaction.status === "Berhasil"
+                  transaction.status === "PAID" || transaction.status === "SETTLED"
                     ? "badge-success bg-neutral-5 border border-secondary-5 text-secondary-5 text-[10px]"
-                    : transaction.status === "Gagal"
+                    : transaction.status === "CANCELED"
                     ? "badge-error bg-neutral-5 border border-error-3 text-error-3 text-[10px]"
                     : "bg-neutral-5 border border-neutral-1 text-neutral-1 text-[10px]"
                 }`}
@@ -28,7 +28,7 @@ export default function TransactionTableBody({ transactions, openModal }) {
               </span>
             </td>
             <td>
-              <button onClick={() => openModal(transaction)}>
+              <button onClick={() => onDeleteClick(transaction.id)}>
                 <svg
                   width="13"
                   height="16"
