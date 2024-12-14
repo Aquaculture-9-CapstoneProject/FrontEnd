@@ -1,12 +1,48 @@
-const categoryData = [
-  { id: 1, category: "Ikan", productCount: 30 },
-  { id: 2, category: "Produk Olahan", productCount: 20 },
-  { id: 3, category: "Udang", productCount: 15 },
-  { id: 4, category: "Kerang", productCount: 10 },
-  { id: 5, category: "Ikan Hias", productCount: 5 },
-];
+import { useState, useEffect } from "react";
+import { topCategories } from "../../../services/adminServices";
 
 export default function CategoryTable() {
+  const [categoryData, setCategoryData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      try {
+        const response = await topCategories();
+        const categories = response.Produk.map((item) => ({
+          id: item.ID,
+          category: item.Kategori,
+          productCount: item.Stok,
+        }));
+        setCategoryData(categories);
+      } catch (err) {
+        setError(err);
+        console.error("Gagal mengambil data kategori:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategoryData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-40">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-40">
+        <p>Terjadi kesalahan: {error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex overflow-hidden flex-col px-6 py-4 rounded-xl bg-neutral-5 max-w-[517px] max-md:px-5">
       <p className="text-sm font-semibold leading-loose text-neutral-1 max-md:max-w-full">
