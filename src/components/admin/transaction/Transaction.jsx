@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import TransactionHeader from "./TransactionHeader";
 import FilterSearch from "./FilterSearch";
 import TransactionTable from "./TransactionTable";
@@ -6,18 +6,24 @@ import Pagination from "./Pagination";
 import useTransactionStore from "../../../store/useTransactionStore";
 
 export default function Transaction() {
-  const { transactions, isLoading, error, fetchTransactions } = useTransactionStore();
+  const {
+    transactions,
+    isLoading,
+    error,
+    fetchTransactions,
+    currentPage,
+    totalPages,
+  } = useTransactionStore();
 
     useEffect(() => {
-        fetchTransactions();
-    }, [fetchTransactions]);
+        fetchTransactions(currentPage);
+    }, [fetchTransactions, currentPage]);
 
-  const transactionsPerPage = 14;
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(transactions.length / transactionsPerPage);
-
-  const startIndex = (currentPage - 1) * transactionsPerPage;
-  const currentTransactions = transactions.slice(startIndex, startIndex + transactionsPerPage);
+    const handlePageChange = (page) => {
+      if (page >= 1 && page <= totalPages) {
+        fetchTransactions(page); // Panggil data baru sesuai halaman
+      }
+    };
 
   return (
     <div className="bg-[#E4EDF1] h-full">
@@ -37,7 +43,7 @@ export default function Transaction() {
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={setCurrentPage}
+        onPageChange={handlePageChange}
       />
     </div>
   );
