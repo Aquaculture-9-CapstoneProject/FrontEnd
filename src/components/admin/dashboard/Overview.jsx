@@ -1,17 +1,48 @@
-export default function Overview() {
-  const processedOrders = {
-    title: "Pesanan Diproses",
-    currentAmount: "21 pesanan",
-    iconUrl: "./admin/dashboard/processed.svg",
-    status: "Perlu dikirim",
-  };
+import { useState, useEffect } from "react";
+import {
+  ordersCompleted,
+  ordersShipped,
+} from "../../../services/adminServices";
 
-  const completedOrders = {
+export default function Overview() {
+  const [processedOrders, setProcessedOrders] = useState({
+    title: "Pesanan Dikirim",
+    currentAmount: "Loading...",
+    iconUrl: "./admin/dashboard/processed.svg",
+    status: "sedang dalam perjalanan",
+  });
+
+  const [completedOrders, setCompletedOrders] = useState({
     title: "Pesanan Selesai",
-    currentAmount: "40 pesanan",
+    currentAmount: "Loading...",
     iconUrl: "./admin/dashboard/completed.svg",
-    status: "Telah diterima oleh pembeli",
-  };
+    status: "telah diterima oleh pembeli",
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const shipped = await ordersShipped();
+        console.log("Pesanan dikirim:", shipped);
+        setProcessedOrders((prev) => ({
+          ...prev,
+          currentAmount: `${shipped.totalPesananDikrim} pesanan`,
+        }));
+
+        // Fetch jumlah pesanan selesai
+        const completed = await ordersCompleted();
+        console.log("Pesanan selesai:", completed);
+        setCompletedOrders((prev) => ({
+          ...prev,
+          currentAmount: `${completed.totalPesananDiterima} pesanan`,
+        }));
+      } catch (error) {
+        console.error("Gagal mengambil data pesanan:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const renderStats = (data) => (
     <div className="flex overflow-hidden flex-col px-6 py-2 rounded-xl bg-neutral-5 w-full h-min flex-grow">
