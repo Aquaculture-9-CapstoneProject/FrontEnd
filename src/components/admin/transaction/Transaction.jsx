@@ -30,12 +30,14 @@ export default function Transaction() {
       <div className="mb-28">
         <TransactionHeader />
       </div>      
-      <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md">
+      <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md items-center">
         <FilterSearch />
         {isLoading ? (
-                <p>Loading...</p>
+                <div className="flex justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-primary-4"></span>
+                </div>
             ) : error ? (
-                <p>Error: {error}</p>
+                <p className="text-center text-neutral-3 text-base py-4">Error: {error}</p>
             ) : (
                 <TransactionTable transactions={transactions} />
             )}
