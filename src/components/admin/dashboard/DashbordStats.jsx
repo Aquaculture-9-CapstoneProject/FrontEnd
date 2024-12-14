@@ -1,7 +1,11 @@
+import useDashboardStore from "../../../store/useDashboardStore";
+import { formatCurrency } from "../../../utils/currency";
+
 export default function DashboardStats() {
+  const { data } = useDashboardStore();
   const revenue = {
     title: "Pendapatan Bulan Ini",
-    currentAmount: "Rp 543.000",
+    currentAmount: formatCurrency(data.stats.revenue),
     iconUrl: "./admin/dashboard/credit.svg",
     changeAmount: "Rp 200.000",
     changePercentage: "10%",
@@ -11,7 +15,7 @@ export default function DashboardStats() {
 
   const orders = {
     title: "Pesanan Bulan Ini",
-    currentAmount: "520",
+    currentAmount: data.stats.orders,
     iconUrl: "./admin/dashboard/pesanan.svg",
     changeAmount: "30",
     changePercentage: "0.1%",
@@ -21,7 +25,7 @@ export default function DashboardStats() {
 
   const products = {
     title: "Total Produk",
-    currentAmount: "320",
+    currentAmount: data.stats.products,
     iconUrl: "./admin/dashboard/produk.svg",
     changeAmount: "10",
     changePercentage: "30%",
@@ -31,7 +35,7 @@ export default function DashboardStats() {
 
   const articles = {
     title: "Total Artikel Diunggah",
-    currentAmount: "1200",
+    currentAmount: data.stats.articles,
     iconUrl: "./admin/dashboard/artikel.svg",
     changeAmount: "5",
     changePercentage: "0.5%",
@@ -42,7 +46,7 @@ export default function DashboardStats() {
   const renderStats = (data) => (
     <div className="flex overflow-hidden flex-col px-6 py-2 rounded-xl bg-neutral-5 w-full h-min flex-grow">
       <p className="text-sm leading-loose text-neutral-2">{data.title}</p>
-      <div className="flex gap-7 justify-between items-center mt-2 w-full">
+      <div className="flex gap-4 justify-between items-center mt-2 w-full">
         <p className="text-2xl font-bold leading-none text-primary-8 text-nowrap">
           {data.currentAmount}
         </p>

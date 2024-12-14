@@ -1,12 +1,8 @@
-const categoryData = [
-  { id: 1, category: "Ikan", productCount: 30 },
-  { id: 2, category: "Produk Olahan", productCount: 20 },
-  { id: 3, category: "Udang", productCount: 15 },
-  { id: 4, category: "Kerang", productCount: 10 },
-  { id: 5, category: "Ikan Hias", productCount: 5 },
-];
-
+import useDashboardStore from "../../../store/useDashboardStore";
 export default function CategoryTable() {
+  const { data } = useDashboardStore();
+  const categoryData = data.categories;
+
   return (
     <div className="flex overflow-hidden flex-col px-6 py-4 rounded-xl bg-neutral-5 max-w-[517px] max-md:px-5">
       <p className="text-sm font-semibold leading-loose text-neutral-1 max-md:max-w-full">

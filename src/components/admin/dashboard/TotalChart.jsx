@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import useDashboardStore from "../../../store/useDashboardStore";
 
 ChartJS.register(
   CategoryScale,
@@ -23,6 +24,7 @@ ChartJS.register(
 );
 
 const TotalChart = () => {
+  const { data } = useDashboardStore();
   const options = {
     responsive: true,
     plugins: {
@@ -32,27 +34,16 @@ const TotalChart = () => {
     },
   };
 
-  const labels = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const data = {
+  const labels = data.chartData.total.labels;
+  const arrayData = data.chartData.total.data;
+
+  const dataChart = {
     labels,
     datasets: [
       {
         fill: true,
         label: "Total Transaksi",
-        data: [450, 520, 610, 580, 650, 720, 690, 550, 720, 500, 620, 600],
+        data: arrayData,
         borderColor: "#1F92C5",
         backgroundColor: "rgba(31, 146, 197, 0.5)",
       },
@@ -68,7 +59,7 @@ const TotalChart = () => {
       <div className="flex flex-row items-center justify-center w-full">
         {/* Chart */}
         <div className="h-full w-full">
-          <Line data={data} options={options} />
+          <Line data={dataChart} options={options} />
         </div>
       </div>
     </div>

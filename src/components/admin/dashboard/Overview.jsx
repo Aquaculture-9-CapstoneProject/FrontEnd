@@ -1,16 +1,20 @@
+import useDashboardStore from "../../../store/useDashboardStore";
+
 export default function Overview() {
+  const { data } = useDashboardStore();
+
   const processedOrders = {
-    title: "Pesanan Diproses",
-    currentAmount: "21 pesanan",
+    title: "Pesanan Dikirim",
+    currentAmount: data.overview.shipped,
     iconUrl: "./admin/dashboard/processed.svg",
-    status: "Perlu dikirim",
+    status: "sedang dalam perjalanan",
   };
 
   const completedOrders = {
     title: "Pesanan Selesai",
-    currentAmount: "40 pesanan",
+    currentAmount: data.overview.completed,
     iconUrl: "./admin/dashboard/completed.svg",
-    status: "Telah diterima oleh pembeli",
+    status: "telah diterima oleh pembeli",
   };
 
   const renderStats = (data) => (
