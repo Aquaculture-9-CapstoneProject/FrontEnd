@@ -1,44 +1,24 @@
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { useEffect, useState } from "react";
-import { transactionStatus } from "../../../services/adminServices";
+import useDashboardStore from "../../../store/useDashboardStore";
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const StatusChartt = () => {
-  const [chartData, setChartData] = useState({
-    labels: ["Berhasil", "Gagal"],
+  const { data } = useDashboardStore();
+  const dataArray = data.chartData.status.data;
+
+  const dataChart = {
+    // labels: ["Berhasil", "Gagal"],
     datasets: [
       {
         label: "Status Transaksi",
-        data: [0, 0],
+        data: dataArray,
         backgroundColor: ["#1F92C5", "#E11D48"],
         hoverOffset: 4,
       },
     ],
-  });
-
-  useEffect(() => {
-    const fetchTransactionStatus = async () => {
-      try {
-        const response = await transactionStatus();
-        console.log("Transaction status:", response);
-
-        setChartData((prevData) => ({
-          ...prevData,
-          datasets: [
-            {
-              ...prevData.datasets[0],
-              data: [response.jumlahBerhasil, response.jumlahGagal],
-            },
-          ],
-        }));
-      } catch (error) {
-        console.error("Error fetching transaction status:", error);
-      }
-    };
-
-    fetchTransactionStatus();
-  }, []);
+  };
 
   return (
     <div className="flex overflow-hidden flex-col justify-center px-5 pt-2 pb-4 rounded-xl bg-neutral-5 w-full">
@@ -48,7 +28,7 @@ const StatusChartt = () => {
       <div className="flex flex-row items-center justify-center mt-5 w-full">
         {/* Chart */}
         <div className="h-52 w-52">
-          <Doughnut data={chartData} />
+          <Doughnut data={dataChart} />
         </div>
 
         {/* Labels */}
