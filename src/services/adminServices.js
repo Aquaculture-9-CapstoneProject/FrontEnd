@@ -134,3 +134,17 @@ export const topCategories = async () => {
     throw errorMessage;
   }
 };
+
+export const getAllProduct = async (page) => {
+  try {
+    const response = await apiClient.get(`/admin/products/page/${page}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal mengambil artikel.";
+    console.error("Error fetching articles:", errorMessage);
+    throw errorMessage;
+  }
+};
