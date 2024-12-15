@@ -55,14 +55,14 @@ export default function OrderTableBody({ orders }) {
               {formatCurrency(order.produk.reduce((acc, p) => acc + p.nominal, 0))}
             </td>
             <td className="text-neutral-2 text-xs border-b border-neutral-4 sm:max-w-[100px] md:max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span
+            <span
                 className={`badge px-2 ${
-                  order.status === "DIKIRIM"
+                  order.status !== "SELESAI"
                     ? "bg-neutral-5 border border-secondary-5 text-secondary-5 text-[10px]"
                     : "text-neutral-1 text-[10px] bg-neutral-5 border border-neutral-5"
                 }`}
               >
-                {order.status}
+                {order.status || "DIKIRIM"}
               </span>
             </td>
           </tr>
