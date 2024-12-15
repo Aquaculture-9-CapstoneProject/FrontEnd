@@ -1,4 +1,5 @@
 import apiClient from "./apiClient";
+import apiForm from "./apiForm";
 
 // Fungsi untuk mengambil total pendapatan bulan ini
 export const totalIncome = async () => {
@@ -160,5 +161,20 @@ export const deleteProduct = async (id) => {
       "Gagal menghapus produk.";
     console.error("Error deleting product:", errorMessage);
     throw errorMessage;
+  }
+};
+
+export const addProduct = async (formData) => {
+  try {
+    const response = await apiForm.post("/admin/products", formData);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error("Error: ", error.response.data);
+      alert(`Gagal menambahkan produk: ${error.response.data.message}`);
+    } else {
+      console.error("Request Error: ", error.message);
+    }
   }
 };

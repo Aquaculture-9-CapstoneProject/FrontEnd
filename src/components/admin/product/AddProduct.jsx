@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { addProduct } from "../../../services/adminServices";
+import { showToast } from "../../../utils/toastUtils";
 
 export default function AddProduct({ isOpen, onClose }) {
   const {
@@ -9,18 +11,48 @@ export default function AddProduct({ isOpen, onClose }) {
     reset,
   } = useForm();
   const [imagePreview, setImagePreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   if (!isOpen) return null;
 
-  const onSubmit = (data) => {
-    console.log({ ...data, image: imagePreview });
-    reset();
-    setImagePreview(null);
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    const formData = new FormData();
+
+    // Menambahkan data ke FormData
+    formData.append("gambar", imageFile);
+    formData.append("nama", data.productName);
+    formData.append("deskripsi", data.description);
+    formData.append("keunggulan", data.advantages);
+    formData.append("harga", data.price);
+    formData.append("variasi", data.variation);
+    formData.append("kategori", data.category);
+    formData.append("kota_asal", "jakarta");
+    formData.append("stok", data.stock);
+    formData.append("status", "anjay");
+
+    try {
+      await addProduct(formData);
+      setIsLoading(false);
+      reset();
+      setImagePreview(null);
+      setImageFile(null);
+      onClose();
+      showToast("Produk berhasil ditambahkan.");
+    } catch (error) {
+      if (error.response) {
+        console.error("Error: ", error.response.data);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
+      setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
@@ -32,8 +64,9 @@ export default function AddProduct({ isOpen, onClose }) {
     }
   };
 
-  const handleCancle = () => {
+  const handleCancel = () => {
     setImagePreview(null);
+    setImageFile(null);
     reset();
     onClose();
   };
@@ -69,6 +102,9 @@ export default function AddProduct({ isOpen, onClose }) {
               <input
                 type="file"
                 accept="image/*"
+                {...register("image", {
+                  required: "Gambar produk harus diunggah.",
+                })}
                 className="hidden"
                 id="imageUpload"
                 onChange={handleImageUpload}
@@ -79,8 +115,14 @@ export default function AddProduct({ isOpen, onClose }) {
               >
                 Upload Image
               </label>
+              {errors.image && (
+                <p className="text-xs text-error-3 mt-1">
+                  {errors.image.message}
+                </p>
+              )}
             </div>
 
+            {/* Nama Produk */}
             <div className="mb-4">
               <label className="text-xs font-semibold text-neutral-1 mb-2 block">
                 Nama Produk
@@ -100,6 +142,7 @@ export default function AddProduct({ isOpen, onClose }) {
               )}
             </div>
 
+            {/* Harga, Stok, Variasi, Kategori */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="text-xs font-semibold text-neutral-1 mb-2 block">
@@ -178,6 +221,7 @@ export default function AddProduct({ isOpen, onClose }) {
               </div>
             </div>
 
+            {/* Deskripsi dan Keunggulan */}
             <div className="mb-4">
               <label className="text-xs font-semibold text-neutral-1 mb-2 block">
                 Deskripsi
@@ -195,6 +239,7 @@ export default function AddProduct({ isOpen, onClose }) {
                 </p>
               )}
             </div>
+
             <div className="mb-4">
               <label className="text-xs font-semibold text-neutral-1 mb-2 block">
                 Keunggulan Produk
@@ -216,7 +261,7 @@ export default function AddProduct({ isOpen, onClose }) {
             <div className="flex justify-end gap-4">
               <button
                 type="button"
-                onClick={handleCancle}
+                onClick={handleCancel}
                 className="bg-neutral-5 border-2 border-neutral-4 text-sm text-neutral-1 font-semibold rounded-lg py-2 px-4 hover:bg-neutral-4 transition"
               >
                 Batal
@@ -224,8 +269,9 @@ export default function AddProduct({ isOpen, onClose }) {
               <button
                 type="submit"
                 className="bg-primary-5 text-sm text-neutral-5 font-semibold rounded-lg py-2 px-4 hover:bg-primary-4 transition"
+                disabled={isLoading}
               >
-                Tambah
+                {isLoading ? "Loading..." : "Tambah"}
               </button>
             </div>
           </form>
