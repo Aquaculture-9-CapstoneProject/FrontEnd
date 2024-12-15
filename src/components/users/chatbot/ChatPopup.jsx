@@ -7,6 +7,11 @@ export default function ChatPopup({ onClose, isOpen }) {
   const [pendingMessages, setPendingMessages] = useState([]);
   const { messages, sendMessage, isLoading } = useChatStore();
 
+  const defaultMessages = [
+    "Hai! Selamat datang di BlueBay",
+    "Saya siap membantu Anda. Ada yang bisa saya bantu hari ini?",
+  ];
+
   const handleSend = async () => {
     if (inputValue.trim()) {
       // Tambahkan input user ke messages
@@ -50,6 +55,18 @@ export default function ChatPopup({ onClose, isOpen }) {
 
         {/* Chat Content */}
         <div className="flex-grow overflow-y-auto">
+          <div className="chat chat-start">
+            {defaultMessages.map((message, index) => (
+              <div
+                key={index}
+                className={`chat-bubble bg-primary-4 text-neutral-5 font-normal text-sm ${
+                  index !== defaultMessages.length - 1 ? "mb-2" : ""
+                }`}
+              >
+                <p>{message}</p>
+              </div>
+            ))}
+          </div>
           {[...messages, ...pendingMessages].map((msg, index) => (
             <div
               key={index}
@@ -80,6 +97,11 @@ export default function ChatPopup({ onClose, isOpen }) {
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSend();
+              }
+            }}
             placeholder="Masukkan pertanyaan"
             className="w-full input input-bordered border-neutral-3 rounded-lg pr-10"
           />
