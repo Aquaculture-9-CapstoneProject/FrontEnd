@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { deleteProduct, getAllProduct } from "../services/adminServices";
+import { showToast } from "../utils/toastUtils";
 
 const useAdminProductStore = create((set, get) => ({
   products: [],
@@ -8,6 +9,7 @@ const useAdminProductStore = create((set, get) => ({
   totalItems: 0,
   isLoading: false,
   error: null,
+  loadingDelete: false,
 
   fetchProducts: async (page = 1) => {
     set({ isLoading: true, error: null });
@@ -27,6 +29,7 @@ const useAdminProductStore = create((set, get) => ({
   },
 
   deleteProductById: async (id) => {
+    set({ loadingDelete: id });
     try {
       await deleteProduct(id);
       const updatedProducts = get().products.filter(
@@ -35,6 +38,9 @@ const useAdminProductStore = create((set, get) => ({
       set({ products: updatedProducts });
     } catch (error) {
       set({ error: error.message });
+    } finally {
+      set({ loadingDelete: null });
+      showToast("Produk berhasil dihapus");
     }
   },
 
