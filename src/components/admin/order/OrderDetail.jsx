@@ -1,4 +1,5 @@
 import { formatCurrency } from "../../../utils/currency";
+import { formatDate } from "../../../utils/formatDate";
 
 export default function OrderDetail({ isOpen, onClose, order }) {
   if (!isOpen || !order) return null;
@@ -33,7 +34,7 @@ export default function OrderDetail({ isOpen, onClose, order }) {
           {/* Tanggal dan Waktu Pemesanan */}
           <div className="flex justify-between text-sm text-neutral-2">
             <span className="font-semibold text-neutral-1">Tanggal dan Waktu Pemesanan</span>
-            <span>{order.tanggaldanwaktu}</span>
+            <span>{formatDate(order.tanggaldanwaktu)}</span>
           </div>
 
           {/* Produk */}

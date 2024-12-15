@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import OrderDetail from "./OrderDetail";
 import { formatCurrency } from "../../../utils/currency";
+import { formatDate } from "../../../utils/formatDate";
 
 export default function OrderTableBody({ orders }) {
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -45,7 +46,7 @@ export default function OrderTableBody({ orders }) {
               )}
             </td>
             <td className="text-neutral-2 text-xs border-b border-neutral-4">
-              {order.tanggaldanwaktu}
+              {formatDate(order.tanggaldanwaktu)}
             </td>
             <td className="text-neutral-2 text-xs border-b border-neutral-4">
               {order.alamat}
