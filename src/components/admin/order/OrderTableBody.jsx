@@ -24,26 +24,26 @@ export default function OrderTableBody({ orders }) {
           </td>
         </tr>
       ) : (
-      orders.map((order, index) => (
-        <tr key={index}>
+      orders.map((order) => (
+        <tr key={order.id}>
           <td
             className="text-secondary-5 text-xs border-b border-neutral-4 cursor-pointer hover:underline"
             onClick={() => handleOpenModal(order)}
           >
-            {order.id}
+            {order.order_id}
           </td>
           <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.userName}
+            {order.namapengguna}
           </td>
           <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.productName} <br />
+            {order.produk} <br />
             <span className="text-neutral-3">+2 lainnya</span>
           </td>
           <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.date}
+            {order.tanggaldanwaktu}
           </td>
           <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.address}
+            {order.alamat}
           </td>
           <td className="text-neutral-2 text-xs border-b border-neutral-4">
             {order.nominal}
@@ -51,7 +51,7 @@ export default function OrderTableBody({ orders }) {
           <td className="text-neutral-2 text-xs border-b border-neutral-4 sm:max-w-[100px] md:max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
             <span
               className={`badge px-2 ${
-                order.status === "Dikirim"
+                order.status === "DIKIRIM"
                   ? "bg-neutral-5 border border-secondary-5 text-secondary-5 text-[10px]"
                   : "text-neutral-1 text-[10px]"
               }`}
