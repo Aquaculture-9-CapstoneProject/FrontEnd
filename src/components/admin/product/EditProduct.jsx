@@ -36,7 +36,6 @@ export default function EditProduct({ isOpen, onClose, product }) {
   };
 
   const handleSave = () => {
-    // Pastikan advantages diubah ke array
     const updatedData = {
       ...formData,
       advantages: formData.advantages.split("\n"),
@@ -48,7 +47,7 @@ export default function EditProduct({ isOpen, onClose, product }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className={`modal ${isOpen ? "modal-open" : ""}`}>
       <div className="bg-white rounded-lg shadow-lg w-[600px] h-[400px] md:h-[550px] max-w-full mx-4 md:mx-6 overflow-y-auto">
         <div className="p-6">
           <h2 className="text-xl font-semibold text-neutral-1 mb-2">
@@ -60,7 +59,7 @@ export default function EditProduct({ isOpen, onClose, product }) {
               <img
                 src={formData.image}
                 alt={formData.productName}
-                className="w-full rounded-lg object-cover"
+                className="rounded-lg w-full h-48 object-cover mb-6"
               />
             </div>
             <div className="mb-4">
@@ -156,13 +155,19 @@ export default function EditProduct({ isOpen, onClose, product }) {
               ></textarea>
             </div>
           </div>
-          <div className="flex justify-end gap-4">
-            <button onClick={onClose} className="btn btn-secondary">
+          <div className="modal-action">
+            <button
+              onClick={onClose}
+              className="bg-neutral-5 border-2 border-neutral-4 text-sm text-neutral-1 font-semibold rounded-lg py-2 px-4 hover:bg-neutral-4 transition"
+            >
               Batal
             </button>
-            <button onClick={handleSave} className="btn btn-primary">
+            <button
+              className="bg-primary-5 text-sm text-neutral-5 font-semibold rounded-lg py-2 px-4 hover:bg-primary-4 transition"
+              onClick={() => handleSave()} // Simpan data
+            >
               Simpan
-            </button>
+            </button>{" "}
           </div>
         </div>
       </div>
