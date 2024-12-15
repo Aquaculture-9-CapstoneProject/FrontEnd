@@ -274,7 +274,11 @@ export default function AddProduct({ isOpen, onClose }) {
                 className="bg-primary-5 text-sm text-neutral-5 font-semibold rounded-lg py-2 px-4 hover:bg-primary-4 transition"
                 disabled={isLoading}
               >
-                {isLoading ? "Loading..." : "Tambah"}
+                {isLoading ? (
+                  <span className="loading loading-spinner loading-xs"></span>
+                ) : (
+                  "Tambah"
+                )}
               </button>
             </div>
           </form>
