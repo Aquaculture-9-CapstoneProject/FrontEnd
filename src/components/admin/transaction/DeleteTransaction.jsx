@@ -1,12 +1,18 @@
 import React from "react";
 import useTransactionStore from "../../../store/useTransactionStore";
+import { showToast } from "../../../utils/toastUtils";
 
 const DeleteTransaction = ({ transaction, onClose }) => {
   const { deleteTransaction } = useTransactionStore();
 
   const handleDelete = async () => {
-    await deleteTransaction(transaction);
-    onClose();
+    try {
+      await deleteTransaction(transaction); // Hapus transaksi
+      showToast("Berhasil menghapus transaksi"); // Tampilkan notifikasi
+      onClose(); // Tutup modal
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+    }
   };
 
   return (

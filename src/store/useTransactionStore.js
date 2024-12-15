@@ -9,6 +9,7 @@ const useTransactionStore = create((set) => ({
   totalPages: 1,
   totalItems: 0,
   limit: 10,
+  deletingTransactionId: null,
 
   fetchTransactions: async (page = 1, limit = 10) => {
     set({ isLoading: true, error: null });
@@ -32,17 +33,16 @@ const useTransactionStore = create((set) => ({
   },
 
   deleteTransaction: async (id) => {
-    set({ isLoading: true, error: null });
+    set({ deletingTransactionId: id, error: null });
     try {
-      console.log('ID to delete:', id);
       await apiClient.delete(`/admin/hapustransaksi/${id}`);
       set((state) => ({
         transactions: state.transactions.filter((t) => t.id !== id),
-        isLoading: false,
+        deletingTransactionId: null,
       }));
     } catch (error) {
       console.error('Error deleting transaction:', error);
-      set({ error: error.message, isLoading: false });
+      set({ error: error.message, deletingTransactionId: null });
     }
   },
 
