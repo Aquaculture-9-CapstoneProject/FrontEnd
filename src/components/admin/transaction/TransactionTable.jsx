@@ -4,29 +4,24 @@ import TransactionTableBody from "./TransactionTableBody";
 import DeleteTransaction from "./DeleteTransaction";
 
 export default function TransactionTable({ transactions }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedTransactionId, setSelectedTransactionId] = useState(null);
 
-  const openModal = (transaction) => {
-    setSelectedTransaction(transaction);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedTransaction(null);
+  const openDeleteModal = (id) => {
+    setSelectedTransactionId(id);
+    setIsDeleteModalOpen(true);
   };
 
   return (
     <div className="overflow-x-auto">
       <table className="table w-full">
         <TransactionTableHeader />
-        <TransactionTableBody transactions={transactions} openModal={openModal} />
+        <TransactionTableBody transactions={transactions} onDeleteClick={openDeleteModal} />
       </table>
 
       {/* Modal */}
-      {isModalOpen && (
-        <DeleteTransaction transaction={selectedTransaction} onClose={closeModal} />
+      {isDeleteModalOpen && (
+        <DeleteTransaction transaction={selectedTransactionId} onClose={() => setIsDeleteModalOpen(false)} />
       )}
     </div>
   );

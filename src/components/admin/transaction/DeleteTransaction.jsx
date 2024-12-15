@@ -1,6 +1,20 @@
 import React from "react";
+import useTransactionStore from "../../../store/useTransactionStore";
+import { showToast } from "../../../utils/toastUtils";
 
 const DeleteTransaction = ({ transaction, onClose }) => {
+  const { deleteTransaction } = useTransactionStore();
+
+  const handleDelete = async () => {
+    try {
+      onClose(); // Tutup modal
+      await deleteTransaction(transaction); // Hapus transaksi
+      showToast("Berhasil menghapus transaksi"); // Tampilkan notifikasi
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+    }
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-neutral-1 bg-opacity-50 px-4">
       <div className="bg-neutral-5 max-w-[487px] w-full sm:w-[360px] py-6 px-8 sm:px-6 rounded-lg shadow-lg">
@@ -35,7 +49,9 @@ const DeleteTransaction = ({ transaction, onClose }) => {
           >
             Batal
           </button>
-          <button className="btn bg-primary-5 w-[103px] sm:w-[96px] h-[34px] sm:h-[30px] text-neutral-5 font-semibold text-xs sm:text-sm">
+          <button 
+            onClick={handleDelete}
+            className="btn bg-primary-5 w-[103px] sm:w-[96px] h-[34px] sm:h-[30px] text-neutral-5 font-semibold text-xs sm:text-sm">
             Hapus
           </button>
         </div>

@@ -34,7 +34,9 @@ export default function Article() {
 
   return (
     <div className="bg-[#E4EDF1] h-full">
-      <ArticleHeader />
+      <div className="mb-28">
+        <ArticleHeader />
+      </div>      
       <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md">
       <FilterSearch onAddArticleClick={() => setIsAddArticleModalOpen(true)} />
       <AddArticle

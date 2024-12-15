@@ -33,7 +33,9 @@ export default function Order() {
 
   return (
     <div className="bg-[#E4EDF1] h-full">
-      <OrderHeader />
+      <div className="mb-28">
+        <OrderHeader />
+      </div>
       <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md">
         <FilterSearch />
         <OrderTable orders={currentOrders} />

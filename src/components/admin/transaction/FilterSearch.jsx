@@ -1,4 +1,12 @@
+import useTransactionStore from "../../../store/useTransactionStore";
+
 export default function FilterSearch() {
+  const { fetchTransactionsByStatus } = useTransactionStore();
+
+  const handleFilterChange = (status) => {
+    fetchTransactionsByStatus(status);
+  };
+
   return (
     <div className="flex justify-between items-center mb-4 flex-wrap sm:flex-nowrap">
       <h2 className="text-sm sm:text-base font-semibold text-neutral-1 mb-2 sm:mb-0">
@@ -47,13 +55,10 @@ export default function FilterSearch() {
           </summary>
           <ul className="mt-2 menu dropdown-content bg-neutral-5 text-xs sm:text-sm rounded-box z-[1] w-40 p-2 shadow">
             <li>
-              <a>Berhasil</a>
+              <button onClick={() => handleFilterChange("PAID")}>Paid</button>
             </li>
             <li>
-              <a>Gagal</a>
-            </li>
-            <li>
-              <a>Pending</a>
+              <button onClick={() => handleFilterChange("EXPIRED")}>Expired</button>
             </li>
           </ul>
         </details>
