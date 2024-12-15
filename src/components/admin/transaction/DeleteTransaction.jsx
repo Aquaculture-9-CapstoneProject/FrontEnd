@@ -7,9 +7,9 @@ const DeleteTransaction = ({ transaction, onClose }) => {
 
   const handleDelete = async () => {
     try {
+      onClose(); // Tutup modal
       await deleteTransaction(transaction); // Hapus transaksi
       showToast("Berhasil menghapus transaksi"); // Tampilkan notifikasi
-      onClose(); // Tutup modal
     } catch (error) {
       console.error("Error deleting transaction:", error);
     }
