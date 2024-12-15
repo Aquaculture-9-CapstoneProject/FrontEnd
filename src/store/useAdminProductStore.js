@@ -57,6 +57,12 @@ const useAdminProductStore = create((set, get) => ({
   getProductDetails: (id) => {
     return (state) => state.products.find((product) => product.ID === id);
   },
+
+  addProductToStore: (newProduct) => {
+    set((state) => ({
+      products: [...state.products, newProduct],
+    }));
+  },
 }));
 
 export default useAdminProductStore;

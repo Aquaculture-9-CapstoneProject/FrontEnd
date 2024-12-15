@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { addProduct } from "../../../services/adminServices";
 import { showToast } from "../../../utils/toastUtils";
+import useAdminProductStore from "../../../store/useAdminProductStore";
 
 export default function AddProduct({ isOpen, onClose }) {
+  const { addProductToStore } = useAdminProductStore();
   const {
     register,
     handleSubmit,
@@ -33,7 +35,8 @@ export default function AddProduct({ isOpen, onClose }) {
     formData.append("status", "anjay");
 
     try {
-      await addProduct(formData);
+      const response = await addProduct(formData);
+      addProductToStore(response.data);
       setIsLoading(false);
       reset();
       setImagePreview(null);
