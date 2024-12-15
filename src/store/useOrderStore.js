@@ -30,6 +30,20 @@ const useOrderStore = create((set) => ({
           set({ error: error.message, isLoading: false });
         }
       },
+    
+    fetchOrdersByStatus: async (status) => {
+        set({ isLoading: true, error: null });
+        try {
+          const response = await apiClient.get(`/admin/payment?status_barang=${status}`);
+          set({
+            orders: response.data.data || [],
+            isLoading: false,
+          });
+        } catch (error) {
+          console.error('Error fetching orders by status:', error);
+          set({ error: error.message, isLoading: false });
+        }
+      },
     }));
 
 export default useOrderStore;
