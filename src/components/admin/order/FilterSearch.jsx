@@ -1,6 +1,12 @@
-import React from "react";
+import useOrderStore from "../../../store/useOrderStore";
 
 export default function FilterSearch() {
+  const { fetchOrdersByStatus } = useOrderStore();
+
+  const handleFilterChange = (status) => {
+    fetchOrdersByStatus(status);
+  };
+
   return (
     <div className="flex justify-between items-center mb-4 flex-wrap sm:flex-nowrap">
       <h2 className="text-sm sm:text-base font-semibold text-neutral-1 mb-2 sm:mb-0">
@@ -49,10 +55,10 @@ export default function FilterSearch() {
           </summary>
           <ul className="mt-2 menu dropdown-content bg-neutral-5 text-xs sm:text-sm rounded-box z-[1] w-40 p-2 shadow">
             <li>
-              <a>Dikirim</a>
+              <button onClick={() => handleFilterChange("DIKIRIM")}>Dikirim</button>
             </li>
             <li>
-              <a>Selesai</a>
+              <button onClick={() => handleFilterChange("SELESAI")}>Selesai</button>
             </li>
           </ul>
         </details>

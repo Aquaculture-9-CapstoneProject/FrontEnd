@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import OrderDetail from "./OrderDetail";
+import { formatCurrency } from "../../../utils/currency";
+import { formatDate } from "../../../utils/formatDate";
 
 export default function OrderTableBody({ orders }) {
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -24,43 +26,48 @@ export default function OrderTableBody({ orders }) {
           </td>
         </tr>
       ) : (
-      orders.map((order, index) => (
-        <tr key={index}>
-          <td
-            className="text-secondary-5 text-xs border-b border-neutral-4 cursor-pointer hover:underline"
-            onClick={() => handleOpenModal(order)}
-          >
-            {order.id}
-          </td>
-          <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.userName}
-          </td>
-          <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.productName} <br />
-            <span className="text-neutral-3">+2 lainnya</span>
-          </td>
-          <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.date}
-          </td>
-          <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.address}
-          </td>
-          <td className="text-neutral-2 text-xs border-b border-neutral-4">
-            {order.nominal}
-          </td>
-          <td className="text-neutral-2 text-xs border-b border-neutral-4 sm:max-w-[100px] md:max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-            <span
-              className={`badge px-2 ${
-                order.status === "Dikirim"
-                  ? "bg-neutral-5 border border-secondary-5 text-secondary-5 text-[10px]"
-                  : "text-neutral-1 text-[10px]"
-              }`}
+        orders.map((order) => (
+          <tr key={order.order_id}>
+            <td
+              className="text-secondary-5 text-xs border-b border-neutral-4 cursor-pointer hover:underline"
+              onClick={() => handleOpenModal(order)}
             >
-              {order.status}
-            </span>
-          </td>
-        </tr>
-      )))}
+              {order.order_id}
+            </td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4">
+              {order.namapengguna}
+            </td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4">
+              {order.produk[0]?.nama} <br />
+              {order.produk.length > 1 && (
+                <span className="text-neutral-3">
+                  +{order.produk.length - 1} lainnya
+                </span>
+              )}
+            </td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4">
+              {formatDate(order.tanggaldanwaktu)}
+            </td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4">
+              {order.alamat}
+            </td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4">
+              {formatCurrency(order.produk.reduce((acc, p) => acc + p.nominal, 0))}
+            </td>
+            <td className="text-neutral-2 text-xs border-b border-neutral-4 sm:max-w-[100px] md:max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+            <span
+                className={`badge px-2 ${
+                  order.status !== "SELESAI"
+                    ? "bg-neutral-5 border border-secondary-5 text-secondary-5 text-[10px]"
+                    : "text-neutral-1 text-[10px] bg-neutral-5 border border-neutral-5"
+                }`}
+              >
+                {order.status || "DIKIRIM"}
+              </span>
+            </td>
+          </tr>
+        ))
+      )}
 
       {/* Render Modal OrderDetail */}
       <OrderDetail
