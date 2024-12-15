@@ -63,6 +63,14 @@ const useAdminProductStore = create((set, get) => ({
       products: [...state.products, newProduct],
     }));
   },
+
+  updateProductInStore: (updatedProduct) => {
+    set((state) => ({
+      products: state.products.map((product) =>
+        product.ID === updatedProduct.ID ? updatedProduct : product,
+      ),
+    }));
+  },
 }));
 
 export default useAdminProductStore;

@@ -178,3 +178,18 @@ export const addProduct = async (formData) => {
     }
   }
 };
+
+export const updateProduct = async (id, formData) => {
+  try {
+    const response = await apiForm.put(`/admin/products/${id}`, formData);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error("Error: ", error.response.data);
+      alert(`Gagal mengupdate produk: ${error.response.data.message}`);
+    } else {
+      console.error("Request Error: ", error.message);
+    }
+  }
+};
