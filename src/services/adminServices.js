@@ -150,6 +150,22 @@ export const getAllProduct = async (page) => {
   }
 };
 
+export const filterProduct = async (categories) => {
+  try {
+    const response = await apiClient.get(
+      `/admin/products?kategori=${categories}`,
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal mengambil artikel.";
+    console.error("Error fetching articles:", errorMessage);
+    throw errorMessage;
+  }
+};
+
 export const deleteProduct = async (id) => {
   try {
     const response = await apiClient.delete(`/admin/products/${id}`);

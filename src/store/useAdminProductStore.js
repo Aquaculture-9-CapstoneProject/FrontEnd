@@ -1,5 +1,9 @@
 import { create } from "zustand";
-import { deleteProduct, getAllProduct } from "../services/adminServices";
+import {
+  deleteProduct,
+  filterProduct,
+  getAllProduct,
+} from "../services/adminServices";
 import { showToast } from "../utils/toastUtils";
 
 const useAdminProductStore = create((set, get) => ({
@@ -70,6 +74,23 @@ const useAdminProductStore = create((set, get) => ({
         product.ID === updatedProduct.ID ? updatedProduct : product,
       ),
     }));
+  },
+
+  filterProductsByCategory: async (category) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await filterProduct(category);
+      const { data, pagination } = response;
+      set({
+        products: data,
+        currentPage: pagination.CurrentPage,
+        totalPages: pagination.TotalPages,
+        totalItems: pagination.TotalItems,
+        isLoading: false,
+      });
+    } catch (error) {
+      set({ error: error.message, isLoading: false });
+    }
   },
 }));
 
