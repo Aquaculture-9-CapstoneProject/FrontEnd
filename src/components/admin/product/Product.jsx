@@ -52,7 +52,9 @@ export default function Product() {
           onClose={() => setIsAddProductModalOpen(false)}
         />
         {isLoading ? (
-          <p>Loading...</p>
+          <div className="flex justify-center items-center mt-4">
+            <span className="loading loading-spinner loading-lg text-primary-4"></span>
+          </div>
         ) : error ? (
           <p>Error: {error}</p>
         ) : (

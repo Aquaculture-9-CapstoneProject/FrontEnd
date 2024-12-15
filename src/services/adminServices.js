@@ -148,3 +148,17 @@ export const getAllProduct = async (page) => {
     throw errorMessage;
   }
 };
+
+export const deleteProduct = async (id) => {
+  try {
+    const response = await apiClient.delete(`/admin/products/${id}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal menghapus produk.";
+    console.error("Error deleting product:", errorMessage);
+    throw errorMessage;
+  }
+};

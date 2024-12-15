@@ -2,8 +2,10 @@ import { useState } from "react";
 import ProductDetail from "./ProductDetail";
 import DeleteProduct from "./DeleteProduct";
 import EditProduct from "./EditProduct";
+import useAdminProductStore from "../../../store/useAdminProductStore";
 
 export default function ProductTableBody({ products }) {
+  const { loadingDelete } = useAdminProductStore();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -20,8 +22,8 @@ export default function ProductTableBody({ products }) {
     setIsDetailModalOpen(false);
   };
 
-  const handleOpenDeleteModal = (product) => {
-    setProductToDelete(product);
+  const handleOpenDeleteModal = (id) => {
+    setProductToDelete(id);
     setIsDeleteModalOpen(true);
   };
 
@@ -33,7 +35,6 @@ export default function ProductTableBody({ products }) {
   const handleOpenEditModal = (product) => {
     setSelectedProduct(product);
     setIsEditModalOpen(true);
-    console.log("Selected Product:", product); // Debugging
   };
 
   const handleCloseEditModal = () => {
@@ -93,20 +94,27 @@ export default function ProductTableBody({ products }) {
                     />
                   </svg>{" "}
                 </button>
-                <button onClick={() => handleOpenDeleteModal(product)}>
-                  <svg
-                    width="12"
-                    height="16"
-                    viewBox="0 0 12 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+                {loadingDelete ? (
+                  <span className="loading loading-spinner loading-sm text-primary-4"></span>
+                ) : (
+                  <button
+                    onClick={() => handleOpenDeleteModal(product.ID)}
+                    disabled={loadingDelete}
                   >
-                    <path
-                      d="M0.999959 13.6833C0.999959 14.5999 1.74996 15.3499 2.66663 15.3499H9.33329C10.25 15.3499 11 14.5999 11 13.6833V5.34993C11 4.43326 10.25 3.68326 9.33329 3.68326H2.66663C1.74996 3.68326 0.999959 4.43326 0.999959 5.34993V13.6833ZM11 1.18326H8.91663L8.32496 0.591596C8.17496 0.441596 7.95829 0.34993 7.74163 0.34993H4.25829C4.04163 0.34993 3.82496 0.441596 3.67496 0.591596L3.08329 1.18326H0.999959C0.541626 1.18326 0.166626 1.55826 0.166626 2.0166C0.166626 2.47493 0.541626 2.84993 0.999959 2.84993H11C11.4583 2.84993 11.8333 2.47493 11.8333 2.0166C11.8333 1.55826 11.4583 1.18326 11 1.18326Z"
-                      fill="#BE123C"
-                    />
-                  </svg>{" "}
-                </button>
+                    <svg
+                      width="12"
+                      height="16"
+                      viewBox="0 0 12 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0.999959 13.6833C0.999959 14.5999 1.74996 15.3499 2.66663 15.3499H9.33329C10.25 15.3499 11 14.5999 11 13.6833V5.34993C11 4.43326 10.25 3.68326 9.33329 3.68326H2.66663C1.74996 3.68326 0.999959 4.43326 0.999959 5.34993V13.6833ZM11 1.18326H8.91663L8.32496 0.591596C8.17496 0.441596 7.95829 0.34993 7.74163 0.34993H4.25829C4.04163 0.34993 3.82496 0.441596 3.67496 0.591596L3.08329 1.18326H0.999959C0.541626 1.18326 0.166626 1.55826 0.166626 2.0166C0.166626 2.47493 0.541626 2.84993 0.999959 2.84993H11C11.4583 2.84993 11.8333 2.47493 11.8333 2.0166C11.8333 1.55826 11.4583 1.18326 11 1.18326Z"
+                        fill="#BE123C"
+                      />
+                    </svg>
+                  </button>
+                )}{" "}
               </div>
             </td>
           </tr>

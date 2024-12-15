@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { getAllProduct } from "../services/adminServices";
+import { deleteProduct, getAllProduct } from "../services/adminServices";
 
-const useAdminProductStore = create((set) => ({
+const useAdminProductStore = create((set, get) => ({
   products: [],
   currentPage: 1,
   totalPages: 1,
@@ -23,6 +23,18 @@ const useAdminProductStore = create((set) => ({
       });
     } catch (error) {
       set({ error: error.message, isLoading: false });
+    }
+  },
+
+  deleteProductById: async (id) => {
+    try {
+      await deleteProduct(id);
+      const updatedProducts = get().products.filter(
+        (product) => product.ID !== id,
+      );
+      set({ products: updatedProducts });
+    } catch (error) {
+      set({ error: error.message });
     }
   },
 
