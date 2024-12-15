@@ -164,6 +164,11 @@ export default function AddProduct({ isOpen, onClose }) {
                   <option value="">Pilih salah satu opsi</option>
                   <option value="Ikan">Ikan</option>
                   <option value="Udang">Udang</option>
+                  <option value="kerang">kerang</option>
+                  <option value="Ikan Hias">Ikan Hias</option>
+                  <option value="Produk Olahan">Produk Olahan</option>
+                  <option value="Benih">Benih</option>
+                  <option value="Lainnya">Lainnya</option>
                 </select>
                 {errors.category && (
                   <p className="text-xs text-error-3 mt-1">
