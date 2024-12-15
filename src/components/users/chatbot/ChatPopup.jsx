@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import useChatStore from "../../../store/useChatbotStore";
+import formatAIResponse from "../../../utils/formatAIResponse";
 
 export default function ChatPopup({ onClose }) {
+  const [inputValue, setInputValue] = useState("");
+  const [pendingMessages, setPendingMessages] = useState([]);
+  const { messages, sendMessage, isLoading } = useChatStore();
+
+  const handleSend = async () => {
+    if (inputValue.trim()) {
+      // Tambahkan input user ke messages
+      const userMessage = { sender: "user", text: inputValue };
+      setPendingMessages([...pendingMessages, userMessage]);
+      setInputValue("");
+
+      // Kirim pesan ke store chatbot
+      await sendMessage(inputValue);
+
+      // Hapus dari pending setelah dikirim
+      setPendingMessages((prev) =>
+        prev.filter((msg) => msg.text !== userMessage.text)
+      );
+    }
+  };
+
   return (
-    <div className="fixed bottom-20 right-6 max-w-[600px] h-[400px] bg-neutral-5 rounded-lg shadow-lg p-6 border border-neutral-3 z-50 flex flex-col">
+    <div className="fixed bottom-20 right-6 max-w-[600px] w-[500px] h-[400px] bg-neutral-5 rounded-lg shadow-lg p-6 border border-neutral-3 z-50 flex flex-col">
       {/* Header */}
       <div className="flex justify-between items-center mb-4 border-b pb-3">
         <h3 className="text-base font-semibold text-neutral-1 text-center flex-grow">
@@ -26,26 +49,43 @@ export default function ChatPopup({ onClose }) {
 
       {/* Chat Content */}
       <div className="flex-grow overflow-y-auto">
-        <div className="chat chat-start">
-          <div className="chat-bubble bg-primary-4 text-neutral-5 font-normal text-sm">
-            Hai! Selamat datang di BlueBay. Saya siap membantu Anda.
+        {[...messages, ...pendingMessages].map((msg, index) => (
+          <div
+            key={index}
+            className={`chat ${msg.sender === "ai" ? "chat-start" : "chat-end"}`}
+          >
+            <div
+              className={`chat-bubble ${
+                msg.sender === "ai"
+                  ? "bg-primary-4 text-neutral-5"
+                  : "bg-secondary-5 text-neutral-5"
+              } font-normal text-sm`}
+              dangerouslySetInnerHTML={{ __html: formatAIResponse(msg.text) }}
+            />
           </div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble bg-secondary-5 text-neutral-5 font-normal text-sm">
-            Hai! Selamat datang di BlueBay. Saya siap membantu Anda.
+        ))}
+        {isLoading && (
+          <div className="chat chat-start">
+            <div className="chat-bubble bg-primary-4 text-neutral-5 font-normal text-sm">
+              <span className="loading loading-dots loading-xs"></span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Input Field */}
       <div className="mt-4 relative">
         <input
           type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           placeholder="Masukkan pertanyaan"
           className="w-full input input-bordered border-neutral-3 rounded-lg pr-10"
         />
-        <button className="absolute top-1/2 right-3 transform -translate-y-1/2">
+        <button
+          onClick={handleSend}
+          className="absolute top-1/2 right-3 transform -translate-y-1/2"
+        >
           <svg
             width="20"
             height="18"
