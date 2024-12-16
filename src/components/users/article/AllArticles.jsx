@@ -10,12 +10,10 @@ export default function AllArticles() {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
-  // Fetch data saat halaman dimuat
   useEffect(() => {
     fetchAllArticles(currentPage);
   }, [currentPage, fetchAllArticles]);
 
-  // Navigasi antar halaman
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
     window.scrollTo(0, 0);
