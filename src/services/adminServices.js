@@ -253,3 +253,13 @@ export const deleteArticle = async (id) => {
     throw errorMessage;
   }
 };
+
+export const addArticle = async (formData) => {
+  try {
+    const response = await apiForm.post("/admin/artikel", formData);
+    return response.data;
+  } catch (error) {
+    console.error("Error: ", error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
