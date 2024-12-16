@@ -60,6 +60,12 @@ export default function EditProduct({ isOpen, onClose, product }) {
     formData.append("variasi", data.variation);
     formData.append("kategori", data.category);
     formData.append("stok", data.stock);
+    formData.append("kota_asal", "jakarta");
+    formData.append("status", "Status panen saat ini sedang baik");
+    formData.append(
+      "tips_penyimpanan",
+      "Simpan di suhu -18°C untuk menjaga kualitas hingga masa kedaluwarsa. Jika sudah dicairkan, segera olah untuk hasil terbaik.",
+    );
 
     try {
       const response = await updateProduct(product.ID, formData);
