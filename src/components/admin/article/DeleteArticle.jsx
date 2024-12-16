@@ -1,6 +1,18 @@
-import React from "react";
+import useAdminArticleStore from "../../../store/useAdminArticleStore";
 
-const DeleteArticle = ({ article, onClose }) => {
+const DeleteArticle = ({ articleId, onClose }) => {
+  console.log("DeleteArticle -> articleId", articleId);
+  const { deleteArticleById } = useAdminArticleStore();
+
+  const handleDelete = async () => {
+    try {
+      onClose();
+      await deleteArticleById(articleId);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-neutral-1 bg-opacity-50 px-4">
       <div className="bg-neutral-5 max-w-[487px] w-full sm:w-[360px] py-6 px-8 sm:px-6 rounded-lg shadow-lg">
@@ -24,7 +36,8 @@ const DeleteArticle = ({ article, onClose }) => {
           Hapus Artikel
         </h2>
         <p className="text-neutral-1 text-xs sm:text-sm text-center mb-4 leading-5">
-          Apakah Anda yakin ingin menghapus artikel ini? Tindakan ini tidak dapat dibatalkan.
+          Apakah Anda yakin ingin menghapus artikel ini? Tindakan ini tidak
+          dapat dibatalkan.
         </p>
 
         {/* Tombol */}
@@ -35,7 +48,10 @@ const DeleteArticle = ({ article, onClose }) => {
           >
             Batal
           </button>
-          <button className="btn bg-primary-5 w-[103px] sm:w-[96px] h-[34px] sm:h-[30px] text-neutral-5 font-semibold text-xs sm:text-sm">
+          <button
+            onClick={handleDelete}
+            className="btn bg-primary-5 w-[103px] sm:w-[96px] h-[34px] sm:h-[30px] text-neutral-5 font-semibold text-xs sm:text-sm"
+          >
             Hapus
           </button>
         </div>

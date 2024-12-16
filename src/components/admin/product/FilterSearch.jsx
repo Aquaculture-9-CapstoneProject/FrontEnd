@@ -22,7 +22,7 @@ export default function FilterSearch({ onAddProductClick }) {
     <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
       {/* Heading */}
       <h2 className="text-sm sm:text-base font-semibold text-neutral-1 mb-2 sm:mb-0">
-        Pesanan Bulan Ini
+        Data Produk
       </h2>
 
       {/* Filter, Search, and Buttons */}

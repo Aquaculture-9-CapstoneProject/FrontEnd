@@ -110,7 +110,7 @@ export default function OrderSummary() {
         <div className="flex flex-col gap-3 mt-4">
           <div className="flex justify-between gap-2 text-neutral-1 items-center">
             <p className="text-base">Metode Pembayaran</p>
-            <p className="text-base">Transfer Bank</p>
+            <p className="text-base">{payment.order.metode_pembayaran}</p>
           </div>
         </div>
 
