@@ -1,29 +1,24 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useArticleStore from "../../../store/useArticleStore";
 import ArticleThumbnail from "./ArticleThumbnail";
+import SkeletonTop3 from "./SkeletonTop3";
 
 const Top3 = () => {
   const navigate = useNavigate();
-  // Data dummy
-  const topArticles = [
-    {
-      id: 1,
-      title: "Sajian Udang Asam Manis Untuk Keluarga",
-      date: "27 Februari 2024",
-      image: "user/home/bg-article.png",
-    },
-    {
-      id: 2,
-      title: "Cara Memasak Mie Goreng Lezat",
-      date: "27 Februari 2024",
-      image: "user/home/bg-article.png",
-    },
-    {
-      id: 3,
-      title: "Tips Hidup Sehat dengan Oatmeal",
-      date: "27 Februari 2024",
-      image: "user/home/bg-article.png",
-    },
-  ];
+  const { topArticles, fetchTopArticles, isLoading, error } = useArticleStore();
+
+  useEffect(() => {
+    fetchTopArticles();
+  }, [fetchTopArticles]);
+
+  if (isLoading) {
+    return <SkeletonTop3 />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <section className="py-10 px-4 md:px-8">
@@ -34,12 +29,12 @@ const Top3 = () => {
           <h2 className="text-2xl font-semibold text-neutral-1 mb-5">
             Berita dan Artikel
           </h2>
-          <ArticleThumbnail
-            image="user/home/bg-article.png"
-            title="Sajian Udang Asam Manis Untuk Keluarga"
-            badgeText="Resep dan Kuliner"
-            cardSize="large"
-          />
+            <ArticleThumbnail
+              image="user/article/artikel-dan-berita.jpg"
+              title="Tips Memelihara Ikan Cupang"
+              badgeText="Panduan dan Tips"
+              cardSize="large"
+            />
         </div>
 
         {/* Kolom Kanan */}
@@ -50,23 +45,23 @@ const Top3 = () => {
           <div className="space-y-4">
             {topArticles.map((article) => (
               <div
-                key={article.id}
+                key={article.ID}
                 className="flex items-start gap-4 cursor-pointer transform transition-transform duration-200 ease-in-out hover:scale-105 active:scale-95"
-                onClick={() => navigate("/article-content")}
+                onClick={() => navigate(`/article-content/${article.ID}`)}
               >
                 {/* Gambar Artikel */}
                 <img
                   className="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg"
-                  src={article.image}
-                  alt={article.title}
+                  src={article.Gambar}
+                  alt={article.Judul}
                 />
                 {/* Konten Artikel */}
                 <div>
                   <div className="text-primary-5 text-xs">
-                    <h3>Resep dan Kuliner</h3>
+                    <h3>{article.Kategori}</h3>
                   </div>
                   <h4 className="text-sm md:text-base text-neutral-1 font-semibold">
-                    {article.title}
+                    {article.Judul}
                   </h4>
                   {/* Ikon Kalender dan Tanggal */}
                   <div className="flex items-center text-xs text-neutral-2 mt-2">
@@ -76,7 +71,11 @@ const Top3 = () => {
                         fill="#525252"
                       />
                     </svg>
-                    {article.date}
+                    {new Date(article.CreatedAt).toLocaleDateString("id-ID", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
                   </div>
                 </div>
               </div>

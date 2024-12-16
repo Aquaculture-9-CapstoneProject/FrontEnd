@@ -1,61 +1,22 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
+import useArticleStore from "../../../store/useArticleStore";
+import SkeletonArticleCard from "./SkeletonArticleCard";
 
 const LatestArticles = () => {
   const navigate = useNavigate();
+  const { latestArticles, fetchLatestArticles, isLoading, error } = useArticleStore();
 
-  const latestArticles = [
-    {
-      id: 1,
-      image: "user/home/bg-article.png",
-      title: "Sajian Udang Asam Manis Untuk Keluarga",
-      date: "27 Februari 2024",
-      badgeText: "Panduan dan Tips",
-    },
-    {
-      id: 2,
-      image: "user/home/bg-article.png",
-      title: "Cara Memasak Mie Goreng Lezat",
-      date: "27 Februari 2024",
-      badgeText: "Panduan dan Tips",
-    },
-    {
-      id: 3,
-      image: "user/home/bg-article.png",
-      title: "Tips Hidup Sehat dengan Oatmeal",
-      date: "27 Februari 2024",
-      badgeText: "Panduan dan Tips",
-    },
-    {
-      id: 4,
-      image: "user/home/bg-article.png",
-      title: "Sajian Udang Asam Manis Untuk Keluarga",
-      date: "27 Februari 2024",
-      badgeText: "Panduan dan Tips",
-    },
-    {
-      id: 5,
-      image: "user/home/bg-article.png",
-      title: "Cara Memasak Mie Goreng Lezat",
-      date: "27 Februari 2024",
-      badgeText: "Panduan dan Tips",
-    },
-    {
-      id: 6,
-      image: "user/home/bg-article.png",
-      title: "Tips Hidup Sehat dengan Oatmeal",
-      date: "27 Februari 2024",
-      badgeText: "Panduan dan Tips",
-    },
-  ];
+  useEffect(() => {
+    fetchLatestArticles();
+  }, [fetchLatestArticles]);
 
   return (
     <section className="py-10 px-4 md:px-8">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold text-neutral-1">
-          Artikel Terbaru
-        </h2>
+        <h2 className="text-2xl font-semibold text-neutral-1">Artikel Terbaru</h2>
         <div
           className="flex items-center gap-2 text-base cursor-pointer font-semibold text-primary-5 hover:underline"
           onClick={() => navigate("/article-latest")}
@@ -77,17 +38,32 @@ const LatestArticles = () => {
       </div>
 
       {/* Grid Articles */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {latestArticles.map((article) => (
-          <ArticleCard
-            key={article.id}
-            image={article.image}
-            title={article.title}
-            date={article.date}
-            badgeText={article.badgeText}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <SkeletonArticleCard key={index} />
+          ))}
+        </div>
+      ) : error ? (
+        <p className="text-red-500">Error: {error}</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {latestArticles.map((article) => (
+            <ArticleCard
+              key={article.ID}
+              id={article.ID}
+              image={article.Gambar}
+              title={article.Judul}
+              date={new Date(article.CreatedAt).toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+              badgeText={article.Kategori}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
