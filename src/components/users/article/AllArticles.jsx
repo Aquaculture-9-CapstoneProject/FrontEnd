@@ -50,6 +50,7 @@ export default function AllArticles() {
               : latestArticles.map((article) => (
                   <ArticleCard
                     key={article.ID}
+                    id={article.ID}
                     image={article.Gambar}
                     title={article.Judul}
                     date={new Date(article.CreatedAt).toLocaleDateString("id-ID", {
