@@ -18,7 +18,7 @@ export default function Navbar() {
       <div className="hidden md:flex">
         <img
           className="w-24 cursor-pointer"
-          src="./logo.svg"
+          src="/logo.svg"
           alt="Logo"
           onClick={() => navigate("/home")}
         />
