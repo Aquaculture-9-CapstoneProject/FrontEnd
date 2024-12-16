@@ -144,8 +144,8 @@ export const getAllProduct = async (page) => {
     const errorMessage =
       error.response?.data?.message ||
       error.message ||
-      "Gagal mengambil artikel.";
-    console.error("Error fetching articles:", errorMessage);
+      "Gagal mengambil products.";
+    console.error("Error fetching products:", errorMessage);
     throw errorMessage;
   }
 };
@@ -160,8 +160,8 @@ export const filterProduct = async (categories) => {
     const errorMessage =
       error.response?.data?.message ||
       error.message ||
-      "Gagal mengambil artikel.";
-    console.error("Error fetching articles:", errorMessage);
+      "Gagal mengambil products.";
+    console.error("Error fetching products:", errorMessage);
     throw errorMessage;
   }
 };
@@ -207,5 +207,49 @@ export const updateProduct = async (id, formData) => {
     } else {
       console.error("Request Error: ", error.message);
     }
+  }
+};
+
+export const getAllArticle = async (page) => {
+  try {
+    const response = await apiClient.get(`/admin/artikel/page/${page}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal mengambil artikel.";
+    console.error("Error fetching articles:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const filterArticle = async (categories) => {
+  try {
+    const response = await apiClient.get(
+      `/admin/artikel?kategori=${categories}`,
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal mengambil artikel.";
+    console.error("Error fetching articles:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const deleteArticle = async (id) => {
+  try {
+    const response = await apiClient.delete(`/admin/artikel/${id}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal menghapus produk.";
+    console.error("Error deleting product:", errorMessage);
+    throw errorMessage;
   }
 };

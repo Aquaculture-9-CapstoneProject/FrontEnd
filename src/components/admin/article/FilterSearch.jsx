@@ -1,11 +1,9 @@
-import React from "react";
-
 export default function FilterSearch({ onAddArticleClick }) {
   return (
     <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
       {/* Heading */}
       <h2 className="text-sm sm:text-base font-semibold text-neutral-1 mb-2 sm:mb-0">
-        Pesanan Bulan Ini
+        Data Artikel
       </h2>
 
       {/* Filter, Search, and Buttons */}
@@ -78,8 +76,9 @@ export default function FilterSearch({ onAddArticleClick }) {
         </details>
 
         {/* Tombol Tambah Artikel */}
-        <button className="btn btn-sm bg-primary-5 text-neutral-5 text-xs sm:text-sm font-semibold flex items-center gap-2"
-        onClick={onAddArticleClick}
+        <button
+          className="btn btn-sm bg-primary-5 text-neutral-5 text-xs sm:text-sm font-semibold flex items-center gap-2"
+          onClick={onAddArticleClick}
         >
           + Tambah Artikel
         </button>
