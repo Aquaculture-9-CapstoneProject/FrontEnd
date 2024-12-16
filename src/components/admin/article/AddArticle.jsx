@@ -26,7 +26,7 @@ export default function AddArticle({ isOpen, onClose }) {
     formData.append("gambar", imageFile);
     formData.append("judul", data.title);
     formData.append("kategori", data.category);
-    formData.append("konten", data.content);
+    formData.append("deskripsi", data.content);
 
     try {
       const response = await addArticle(formData);

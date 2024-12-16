@@ -263,3 +263,12 @@ export const addArticle = async (formData) => {
     throw error.response?.data || error.message;
   }
 };
+
+export const updateArticle = async (id, formData) => {
+  try {
+    const response = await apiForm.put(`/admin/artikel/${id}`, formData);
+    return response.data;
+  } catch (error) {
+    console.error("Error: ", error.response?.data || error.message);
+  }
+};
