@@ -28,7 +28,7 @@ export default function ChatbotButton() {
       </button>
 
       {/* Popup */}
-      {isOpen && <ChatPopup onClose={togglePopup} />}
+      {isOpen && <ChatPopup onClose={togglePopup} isOpen={isOpen} />}
     </div>
   );
 }
