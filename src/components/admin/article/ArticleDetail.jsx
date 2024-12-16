@@ -1,3 +1,5 @@
+import { formatDate } from "../../../utils/formatDate";
+
 export default function ArticleDetail({ isOpen, onClose, article }) {
   console.log(article);
   if (!isOpen) return null;
@@ -11,7 +13,7 @@ export default function ArticleDetail({ isOpen, onClose, article }) {
             {article.Judul}
           </h2>
           <p className="text-center text-sm text-neutral-3 mb-6">
-            {article.Kategori} • {article.CreatedAt}
+            {article.Kategori} • {formatDate(article.CreatedAt)}
           </p>
 
           {/* Gambar Artikel */}

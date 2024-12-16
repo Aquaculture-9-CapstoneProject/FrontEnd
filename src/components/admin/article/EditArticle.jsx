@@ -159,9 +159,9 @@ export default function EditArticle({ isOpen, onClose, article }) {
                 className={`input input-bordered w-full text-sm ${errors.category ? "border-error-3" : ""}`}
               >
                 <option value="">Pilih salah satu opsi</option>
-                <option value="Resep dan Kuliner">Resep dan Kuliner</option>
                 <option value="Panduan dan Tips">Panduan dan Tips</option>
-                <option value="Tips">Tips</option>
+                <option value="Resep dan Kuliner">Resep dan Kuliner</option>
+                <option value="Resep dan Kuliner">Kesehatan</option>
               </select>
               {errors.category && (
                 <p className="text-xs text-error-3 mt-1">
