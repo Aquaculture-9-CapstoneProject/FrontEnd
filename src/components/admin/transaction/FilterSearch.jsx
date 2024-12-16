@@ -58,7 +58,7 @@ export default function FilterSearch() {
               <button onClick={() => handleFilterChange("PAID")}>Paid</button>
             </li>
             <li>
-              <button onClick={() => handleFilterChange("EXPIRED")}>Expired</button>
+              <button onClick={() => handleFilterChange("PENDING")}>Pending</button>
             </li>
           </ul>
         </details>
