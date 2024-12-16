@@ -13,7 +13,7 @@ const useAdminArticleStore = create((set, get) => ({
   totalItems: 0,
   isLoading: false,
   error: null,
-  loadingDelete: false,
+  loadingDelete: null,
 
   fetchArticles: async (page = 1) => {
     set({ isLoading: true, error: null });
