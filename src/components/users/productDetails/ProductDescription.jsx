@@ -91,7 +91,7 @@ export default function ProductDescription() {
             <div className="flex items-center gap-8">
               <div className="border-[1px] border-primary-5 rounded-full flex py-2 px-5">
                 <img
-                  src="./user/detail/minus.svg"
+                  src="/user/detail/minus.svg"
                   alt="minus"
                   onClick={handleDecrement}
                 />
@@ -99,8 +99,8 @@ export default function ProductDescription() {
                   {quantity}
                 </p>
                 <img
-                  src="./user/detail/plus.svg"
-                  alt="minus"
+                  src="/user/detail/plus.svg"
+                  alt="plus"
                   onClick={handleIncrement}
                 />
               </div>
