@@ -267,7 +267,7 @@ export default function EditProduct({ isOpen, onClose, product }) {
                 {isLoading ? (
                   <span className="loading loading-spinner loading-xs"></span>
                 ) : (
-                  "Tambah"
+                  "Simpan"
                 )}
               </button>
             </div>
