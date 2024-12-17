@@ -30,7 +30,7 @@ export default function UserRoutes() {
       />
 
       <Route
-        path="/detail"
+        path="/product/:id"
         element={
           <ProtectedRoute allowedRole="user">
             <ProductDetail />

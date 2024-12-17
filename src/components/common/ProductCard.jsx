@@ -20,7 +20,7 @@ export default function ProductCard({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleCardClick = async () => {
-    navigate("/detail");
+    navigate(`/product/${id}`);
     await fetchProductDetail(id);
   };
 
