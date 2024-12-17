@@ -272,3 +272,12 @@ export const updateArticle = async (id, formData) => {
     console.error("Error: ", error.response?.data || error.message);
   }
 };
+
+export const exportProducts = async () => {
+  try {
+    const response = await apiClient.get("/admin/exportcsv");
+    return response.data;
+  } catch (error) {
+    console.error("Error: ", error.response?.data || error.message);
+  }
+};
