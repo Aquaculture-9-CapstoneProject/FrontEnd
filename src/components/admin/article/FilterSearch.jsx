@@ -1,11 +1,27 @@
-import React from "react";
+import { useState } from "react";
+import useAdminArticleStore from "../../../store/useAdminArticleStore";
 
 export default function FilterSearch({ onAddArticleClick }) {
+  const { filterArticlesByCategory, fetchArticles } = useAdminArticleStore();
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleCategoryChange = async (e) => {
+    const category = e.target.value;
+    setSelectedCategory(category);
+
+    if (category) {
+      await filterArticlesByCategory(category);
+    } else {
+      // Jika kategori kosong, ambil semua produk
+      await fetchArticles();
+    }
+  };
+
   return (
     <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
       {/* Heading */}
       <h2 className="text-sm sm:text-base font-semibold text-neutral-1 mb-2 sm:mb-0">
-        Pesanan Bulan Ini
+        Data Artikel
       </h2>
 
       {/* Filter, Search, and Buttons */}
@@ -51,35 +67,21 @@ export default function FilterSearch({ onAddArticleClick }) {
         </button>
 
         {/* Dropdown Filter */}
-        <details className="dropdown dropdown-end">
-          <summary className="btn btn-sm bg-neutral-5 border-neutral-4 text-neutral-1 text-xs sm:text-sm font-semibold flex items-center gap-2">
-            <svg
-              width="12"
-              height="8"
-              viewBox="0 0 12 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4.66667 8H7.33333V6.66667H4.66667V8ZM0 0V1.33333H12V0H0ZM2 4.66667H10V3.33333H2V4.66667Z"
-                fill="#262626"
-              />
-            </svg>
-            Filter
-          </summary>
-          <ul className="menu dropdown-content bg-neutral-5 text-xs sm:text-sm rounded-box z-[1] w-40 p-2 mt-2 shadow">
-            <li>
-              <a>Panduan</a>
-            </li>
-            <li>
-              <a>Tips</a>
-            </li>
-          </ul>
-        </details>
+        <select
+          className="select select-sm bg-neutral-5 border-neutral-4 text-neutral-1 text-xs sm:text-sm font-semibold rounded-md"
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+        >
+          <option value="">Semua</option>
+          <option value="Panduan dan Tips">Panduan dan Tips</option>
+          <option value="Resep dan Kuliner">Resep dan Kuliner</option>
+          <option value="Kesehatan">Kesehatan</option>
+        </select>
 
         {/* Tombol Tambah Artikel */}
-        <button className="btn btn-sm bg-primary-5 text-neutral-5 text-xs sm:text-sm font-semibold flex items-center gap-2"
-        onClick={onAddArticleClick}
+        <button
+          className="btn btn-sm bg-primary-5 text-neutral-5 text-xs sm:text-sm font-semibold flex items-center gap-2"
+          onClick={onAddArticleClick}
         >
           + Tambah Artikel
         </button>

@@ -1,6 +1,16 @@
-import React from "react";
+import useAdminProductStore from "../../../store/useAdminProductStore";
 
-const DeleteProduct = ({ product, onClose }) => {
+const DeleteProduct = ({ productId, onClose }) => {
+  const { deleteProductById } = useAdminProductStore();
+
+  const handleDelete = async () => {
+    try {
+      onClose();
+      await deleteProductById(productId);
+    } catch (error) {
+      alert(error);
+    }
+  };
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-neutral-1 bg-opacity-50 px-4">
       <div className="bg-neutral-5 max-w-[487px] w-full sm:w-[360px] py-6 px-8 sm:px-6 rounded-lg shadow-lg">
@@ -24,18 +34,22 @@ const DeleteProduct = ({ product, onClose }) => {
           Hapus Produk
         </h2>
         <p className="text-neutral-1 text-xs sm:text-sm text-center mb-4 leading-5">
-          Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.
+          Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat
+          dibatalkan.
         </p>
 
         {/* Tombol */}
         <div className="flex justify-center gap-4">
           <button
             onClick={onClose}
-            className="btn bg-neutral-5 w-[103px] sm:w-[96px] h-[34px] sm:h-[30px] border border-2 border-neutral-4 text-neutral-1 font-semibold text-xs sm:text-sm"
+            className="btn bg-neutral-5 w-[103px] sm:w-[96px] h-[34px] sm:h-[30px] border-2 border-neutral-4 text-neutral-1 font-semibold text-xs sm:text-sm"
           >
             Batal
           </button>
-          <button className="btn bg-primary-5 w-[103px] sm:w-[96px] h-[34px] sm:h-[30px] text-neutral-5 font-semibold text-xs sm:text-sm">
+          <button
+            onClick={handleDelete}
+            className="btn bg-primary-5 w-[103px] sm:w-[96px] h-[34px] sm:h-[30px] text-neutral-5 font-semibold text-xs sm:text-sm"
+          >
             Hapus
           </button>
         </div>

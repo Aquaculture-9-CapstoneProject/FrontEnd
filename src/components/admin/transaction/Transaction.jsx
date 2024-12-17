@@ -1,36 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import TransactionHeader from "./TransactionHeader";
 import FilterSearch from "./FilterSearch";
 import TransactionTable from "./TransactionTable";
 import Pagination from "./Pagination";
+import useTransactionStore from "../../../store/useTransactionStore";
 
 export default function Transaction() {
-  const transactions = Array.from({ length: 30 }, (_, index) => ({
-    id: `TR${index + 1}`.padStart(6, "0"),
-    orderId: "P0001",
-    date: "24 November 2024, 19:00",
-    paymentMethod: "Transfer Bank",
-    status: index % 3 === 0 ? "Berhasil" : index % 3 === 1 ? "Gagal" : "Pending",
-  }));
+  const {
+    transactions,
+    isLoading,
+    error,
+    fetchTransactions,
+    currentPage,
+    totalPages,
+  } = useTransactionStore();
 
-  const transactionsPerPage = 14;
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(transactions.length / transactionsPerPage);
+    useEffect(() => {
+        fetchTransactions(currentPage);
+    }, [fetchTransactions, currentPage]);
 
-  const startIndex = (currentPage - 1) * transactionsPerPage;
-  const currentTransactions = transactions.slice(startIndex, startIndex + transactionsPerPage);
+    const handlePageChange = (page) => {
+      if (page >= 1 && page <= totalPages) {
+        fetchTransactions(page); // Panggil data baru sesuai halaman
+      }
+    };
 
   return (
     <div className="bg-[#E4EDF1] h-full">
-      <TransactionHeader />
-      <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md">
+      <div className="mb-28">
+        <TransactionHeader />
+      </div>      
+      <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md items-center">
         <FilterSearch />
-        <TransactionTable transactions={currentTransactions} />
+        {isLoading ? (
+                <div className="flex justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-primary-4"></span>
+                </div>
+            ) : error ? (
+                <p className="text-center text-neutral-3 text-base py-4">Error: {error}</p>
+            ) : (
+                <TransactionTable transactions={transactions} />
+            )}
       </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={setCurrentPage}
+        onPageChange={handlePageChange}
       />
     </div>
   );

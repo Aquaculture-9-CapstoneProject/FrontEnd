@@ -1,4 +1,5 @@
 import apiClient from "./apiClient";
+import apiForm from "./apiForm";
 
 // Fungsi untuk mengambil total pendapatan bulan ini
 export const totalIncome = async () => {
@@ -132,5 +133,142 @@ export const topCategories = async () => {
       "Gagal mengambil kategori dengan produk terbanyak.";
     console.error("Error fetching top categories:", errorMessage);
     throw errorMessage;
+  }
+};
+
+export const getAllProduct = async (page) => {
+  try {
+    const response = await apiClient.get(`/admin/products/page/${page}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal mengambil products.";
+    console.error("Error fetching products:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const filterProduct = async (categories) => {
+  try {
+    const response = await apiClient.get(
+      `/admin/products?kategori=${categories}`,
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal mengambil products.";
+    console.error("Error fetching products:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const deleteProduct = async (id) => {
+  try {
+    const response = await apiClient.delete(`/admin/products/${id}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal menghapus produk.";
+    console.error("Error deleting product:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const addProduct = async (formData) => {
+  try {
+    const response = await apiForm.post("/admin/products", formData);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error("Error: ", error.response.data);
+      alert(`Gagal menambahkan produk: ${error.response.data.message}`);
+    } else {
+      console.error("Request Error: ", error.message);
+    }
+  }
+};
+
+export const updateProduct = async (id, formData) => {
+  try {
+    const response = await apiForm.put(`/admin/products/${id}`, formData);
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error("Error: ", error.response.data);
+      alert(`Gagal mengupdate produk: ${error.response.data.message}`);
+    } else {
+      console.error("Request Error: ", error.message);
+    }
+  }
+};
+
+export const getAllArticle = async (page) => {
+  try {
+    const response = await apiClient.get(`/admin/artikel/page/${page}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal mengambil artikel.";
+    console.error("Error fetching articles:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const filterArticle = async (categories) => {
+  try {
+    const response = await apiClient.get(
+      `/admin/artikel?kategori=${categories}`,
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal mengambil artikel.";
+    console.error("Error fetching articles:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const deleteArticle = async (id) => {
+  try {
+    const response = await apiClient.delete(`/admin/artikel/${id}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Gagal menghapus produk.";
+    console.error("Error deleting product:", errorMessage);
+    throw errorMessage;
+  }
+};
+
+export const addArticle = async (formData) => {
+  try {
+    const response = await apiForm.post("/admin/artikel", formData);
+    return response.data;
+  } catch (error) {
+    console.error("Error: ", error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
+
+export const updateArticle = async (id, formData) => {
+  try {
+    const response = await apiForm.put(`/admin/artikel/${id}`, formData);
+    return response.data;
+  } catch (error) {
+    console.error("Error: ", error.response?.data || error.message);
   }
 };

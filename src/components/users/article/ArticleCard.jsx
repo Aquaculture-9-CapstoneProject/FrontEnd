@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-const ArticleCard = ({ image, title, date, badgeText }) => {
+const ArticleCard = ({ id, image, title, date, badgeText }) => {
   const navigate = useNavigate();
   return (
     <div
       className="cursor-pointer"
-      onClick={() => navigate("/article-content")}
+      onClick={() => navigate(`/article-content/${id}`)}
     >
       <img
         src={image}

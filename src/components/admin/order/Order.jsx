@@ -1,49 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import OrderHeader from "./OrderHeader";
 import FilterSearch from "./FilterSearch";
 import Pagination from "./Pagination"
 import OrderTable from "./OrderTable";
+import useOrderStore from "../../../store/useOrderStore";
 
 export default function Order() {
-  const orders = Array.from({ length: 30 }, (_, index) => ({
-    id: `P${(index + 1).toString().padStart(6, "0")}`,
-    userName: "JJ Maybank",
-    productName: "Ikan Tongkol",
-    date: "24 November 2024, 19:00",
-    address: "Jl. Pahlawan",
-    nominal: "Rp. 56.000",
-    status: index % 2 === 0 ? "Dikirim" : "Selesai",
-  }));
+  const {
+    orders,
+    isLoading,
+    error,
+    fetchOrders,
+    currentPage,
+    totalPages,
+  } = useOrderStore();
 
-  const ordersPerPage = 14;
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(orders.length / ordersPerPage);
+    useEffect(() => {
+        fetchOrders(currentPage);
+    }, [fetchOrders, currentPage]);
 
-  const startIndex = (currentPage - 1) * ordersPerPage;
-  const endIndex = startIndex + ordersPerPage;
-  const currentOrders = orders.slice(startIndex, endIndex);
-
-  const handlePrevious = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
+    const handlePageChange = (page) => {
+      if (page >= 1 && page <= totalPages) {
+        fetchOrders(page); // Panggil data baru sesuai halaman
+      }
+    };
 
   return (
     <div className="bg-[#E4EDF1] h-full">
-      <OrderHeader />
+      <div className="mb-28">
+        <OrderHeader />
+      </div>
       <div className="m-5 sm:m-3 lg:m-7 bg-neutral-5 p-6 rounded-lg shadow-md">
         <FilterSearch />
-        <OrderTable orders={currentOrders} />
+        {isLoading ? (
+          <div className="flex justify-center items-center">
+            <span className="loading loading-spinner loading-lg text-primary-4"></span>
+          </div>
+        ) : error ? (
+          <p className="text-center text-neutral-3 text-base py-4">Error: {error}</p>
+        ) : (
+          <OrderTable orders={orders} />
+        )}
       </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-        setPage={setCurrentPage}
+        onPageChange={handlePageChange}
       />
     </div>
   );
