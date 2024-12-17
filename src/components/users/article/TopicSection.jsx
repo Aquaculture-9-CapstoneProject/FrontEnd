@@ -34,8 +34,7 @@ const TopicSection = () => {
           <button
             key={topic.id}
             className="btn bg-neutral-5 flex items-center gap-3 w-full h-[72px] rounded-lg border-neutral-3"
-            // onClick={() => navigate(`/article/${topic.route}`)} // Navigasi ke rute dinamis
-            onClick={() => navigate(`/article-topic`)} // Navigasi ke rute statis
+            onClick={() => navigate(`/article-topic/${topic.route}`)} // Navigasi ke route dinamis
           >
             <img
               src={topic.icon}

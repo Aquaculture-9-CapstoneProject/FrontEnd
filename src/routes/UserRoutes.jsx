@@ -82,7 +82,7 @@ export default function UserRoutes() {
         }
       />
       <Route
-        path="/article-topic"
+        path="/article-topic/:topic"
         element={
           <ProtectedRoute allowedRole="user">
             <FilteredArticles />
@@ -90,7 +90,7 @@ export default function UserRoutes() {
         }
       />
       <Route
-        path="/article-content"
+        path="/article-content/:id"
         element={
           <ProtectedRoute allowedRole="user">
             <ArticleContent />
