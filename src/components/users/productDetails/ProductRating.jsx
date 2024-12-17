@@ -67,7 +67,7 @@ export default function ProductRating() {
           >
             {!isAddingToCart ? (
               <>
-                <img src="./user/detail/add.svg" alt="add" />
+                <img src="/user/detail/add.svg" alt="add" />
                 <p>Keranjang</p>
               </>
             ) : (
@@ -92,7 +92,7 @@ export default function ProductRating() {
         <h1 className="text-xl font-semibold text-neutral-1">Ulasan Pembeli</h1>
         <div className="flex items-center gap-4 mt-3 text-neutral-1">
           <p className="font-semibold text-4xl">{productDetail.Rating}</p>
-          <img src="./user/detail/star.svg" alt="star" />
+          <img src="/user/detail/star.svg" alt="star" />
           <p className="text-2xl mt-2">/5.0</p>
         </div>
         <div className="flex gap-2 overflow-x-auto w-full mt-2 py-3">
@@ -121,7 +121,7 @@ export default function ProductRating() {
                   <img
                     key={index}
                     className="w-3 h-3"
-                    src="./user/detail/star.svg"
+                    src="/user/detail/star.svg"
                     alt="star"
                   />
                 ))}
