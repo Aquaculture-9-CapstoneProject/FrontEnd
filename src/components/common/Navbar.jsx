@@ -13,7 +13,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <div className="navbar flex justify-between items-center bg-neutral-5 border-b-neutral-4 border-[1px] px-8 py-4">
+    <div className="navbar sticky top-0 flex justify-between items-center bg-neutral-5 border-b-neutral-4 border-[1px] px-8 py-4 z-50">
       {/* Logo Section */}
       <div className="hidden md:flex">
         <img
