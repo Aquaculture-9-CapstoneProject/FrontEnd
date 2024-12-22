@@ -2,6 +2,12 @@
 
 **Blue Bay** adalah platform jual beli produk akuakultur terbaik, menyediakan berbagai jenis ikan, udang, kerang, ikan hias, dan produk olahan laut. Dengan komitmen terhadap kualitas, kami hadir untuk memenuhi kebutuhan Anda, baik sebagai pelanggan rumah tangga maupun pegiat akuakultur profesional.
 
+## Demo
+
+1. [🎬 Demo 1](https://github.com/Aquaculture-9-CapstoneProject/FrontEnd/raw/main/public/demo/1.mp4)
+2. [🎬 Demo 2](https://github.com/Aquaculture-9-CapstoneProject/FrontEnd/raw/main/public/demo/2.mp4)
+3. [🎬 Demo 3](https://github.com/Aquaculture-9-CapstoneProject/FrontEnd/raw/main/public/demo/3.mp4)
+
 ## Fitur Utama
 
 ### Untuk User
